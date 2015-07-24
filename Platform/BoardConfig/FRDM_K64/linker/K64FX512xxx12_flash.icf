@@ -1,0 +1,45 @@
+/* Linker file for IAR ARM C Compiler */
+define symbol m_interrupts_start       = 0x00000000;
+define symbol m_interrupts_end         = 0x000003FF;
+
+define symbol m_text_start             = 0x00000410;
+define symbol m_text_end               = 0x0007FFFF;
+
+define symbol m_interrupts_ram_start   = 0x1FFF0000;
+define symbol m_interrupts_ram_end     = 0x1FFF03FF;
+
+define symbol m_data_1FFF0400_start    = 0x1FFF0400;
+define symbol m_data_1FFF0400_end      = 0x1FFFFFFF;
+
+define symbol m_data_start             = 0x20000000;
+define symbol m_data_end               = 0x2001FFFF;
+
+define symbol FlashConfig_start__      = 0x00000400;
+define symbol FlashConfig_end__        = 0x0000040f;
+
+/*-Sizes-*/
+define symbol __size_cstack__          = 0x8000;
+define symbol __size_heap__            = 0x8000;
+define exported symbol __VECTOR_TABLE  = m_interrupts_start;
+define exported symbol __VECTOR_RAM    = m_interrupts_ram_start;
+
+define memory mem with size = 4G;
+define region FlashConfig_region = mem:[from FlashConfig_start__ to FlashConfig_end__];
+define region TEXT_region = mem:[from m_interrupts_start to m_interrupts_end]
+                          | mem:[from m_text_start to m_text_end];
+define region DATA_region = mem:[from m_data_1FFF0400_start to m_data_1FFF0400_end]
+                          | mem:[from m_data_start to m_data_end];
+define region m_interrupts_ram_region = mem:[from m_interrupts_ram_start to m_interrupts_ram_end];
+  
+define block CSTACK    with alignment = 8, size = __size_cstack__   { };
+define block HEAP      with alignment = 8, size = __size_heap__     { };
+
+initialize by copy { readwrite, section .textrw };
+do not initialize  { section .noinit };
+
+place at address mem: m_interrupts_start    { readonly section .intvec };
+place in FlashConfig_region                 { section FlashConfig };
+place in TEXT_region                        { readonly };
+place in DATA_region                        { readwrite, block CSTACK, block HEAP };
+place in DATA_region                        { zi };
+place in m_interrupts_ram_region            { section m_interrupts_ram };

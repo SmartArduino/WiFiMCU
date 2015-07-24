@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<flash_device>
+  <exe>$TOOLKIT_DIR$\config\flashloader\NXP\FlashNXPLPC540xx_RAM32K.out</exe>
+  <flash_base>0x00000000</flash_base>
+  <page>1024</page>
+  <block>16 0x8000</block>
+  <macro>$TOOLKIT_DIR$\config\flashloader\NXP\FlashNXPLPC540xx.mac</macro>
+  <aggregate>1</aggregate>
+</flash_device>

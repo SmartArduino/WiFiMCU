@@ -17,7 +17,7 @@
 
 #define MCU_DEBUG
 #ifdef MCU_DEBUG
-#define MCU_DBG cli_printf
+#define MCU_DBG printf
 #else
 #define MCU_DBG
 #endif	/* NODE_DEBUG */

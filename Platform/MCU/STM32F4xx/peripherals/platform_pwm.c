@@ -1,6 +1,6 @@
 /**
 ******************************************************************************
-* @file    platform_pwm.c 
+* @file    MicoDriverPwm.c 
 * @author  William Xu
 * @version V1.0.0
 * @date    05-May-2014
@@ -64,57 +64,6 @@
 *               Function Definitions
 ******************************************************/
 
-
-void TIM14_PWM_Init(uint32_t arr,uint32_t psc)
-{		 					 
-	//此部分需手动修改IO口设置
-	
-	GPIO_InitTypeDef GPIO_InitStructure;
-	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-	TIM_OCInitTypeDef  TIM_OCInitStructure;
-	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);  	//TIM2时钟使能    
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE); 	//使能PORTF时钟	
-	
-	GPIO_PinAFConfig(GPIOB,GPIO_PinSource10,GPIO_AF_TIM2); //GPIOB10复用为定时器2
-	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;           //GPIOF9
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;        //复用功能
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;	//速度100MHz
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      //推挽复用输出
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;        //上拉
-	GPIO_Init(GPIOF,&GPIO_InitStructure);              //初始化PF9
-	  
-	TIM_TimeBaseStructure.TIM_Prescaler=psc;  //定时器分频
-	TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up; //向上计数模式
-	TIM_TimeBaseStructure.TIM_Period=arr;   //自动重装载值
-	TIM_TimeBaseStructure.TIM_ClockDivision=TIM_CKD_DIV1; 
-	
-	TIM_TimeBaseInit(TIM2,&TIM_TimeBaseStructure);//初始化定时器14
-	
-	//初始化TIM2 Channel3 PWM模式	 
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //选择定时器模式:TIM脉冲宽度调制模式2
- 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
-	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low; //输出极性:TIM输出比较极性低
-
-	TIM_OC3Init(TIM2, &TIM_OCInitStructure);  //根据T指定的参数初始化外设TIM2OC1
-	TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);  //使能TIM14在CCR1上的预装载寄存器
- 
-        TIM_ARRPreloadConfig(TIM2,ENABLE);//ARPE使能 
-	
-	TIM_Cmd(TIM2, ENABLE);  //使能TIM14
- 
-										  
-}  
-
-void pwmTest()
-{
-        TIM14_PWM_Init(500-1,120-1);
-        uint16_t led0pwmval=500;
-        TIM_SetCompare1(TIM14,led0pwmval);
-}
-
-#include "lua.h"
 OSStatus platform_pwm_init( const platform_pwm_t* pwm, uint32_t frequency, float duty_cycle )
 {
   TIM_TimeBaseInitTypeDef tim_time_base_structure;
@@ -140,10 +89,6 @@ OSStatus platform_pwm_init( const platform_pwm_t* pwm, uint32_t frequency, float
     RCC_APB1PeriphClockCmd( pwm->tim_peripheral_clock, ENABLE );
     period = (uint16_t)( rcc_clock_frequencies.PCLK1_Frequency / frequency - 1 ); /* Auto-reload value counts from 0; hence the minus 1 */
   }
-  
-  /* Enable peripheral clock for this port */
-    err = platform_gpio_enable_clock( pwm->pin );
-    require_noerr(err, exit);
     
   /* Set alternate function */
   platform_gpio_set_alternate_function( pwm->pin->port, pwm->pin->pin_number, GPIO_OType_PP, GPIO_PuPd_UP, pwm->gpio_af );
@@ -198,8 +143,6 @@ OSStatus platform_pwm_init( const platform_pwm_t* pwm, uint32_t frequency, float
     }
   }
 
-  //TIM_ARRPreloadConfig(pwm->tim,ENABLE);//enable ARPE
-  
 exit:  
   platform_mcu_powersave_enable();
   return err;

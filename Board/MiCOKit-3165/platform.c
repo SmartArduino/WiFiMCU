@@ -125,100 +125,100 @@ const platform_pwm_t  platform_pwm_peripherals[] =
   [MICO_PWM_1] =
   {
     .tim                          = TIM5,
-    .channel                      = TIM_Channel_3,
+    .channel                      = 2,
     .tim_peripheral_clock         = RCC_APB1Periph_TIM5,
     .gpio_af                      = GPIO_AF_TIM5,
-    .pin                          = &platform_gpio_pins[MICO_GPIO_8],
+    .pin                          = &platform_gpio_pins[MICO_GPIO_9],
   },
   [MICO_PWM_2] =
   {
-    .tim                          = TIM9,
-    .channel                      = TIM_Channel_2,
-    .tim_peripheral_clock         = RCC_APB2Periph_TIM9,
-    .gpio_af                      = GPIO_AF_TIM9,
-    .pin                          = &platform_gpio_pins[MICO_GPIO_12],
-  },
-  [MICO_PWM_3] =
-  {
     .tim                          = TIM2,
-    .channel                      = TIM_Channel_3,
+    .channel                      = 3,
     .tim_peripheral_clock         = RCC_APB1Periph_TIM2,
     .gpio_af                      = GPIO_AF_TIM2,
     .pin                          = &platform_gpio_pins[MICO_GPIO_17],
   },
-  [MICO_PWM_4] =
+  [MICO_PWM_3] =
   {
     .tim                          = TIM11,
-    .channel                      = TIM_Channel_1,
+    .channel                      = 1,
     .tim_peripheral_clock         = RCC_APB2Periph_TIM11,
     .gpio_af                      = GPIO_AF_TIM11,
     .pin                          = &platform_gpio_pins[MICO_GPIO_18],
-  },  
-  [MICO_PWM_5] =
+  },
+  [MICO_PWM_4] =
   {
     .tim                          = TIM1,
-    .channel                      = TIM_Channel_3,
+    .channel                      = 3,
     .tim_peripheral_clock         = RCC_APB2Periph_TIM1,
     .gpio_af                      = GPIO_AF_TIM1,
     .pin                          = &platform_gpio_pins[MICO_GPIO_29],
-  },  
-  [MICO_PWM_6] =
+  },
+  [MICO_PWM_5] =
   {
     .tim                          = TIM4,
-    .channel                      = TIM_Channel_1,
+    .channel                      = 1,
     .tim_peripheral_clock         = RCC_APB1Periph_TIM4,
     .gpio_af                      = GPIO_AF_TIM4,
     .pin                          = &platform_gpio_pins[MICO_GPIO_30],
   },  
+  [MICO_PWM_6] =
+  {
+    .tim                          = TIM10,
+    .channel                      = 1,
+    .tim_peripheral_clock         = RCC_APB2Periph_TIM10,
+    .gpio_af                      = GPIO_AF_TIM10,
+    .pin                          = &platform_gpio_pins[MICO_SYS_LED],
+  },
   [MICO_PWM_7] =
   {
-    .tim                          = TIM2,
-    .channel                      = TIM_Channel_3,
-    .tim_peripheral_clock         = RCC_APB1Periph_TIM2,
-    .gpio_af                      = GPIO_AF_TIM2,
-    .pin                          = &platform_gpio_pins[MICO_SYS_LED],
-  }, 
-  [MICO_PWM_8] =
-  {
     .tim                          = TIM1,
-    .channel                      = TIM_Channel_1,
+    .channel                      = 1,
     .tim_peripheral_clock         = RCC_APB2Periph_TIM1,
     .gpio_af                      = GPIO_AF_TIM1,
     .pin                          = &platform_gpio_pins[MICO_GPIO_33],
-  }, 
-  [MICO_PWM_9] =
+  },
+  [MICO_PWM_8] =
   {
     .tim                          = TIM2,
-    .channel                      = TIM_Channel_1,
+    .channel                      = 1,
     .tim_peripheral_clock         = RCC_APB1Periph_TIM2,
     .gpio_af                      = GPIO_AF_TIM2,
     .pin                          = &platform_gpio_pins[MICO_GPIO_34],
   },
-  [MICO_PWM_10] =
+  [MICO_PWM_9] =
   {
     .tim                          = TIM1,
-    .channel                      = TIM_Channel_4,
+    .channel                      = 4,
     .tim_peripheral_clock         = RCC_APB2Periph_TIM1,
     .gpio_af                      = GPIO_AF_TIM1,
     .pin                          = &platform_gpio_pins[MICO_GPIO_35],
-  },  
+  },
+  [MICO_PWM_10] =
+  {
+    .tim                          = TIM3,
+    .channel                      = 4,
+    .tim_peripheral_clock         = RCC_APB1Periph_TIM3,
+    .gpio_af                      = GPIO_AF_TIM3,
+    .pin                          = &platform_gpio_pins[MICO_GPIO_36],
+  },
   [MICO_PWM_11] =
   {
     .tim                          = TIM3,
-    .channel                      = TIM_Channel_3,
+    .channel                      = 3,
     .tim_peripheral_clock         = RCC_APB1Periph_TIM3,
     .gpio_af                      = GPIO_AF_TIM3,
     .pin                          = &platform_gpio_pins[MICO_GPIO_37],
   },
+  
 };
 const platform_adc_t platform_adc_peripherals[] =
 {
-  [MICO_ADC_1] = { ADC1, ADC_Channel_2, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_8] },
-  [MICO_ADC_2] = { ADC1, ADC_Channel_1, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_9] },
-  [MICO_ADC_3] = { ADC1, ADC_Channel_3, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_12] },
-  [MICO_ADC_4] = { ADC1, ADC_Channel_5, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_34] },
-  [MICO_ADC_5] = { ADC1, ADC_Channel_8, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_37] },
-  [MICO_ADC_6] = { ADC1, ADC_Channel_4, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_38] },
+  [MICO_ADC_1] = { ADC1, ADC_Channel_1, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_9] },
+  [MICO_ADC_2] = { ADC1, ADC_Channel_5, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_34] },
+  [MICO_ADC_3] = { ADC1, ADC_Channel_9, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_36] },
+  [MICO_ADC_4] = { ADC1, ADC_Channel_8, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_37] },
+  [MICO_ADC_5] = { ADC1, ADC_Channel_4, RCC_APB2Periph_ADC1, 1, (platform_gpio_t*)&platform_gpio_pins[MICO_GPIO_38] },
 };
 
 const platform_uart_t platform_uart_peripherals[] =
@@ -629,7 +629,8 @@ bool MicoShouldEnterMFGMode(void)
 
 bool MicoShouldEnterBootloader(void)
 {
-  if(MicoGpioInputGet((mico_gpio_t)BOOT_SEL)==false && MicoGpioInputGet((mico_gpio_t)MFG_SEL)==true)
+  //if(MicoGpioInputGet((mico_gpio_t)BOOT_SEL)==false && MicoGpioInputGet((mico_gpio_t)MFG_SEL)==true)
+  if(MicoGpioInputGet((mico_gpio_t)MICO_GPIO_2)==false)
     return true;
   else
     return false;

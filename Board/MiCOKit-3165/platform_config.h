@@ -45,9 +45,9 @@ extern "C"
 *                    Constants
 ******************************************************/
 
-#define HARDWARE_REVISION   "MK3165_1"
-#define DEFAULT_NAME        "MiCOKit 3165"
-#define MODEL               "MiCOKit-3165"
+#define HARDWARE_REVISION   "V 1.0"
+#define DEFAULT_NAME        "WiFiMCU"
+#define MODEL               "EMW3165"
 #define Bootloader_REVISION "V 0.1"
 
 /* MICO RTOS tick rate in Hz */

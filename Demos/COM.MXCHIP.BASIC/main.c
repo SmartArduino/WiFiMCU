@@ -51,25 +51,20 @@ int readline4lua(const char *prompt, char *buffer, int buffer_size)
     int line_position;
     lua_printf("\r"); //doit
 start:
-    /* show prompt */    
-    lua_printf(prompt);
+    lua_printf(prompt);/* show prompt */
     line_position = 0;
     memset(buffer, 0, buffer_size);
     while (1)
     {
-       // while (rt_device_read(dev4lua.device, 0, &ch, 1) == 1)
-       while (lua_getchar(&ch) == 1)
+       while (lua_getchar(&ch) == 1)// while (rt_device_read(dev4lua.device, 0, &ch, 1) == 1)
         {
-            /* handle CR key */
-            if (ch == '\r')
+            if (ch == '\r')/* handle CR key */
             {
                 char next;
-                //if (rt_device_read(dev4lua.device, 0, &next, 1) == 1)
-                if (lua_getchar(&next)== 1)
+                if (lua_getchar(&next)== 1)//if (rt_device_read(dev4lua.device, 0, &next, 1) == 1)
                   ch = next;
             }
-            /* backspace key */
-            else if (ch == 0x7f || ch == 0x08)
+            else if (ch == 0x7f || ch == 0x08)/* backspace key */
             {
                 if (line_position > 0)
                 {
@@ -79,45 +74,35 @@ start:
                 buffer[line_position] = 0;
                 continue;
             }
-            /* EOF(ctrl+d) */
-            else if (ch == 0x04)
+            else if (ch == 0x04)/* EOF(ctrl+d) */
             {
                 if (line_position == 0)
-                    /* No input which makes lua interpreter close */
-                    return 0;
+                    return 0;/* No input which makes lua interpreter close */
                 else
                     continue;
             }            
-            /* end of line */
-            if (ch == '\r' || ch == '\n')
+            if (ch == '\r' || ch == '\n')/* end of line */
             {
                 buffer[line_position] = 0;
                 lua_printf("\r\n"); //doit
                 if (line_position == 0)
                 {
-                    /* Get a empty line, then go to get a new line */
-                    goto start;
+                    goto start;/* Get a empty line, then go to get a new line */
                 }
                 else
                 {
                     return line_position;
                 }
             }
-
-            /* other control character or not an acsii character */
-            if (ch < 0x20 || ch >= 0x80)
+            if (ch < 0x20 || ch >= 0x80)/* other control character or not an acsii character */
             {
                 continue;
             }
-
-            /* echo */
-            lua_printf("%c", ch);
+            lua_printf("%c", ch);/* echo */
             buffer[line_position] = ch;
             ch = 0;
             line_position++;
-
-            /* it's a large line, discard it */
-            if (line_position >= buffer_size)
+            if (line_position >= buffer_size)/* it's a large line, discard it */
                 line_position = 0;
        }
     }    
@@ -137,6 +122,7 @@ static void lua_main_thread(void *data)
   mico_rtos_delete_thread(NULL);
   MicoSystemReboot();
 }
+
 int application_start( void )
 {
 //start
@@ -148,12 +134,28 @@ int application_start( void )
   mico_init_timer(&_watchdog_reload_timer,DEFAULT_WATCHDOG_TIMEOUT/2, _watchdog_reload_timer_handler, NULL);
   mico_start_timer(&_watchdog_reload_timer);
   
+#if 0
+  #include "tm_stm32f4_usb_vcp.h"
+  lua_printf("\r\n\r\n TM_USB_VCP_Init:%d",TM_USB_VCP_Init());
+  uint8_t c;
+  //NVIC_SetVectorTable(NVIC_VectTab_FLASH, new_addr);
+  while(1)
+  {
+   if (TM_USB_VCP_GetStatus() == TM_USB_VCP_CONNECTED)
+   {
+     if (TM_USB_VCP_Getc(&c) == TM_USB_VCP_DATA_OK) 
+     {
+       TM_USB_VCP_Putc(c);/* Return data back */
+     }
+   }
+  }
+#endif
 //usrinterface
   //MicoCliInit();
 #if 1
 //  lua_printf("Free memory %d bytes\r\n", MicoGetMemoryInfo()->free_memory); 
   lua_rx_data = (uint8_t*)malloc(INBUF_SIZE);
-  ring_buffer_init  ( (ring_buffer_t*)&lua_rx_buffer, (uint8_t*)lua_rx_data, INBUF_SIZE );
+  ring_buffer_init( (ring_buffer_t*)&lua_rx_buffer, (uint8_t*)lua_rx_data, INBUF_SIZE );
   MicoUartInitialize( LUA_UART, &lua_uart_config, (ring_buffer_t*)&lua_rx_buffer );
   mico_rtos_create_thread(NULL, MICO_DEFAULT_WORKER_PRIORITY, "lua_main_thread", lua_main_thread, 20*1024, 0);
 #endif
@@ -162,4 +164,3 @@ int application_start( void )
   lua_printf("application_start exit\r\n");
   return 0;
  }
-

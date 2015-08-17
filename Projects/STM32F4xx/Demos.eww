@@ -7,9 +7,6 @@
   <project>
     <path>$WS_DIR$\COM.MXCHIP.BASIC\EWARM\COM.MXCHIP.BASIC.ewp</path>
   </project>
-  <project>
-    <path>$WS_DIR$\COM.MXCHIP.SPP\EWARM\COM.MXCHIP.SPP.ewp</path>
-  </project>
   <batchBuild/>
 </workspace>
 

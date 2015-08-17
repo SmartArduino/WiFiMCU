@@ -4,7 +4,7 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-
+#include "lrodefs.h"
 #include "lexlibs.h"
 
 #include "platform.h"

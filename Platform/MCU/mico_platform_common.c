@@ -105,11 +105,12 @@ OSStatus mico_platform_init( void )
 #elif defined (__IAR_SYSTEMS_ICC__)
   //platform_log("Platform initialised, build by IAR");
 #endif
-  
-  if ( true == platform_watchdog_check_last_reset() )
+  platform_watchdog_check_last_reset();
+  /*if ( true == platform_watchdog_check_last_reset())
   {
-    platform_log( "WARNING: Watchdog reset occured previously. Please see platform_watchdog.c for debugging instructions." );
-  }
+    //platform_log( "WARNING: Watchdog reset occured previously. Please see platform_watchdog.c for debugging instructions." );
+    cli_printf("Watchdog reset occured previously");
+  }*/
   
 #ifdef USES_RESOURCE_FILESYSTEM
   platform_filesystem_init();
@@ -120,7 +121,7 @@ OSStatus mico_platform_init( void )
   micokit_ext_init();
 #endif
 #endif
-  
+
   return kNoErr;
 }
 

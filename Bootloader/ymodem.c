@@ -201,7 +201,7 @@ int32_t Ymodem_Receive (uint8_t *buf, mico_flash_t flash, uint32_t flashdestinat
                       Send_Byte(CA);
                       Send_Byte(CA);
                       MicoFlashFinalize(flash);
-                      return -1;
+                      return -1;//The image size is higher than memory!
                     }
                     /* erase user application area */
                     MicoFlashErase(flash, flashdestination, flashdestination + maxRecvSize - 1);
@@ -234,7 +234,7 @@ int32_t Ymodem_Receive (uint8_t *buf, mico_flash_t flash, uint32_t flashdestinat
                     Send_Byte(CA);
                     Send_Byte(CA);
                     MicoFlashFinalize(flash);
-                    return -2;
+                    return -2;//Verification failed!
                   }
                 }
                 packets_received ++;
@@ -246,7 +246,7 @@ int32_t Ymodem_Receive (uint8_t *buf, mico_flash_t flash, uint32_t flashdestinat
           Send_Byte(CA);
           Send_Byte(CA);
           MicoFlashFinalize(flash);
-          return -3;
+          return -3;//Aborted by user.
         default:
           if (session_begin > 0)
           {
@@ -257,7 +257,7 @@ int32_t Ymodem_Receive (uint8_t *buf, mico_flash_t flash, uint32_t flashdestinat
             Send_Byte(CA);
             Send_Byte(CA);
             MicoFlashFinalize(flash);
-            return 0;
+            return 0;//Failed to receive file!
           }
           Send_Byte(CRC16);
           break;
@@ -273,7 +273,7 @@ int32_t Ymodem_Receive (uint8_t *buf, mico_flash_t flash, uint32_t flashdestinat
     }
   }
   MicoFlashFinalize(flash);
-  return (int32_t)size;
+  return (int32_t)size;//successful
 }
 
 /**

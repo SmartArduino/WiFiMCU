@@ -57,7 +57,7 @@ char menu[] =
 #else
 char menu[] =
 "\r\n"
-"MICO Bootloader for %s, HARDWARE_REVISION: %s\r\n"
+"WiFiMCU Bootloader for %s, HARDWARE_REVISION: %s\r\n"
 "+ command -------------------------+ function ------------+\r\n"
 "| 0:BOOTUPDATE    <-r>             | Update bootloader    |\r\n"
 "| 1:FWUPDATE      <-r>             | Update application   |\r\n"
@@ -69,12 +69,12 @@ char menu[] =
 "| 6:BOOT                           | Excute application   |\r\n"
 "| 7:REBOOT                         | Reboot               |\r\n"
 "+----------------------------------+----------------------+\r\n"
-"|    (C) COPYRIGHT 2014 MXCHIP Corporation  By William Xu |\r\n"
+"|Modified by Doit Team, Pls visit www.doit.am for more info.|\r\n"
 " Notes:\r\n"
 " -e Erase only  -r Read from flash -i internal flash  -s SPI flash\r\n"
-"  -start flash start address -end flash start address\r\n"
-" Example: Input \"4 -i -start 0x400 -end 0x800\": Update internal\r\n"
-"          flash from 0x400 to 0x800\r\n";
+" -start flash start address -end flash start address\r\n"
+" Example: Input \"4 -i -start 0x800C000 -end 0x807ffff\": Update internal\r\n"
+"          flash from 0x800C000 to 0x807ffff\r\n";
 #endif
 #ifdef MICO_ENABLE_STDIO_TO_BOOT
 extern int stdio_break_in(void);
@@ -93,6 +93,9 @@ int main(void)
   update();
 #endif
 
+  if(MicoShouldEnterBootloader() == false)
+    startApplication();
+#if 0
 #ifdef MICO_ENABLE_STDIO_TO_BOOT
   if (stdio_break_in() == 1)
     goto BOOT;
@@ -106,8 +109,9 @@ int main(void)
     startATEApplication();
 	}
 #endif 
-
 BOOT:
+#endif
+  
   printf ( menu, MODEL, HARDWARE_REVISION );
 
   while(1){                             

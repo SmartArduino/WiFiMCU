@@ -4,7 +4,7 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-
+#include "lrodefs.h"
 #include "lexlibs.h"
 
 #include "platform.h"
@@ -20,24 +20,24 @@
 
 const char wifimcu_gpio_map[] =
 {
-  [0] = MICO_GPIO_2,//D9		BOOT1
-  [1] = MICO_GPIO_9,//ELINK
-  [2] = MICO_GPIO_16,//D7
-  [3] = MICO_GPIO_17,//D6
-  [4] = MICO_GPIO_18,//SDA  带上拉电阻
-  [5] = MICO_GPIO_19,//D5
-  [6] = MICO_GPIO_25,//SWCLK //new define swclk
-  [7] = MICO_GPIO_26,//SWDIO //new define swdio
-  [8] = MICO_GPIO_27,//D4
-  [9] = MICO_GPIO_29,//RX1
-  [10] = MICO_GPIO_30,//TX1
-  [11] = MICO_SYS_LED,//SCL 带上拉电阻
-  [12] = MICO_GPIO_33,//D3
-  [13] = MICO_GPIO_34,//D2
-  [14] = MICO_GPIO_35,//D1
-  [15] = MICO_GPIO_36,//D0		BOOT2
-  [16] = MICO_GPIO_37,//D10 带上拉电阻
-  [17] = MICO_GPIO_38,//D11 通过10K电阻上拉，LED
+  [0] = MICO_GPIO_2,
+  [1] = MICO_GPIO_9,  //pwm adc
+  [2] = MICO_GPIO_16,
+  [3] = MICO_GPIO_17, //pwm
+  [4] = MICO_GPIO_19,
+  [5] = MICO_GPIO_25, //swclk
+  [6] = MICO_GPIO_26, //swdio
+  [7] = MICO_GPIO_27,
+  [8] = MICO_GPIO_29, //rx1 pwm
+  [9] = MICO_GPIO_30, //tx1 pwm
+  [10] = MICO_SYS_LED,//scl pwm MICO_GPIO_31 
+  [11] = MICO_GPIO_18,//sda pwm
+  [12] = MICO_GPIO_33,//pwm
+  [13] = MICO_GPIO_34,//pwm adc
+  [14] = MICO_GPIO_35,//pwm
+  [15] = MICO_GPIO_36,//pwm adc
+  [16] = MICO_GPIO_37,//pwm adc
+  [17] = MICO_GPIO_38,//adc
 };
 
 int platform_gpio_exists( unsigned pin )
@@ -45,7 +45,7 @@ int platform_gpio_exists( unsigned pin )
   return pin < NUM_GPIO;
 }
       
-static int gpio_cb_ref[MICO_GPIO_MAX];//可继续优化
+static int gpio_cb_ref[MICO_GPIO_MAX];
 static lua_State* gL = NULL;
 
 static void _gpio_irq_handler( void* arg )
@@ -173,27 +173,12 @@ static int lgpio_toggle( lua_State* L )
   return 0;  
 }
 
-#define MIN_OPT_LEVEL       2
-#include "lrodefs.h"
 const LUA_REG_TYPE gpio_map[] =
 {
   { LSTRKEY( "mode" ), LFUNCVAL( lgpio_mode ) },
   { LSTRKEY( "read" ), LFUNCVAL( lgpio_read ) },
   { LSTRKEY( "write" ), LFUNCVAL( lgpio_write ) },
   { LSTRKEY( "toggle" ), LFUNCVAL( lgpio_toggle ) },
-#if LUA_OPTIMIZE_MEMORY > 0
-  { LSTRKEY( "INPUT" ), LNUMVAL( INPUT ) },
-  { LSTRKEY( "INPUT_PULL_UP" ), LNUMVAL( INPUT_PULL_UP ) },
-  { LSTRKEY( "INPUT_PULL_DOWN" ), LNUMVAL( INPUT_PULL_DOWN ) },
-  { LSTRKEY( "INPUT_HIGH_IMPEDANCE" ), LNUMVAL( INPUT_HIGH_IMPEDANCE ) },
-  { LSTRKEY( "OUTPUT" ), LNUMVAL( OUTPUT ) },
-  { LSTRKEY( "OUTPUT_PUSH_PULL" ), LNUMVAL( OUTPUT_PUSH_PULL ) },
-  { LSTRKEY( "OUTPUT_OPEN_DRAIN_NO_PULL" ), LNUMVAL( OUTPUT_OPEN_DRAIN_NO_PULL ) },
-  { LSTRKEY( "OUTPUT_OPEN_DRAIN_PULL_UP" ), LNUMVAL( OUTPUT_OPEN_DRAIN_PULL_UP ) },
-  { LSTRKEY( "INT" ), LNUMVAL( INTERRUPT ) },
-  { LSTRKEY( "HIGH" ), LNUMVAL( HIGH ) },
-  { LSTRKEY( "LOW" ), LNUMVAL( LOW ) },
-#endif  
   {LNILKEY, LNILVAL}
 };
 
@@ -203,23 +188,19 @@ LUALIB_API int luaopen_gpio(lua_State *L)
     gpio_cb_ref[i] = LUA_NOREF;
   }
   
-#if LUA_OPTIMIZE_MEMORY > 0
-    return 0;
-#else
-    luaL_register( L, EXLIB_GPIO, gpio_map );
-    MOD_REG_NUMBER( L, "INPUT", INPUT);
-    MOD_REG_NUMBER( L, "INPUT_PULL_UP", INPUT_PULL_DOWN);
-    MOD_REG_NUMBER( L, "INPUT_PULL_DOWN", INPUT_PULL_DOWN);
-    MOD_REG_NUMBER( L, "INPUT_HIGH_IMPEDANCE", INPUT_HIGH_IMPEDANCE);
-    MOD_REG_NUMBER( L, "OUTPUT", OUTPUT);
-    MOD_REG_NUMBER( L, "OUTPUT_PUSH_PULL", OUTPUT_PUSH_PULL);
-    MOD_REG_NUMBER( L, "OUTPUT_OPEN_DRAIN_NO_PULL", OUTPUT_OPEN_DRAIN_NO_PULL);
-    MOD_REG_NUMBER( L, "OUTPUT_OPEN_DRAIN_PULL_UP", OUTPUT_OPEN_DRAIN_PULL_UP);
-    MOD_REG_NUMBER( L, "INT", INTERRUPT);
-    MOD_REG_NUMBER( L, "HIGH", HIGH);
-    MOD_REG_NUMBER( L, "LOW", LOW);
-    return 1;
-#endif
+  luaL_register( L, EXLIB_GPIO, gpio_map );
+  MOD_REG_NUMBER( L, "INPUT", INPUT);
+  MOD_REG_NUMBER( L, "INPUT_PULL_UP", INPUT_PULL_DOWN);
+  MOD_REG_NUMBER( L, "INPUT_PULL_DOWN", INPUT_PULL_DOWN);
+  MOD_REG_NUMBER( L, "INPUT_HIGH_IMPEDANCE", INPUT_HIGH_IMPEDANCE);
+  MOD_REG_NUMBER( L, "OUTPUT", OUTPUT);
+  MOD_REG_NUMBER( L, "OUTPUT_PUSH_PULL", OUTPUT_PUSH_PULL);
+  MOD_REG_NUMBER( L, "OUTPUT_OPEN_DRAIN_NO_PULL", OUTPUT_OPEN_DRAIN_NO_PULL);
+  MOD_REG_NUMBER( L, "OUTPUT_OPEN_DRAIN_PULL_UP", OUTPUT_OPEN_DRAIN_PULL_UP);
+  MOD_REG_NUMBER( L, "INT", INTERRUPT);
+  MOD_REG_NUMBER( L, "HIGH", HIGH);
+  MOD_REG_NUMBER( L, "LOW", LOW);
+  return 1;
 }
 
 

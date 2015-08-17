@@ -346,6 +346,8 @@ static int db_errorfb (lua_State *L) {
   else if (!lua_isstring(L, arg+1)) return 1;  /* message is not a string */
   //else  lua_pushliteral(L, "\n");
   else  lua_pushliteral(L, "\r\n");
+#if 0  
+//doit
   lua_pushliteral(L, "stack traceback:");
   while (lua_getstack(L1, level++, &ar)) {
     if (level > LEVELS1 && firstpart) {
@@ -380,6 +382,7 @@ static int db_errorfb (lua_State *L) {
     }
     lua_concat(L, lua_gettop(L) - arg);
   }
+#endif
   lua_concat(L, lua_gettop(L) - arg);
   return 1;
 }

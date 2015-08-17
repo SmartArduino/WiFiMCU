@@ -105,7 +105,6 @@ static int traceback (lua_State *L) {
   return 1;
 }
 
-
 static int docall (lua_State *L, int narg, int clear) {
   int status;
   int base = lua_gettop(L) - narg;  /* function index */
@@ -122,15 +121,19 @@ static int docall (lua_State *L, int narg, int clear) {
 
 
 static void print_version (void) { 
-  l_message(NULL,"\r\n\r\n");
-  l_message(NULL," _     _   _____ _ _ _   __  _    __");
-  l_message(NULL,"' )   /     /  '' ) ) ) /  )' )  /  ");
-  l_message(NULL," / / / o ,-/-, o / / / /     /  /   ");
-  l_message(NULL,"(_(_/ <_(_/   <_/ ' (_(__/  (__/    ");
-  l_message(NULL,"@_@Design_by_doit_based_on_Lua_5.1.4\r\n");
-  //l_message(NULL, LUA_RELEASE "  " LUA_COPYRIGHT);
+ /* l_message(NULL,"\r\n");
+  l_message(NULL,".  . .___ .  . __ .  .    ;     /       ,--. "); 
+  l_message(NULL,"|  |o[__ o|\\/|/  `|  |   [\"]   [\"]  ,<-|__oo|");   
+  l_message(NULL,"|/\\|||   ||  |\\__.|__|  /[_]\\  [~]\\ /  |//  |");
+  l_message(NULL,"      ---by doit @2015   ] [   OOO     /o|__|");
+  l_message(NULL,"\r\n");
+  */
+  l_message(NULL,"\r\n");
+  l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
+  l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
+  l_message(NULL,"/[_]\\ |/\\|||   ||  |\\__.|__| /  |//  |");
+  l_message(NULL," ] [        ---by doit @2015    /o|__|\r\n");
 }
-
 
 static int getargs (lua_State *L, char **argv, int n) {
   int narg;
@@ -148,7 +151,6 @@ static int getargs (lua_State *L, char **argv, int n) {
   }
   return narg;
 }
-
 
 static int dofile (lua_State *L, const char *name) {
   int status = luaL_loadfile(L, name) || docall(L, 0, 1);

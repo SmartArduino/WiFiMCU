@@ -231,7 +231,46 @@ uint32_t GetLSIFrequency(void)
     return (((2 * RCC_ClockFreq.PCLK1_Frequency) / PeriodValue) * 8) ;
   }
 }
+//doit
+unsigned char boot_reason=BOOT_REASON_NONE;
+extern int cli_printf(const char *msg, ...);
 
+bool platform_watchdog_check_last_reset( void )
+{
+    boot_reason=0;
+    if(RCC_GetFlagStatus(RCC_FLAG_SFTRST))
+    {//Software Reset
+      boot_reason=BOOT_REASON_SOFT_RST;
+    }
+    else if(RCC_GetFlagStatus(RCC_FLAG_IWDGRST))
+    {
+      boot_reason=BOOT_REASON_WDG_RST;
+    }
+    else if(RCC_GetFlagStatus(RCC_FLAG_WWDGRST))
+    {
+      boot_reason=BOOT_REASON_WWDG_RST;
+    }
+    else if(RCC_GetFlagStatus(RCC_FLAG_LPWRRST))
+    {
+      boot_reason=BOOT_REASON_LOWPWR_RST;
+    }
+    else if(RCC_GetFlagStatus(RCC_FLAG_BORRST))
+    {
+      boot_reason=BOOT_REASON_BOR_RST;
+    }
+    else if(RCC_GetFlagStatus(RCC_FLAG_PORRST))
+    {//Power-On-Reset
+      boot_reason=BOOT_REASON_PWRON_RST;
+    }
+    else if(RCC_GetFlagStatus(RCC_FLAG_PINRST))
+    {//Always set, test other cases first
+      boot_reason=BOOT_REASON_EXPIN_RST;
+    }
+    //cli_printf("boot_reason:%d\r\n",boot_reason);
+    RCC_ClearFlag();
+    return true;
+}
+#if 0
 bool platform_watchdog_check_last_reset( void )
 {
 #ifndef MICO_DISABLE_WATCHDOG
@@ -242,9 +281,10 @@ bool platform_watchdog_check_last_reset( void )
         return true;
     }
 #endif
-
     return false;
 }
+#endif
+
 
 /**
   * @brief  This function handles TIM5 global interrupt request.

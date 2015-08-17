@@ -4,7 +4,7 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-
+#include "lrodefs.h"
 #include "lexlibs.h"
 #include "MicoPlatform.h"
 #include "user_version.h"
@@ -21,7 +21,10 @@ static volatile int file_fd = FILE_NOT_OPENED;
 
 
 #define MICO_FLASH_FOR_LUA       MICO_SPI_FLASH
-#define LUA_START_ADDRESS        (uint32_t)0x00100000 
+//#define LUA_START_ADDRESS     (uint32_t)0x00100000 
+//#define LUA_FLASH_SIZE        (uint32_t)1024*1024 
+#define LUA_START_ADDRESS       (uint32_t)0x00C0000 
+#define LUA_FLASH_SIZE          (uint32_t)1024*(1024+256) 
 
 static s32_t lspiffs_read(u32_t addr, u32_t size, u8_t *dst) {
     MicoFlashRead(MICO_FLASH_FOR_LUA,&addr,dst,size);
@@ -41,15 +44,7 @@ static s32_t lspiffs_erase(u32_t addr, u32_t size) {
 
 void lua_spiffs_mount() {
     spiffs_config cfg;    
-    /*
-    cfg.phys_size = 2*1024*1024; // use all spi flash
-    cfg.phys_addr = 0; // start spiffs at start of spi flash
-    cfg.phys_erase_block = 65536; // according to datasheet
-    cfg.log_block_size = 65536; // let us not complicate things
-    cfg.log_page_size = LOG_PAGE_SIZE; // as we said
-    */
-      
-    cfg.phys_size = 1*1024*1024; // use all spi flash
+    cfg.phys_size = LUA_FLASH_SIZE;
     cfg.phys_addr = LUA_START_ADDRESS; // start spiffs at start of spi flash
     cfg.phys_erase_block = 65536/2; // according to datasheet
     cfg.log_block_size = 65536; // let us not complicate things
@@ -141,7 +136,7 @@ static int file_format( lua_State* L )
   int ret = SPIFFS_format(&fs);
   if(ret==SPIFFS_OK)
   {
-    MCU_DBG("format done\r\n",ret);
+    MCU_DBG("format done\r\n");
     lua_spiffs_mount();    
   }
   else
@@ -214,7 +209,7 @@ static int file_writeline( lua_State* L )
   }
   else
   {//success
-     if(SPIFFS_write(&fs,file_fd, "\n", 1)<0)
+     if(SPIFFS_write(&fs,file_fd, "\r\n", 2)<0)
      {
         SPIFFS_close(&fs,file_fd);
         file_fd = FILE_NOT_OPENED;
@@ -464,8 +459,8 @@ static int file_compile( lua_State* L )
 
   return 0;
 }
-#define MIN_OPT_LEVEL   2
-#include "lrodefs.h"
+
+
 const LUA_REG_TYPE file_map[] =
 {
   { LSTRKEY( "list" ), LFUNCVAL( file_list ) },
@@ -483,23 +478,14 @@ const LUA_REG_TYPE file_map[] =
   { LSTRKEY( "rename" ), LFUNCVAL( file_rename ) },
   { LSTRKEY( "info" ), LFUNCVAL( file_info ) },
   { LSTRKEY( "state" ), LFUNCVAL( file_state ) },
-  { LSTRKEY( "compile" ), LFUNCVAL( file_compile ) },  
+  { LSTRKEY( "compile" ), LFUNCVAL( file_compile ) },
   {LNILKEY, LNILVAL}
 };
 
-/*
- * Open library
- */
 LUALIB_API int luaopen_file(lua_State *L)
 {
   lua_spiffs_mount();
 
-#if LUA_OPTIMIZE_MEMORY > 0
-  return 0;
-#else // #if LUA_OPTIMIZE_MEMORY > 0
   luaL_register( L, EXLIB_FILE, file_map );
-  // Add constants
-
   return 1;
-#endif // #if LUA_OPTIMIZE_MEMORY > 0
 }

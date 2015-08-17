@@ -86,90 +86,6 @@
       </data>
     </settings>
   </configuration>
-  <configuration>
-    <name>MiCOKit-3288</name>
-    <toolchain>
-      <name>ARM</name>
-    </toolchain>
-    <debug>0</debug>
-    <settings>
-      <name>RuntimeChecking</name>
-      <archiveVersion>0</archiveVersion>
-      <data>
-        <version>2</version>
-        <wantNonLocal>1</wantNonLocal>
-        <debug>0</debug>
-        <option>
-          <name>GenRtcDebugHeap</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcEnableBoundsChecking</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcCheckPtrsNonInstrMem</name>
-          <state>1</state>
-        </option>
-        <option>
-          <name>GenRtcTrackPointerBounds</name>
-          <state>1</state>
-        </option>
-        <option>
-          <name>GenRtcCheckAccesses</name>
-          <state>1</state>
-        </option>
-        <option>
-          <name>GenRtcGenerateEntries</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcNrTrackedPointers</name>
-          <state>1000</state>
-        </option>
-        <option>
-          <name>GenRtcIntOverflow</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcIncUnsigned</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcIntConversion</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcInclExplicit</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcIntShiftOverflow</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcInclUnsignedShiftOverflow</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcUnhandledCase</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcDivByZero</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcEnable</name>
-          <state>0</state>
-        </option>
-        <option>
-          <name>GenRtcCheckPtrsNonInstrFunc</name>
-          <state>1</state>
-        </option>
-      </data>
-    </settings>
-  </configuration>
   <group>
     <name>Application</name>
     <file>
@@ -178,21 +94,6 @@
   </group>
   <group>
     <name>Board</name>
-    <group>
-      <name>EMW5288</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\EMW5288\platform.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\EMW5288\platform.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\EMW5288\platform_common_config.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\EMW5288\platform_spi_flash.c</name>
-      </file>
-    </group>
     <group>
       <name>MiCOKit-3165</name>
       <file>
@@ -203,18 +104,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\Board\MiCOKit-3165\platform_config.h</name>
-      </file>
-    </group>
-    <group>
-      <name>MiCOKit-3288</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\MiCOKit-3288\platform.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\MiCOKit-3288\platform.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\Board\MiCOKit-3288\platform_config.h</name>
       </file>
     </group>
   </group>
@@ -1049,6 +938,102 @@
       <name>$PROJ_DIR$\..\..\..\..\Support\URLUtils.c</name>
     </file>
   </group>
+  <group>
+    <name>USB</name>
+    <group>
+      <name>usb_cdc_device</name>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_bsp.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_bsp.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_conf.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_core.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_core.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd_int.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd_int.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_defines.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_regs.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_core.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_core.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_vcp.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_vcp.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_conf.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_core.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_core.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_def.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_desc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_desc.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_ioreq.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_ioreq.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_req.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_req.h</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_usr.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_usr.h</name>
+      </file>
+    </group>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\USB\tm_stm32f4_usb_vcp.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\USB\tm_stm32f4_usb_vcp.h</name>
+    </file>
+  </group>
+  <file>
+    <name>$PROJ_DIR$\..\..\..\..\README.md</name>
+  </file>
   <file>
     <name>$PROJ_DIR$\..\..\..\..\readme.txt</name>
   </file>

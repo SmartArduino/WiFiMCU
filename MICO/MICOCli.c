@@ -708,6 +708,7 @@ int cli_printf(const char *msg, ...)
   if( nMessageLen<=0 ) return 0;
   
   cli_putstr((const char*)message);
+ 
   return 0;
 }
 

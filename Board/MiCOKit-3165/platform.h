@@ -282,7 +282,6 @@ typedef enum
     MICO_ADC_3,
     MICO_ADC_4,
     MICO_ADC_5,
-    MICO_ADC_6,
     MICO_ADC_MAX, /* Denotes the total number of ADC port aliases. Not a valid ADC alias */
     MICO_ADC_NONE,
 } mico_adc_t;
@@ -304,7 +303,7 @@ typedef enum
 
 #ifdef BOOTLOADER
 #define STDIO_UART       (MICO_UART_1)
-#define STDIO_UART_BAUDRATE (921600) 
+#define STDIO_UART_BAUDRATE (115200)  //921600 
 #else
 #define STDIO_UART       (MICO_UART_1)
 #define STDIO_UART_BAUDRATE (115200) 
@@ -322,6 +321,17 @@ typedef enum
 
 #define MICO_I2C_CP      (MICO_I2C_NONE)
 
+//doit
+enum {
+  BOOT_REASON_NONE=0,
+  BOOT_REASON_SOFT_RST,//Software Reset
+  BOOT_REASON_PWRON_RST,//Power-On-Reset
+  BOOT_REASON_EXPIN_RST,//External Pin Reset
+  BOOT_REASON_WDG_RST,//Watchdog Reset
+  BOOT_REASON_WWDG_RST,//Window Watchdog Reset
+  BOOT_REASON_LOWPWR_RST,//Low Power Reset
+  BOOT_REASON_BOR_RST,//Brown-Out Reset
+};
 
 #ifdef __cplusplus
 } /*extern "C" */

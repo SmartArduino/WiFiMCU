@@ -341,8 +341,8 @@
 #endif
 #else
 //doit 
-#define luai_writestring(s, l)  cli_printf(s)
-#define luai_writeline()        cli_printf("\r\n")
+#define luai_writestring(s, l)  printf(s)
+#define luai_writeline()        printf("\r\n")
 
 #endif // defined(MICO_USING_LUA)
 
@@ -355,7 +355,7 @@
 	(fprintf(stderr, (s), (p)), fflush(stderr))
 #else
 //doit
-#define luai_writestringerror(s,p)   cli_printf((s), (p))
+#define luai_writestringerror(s,p)   printf((s), (p))
 
 #endif // defined(MICO_USING_LUA)
 

@@ -4,7 +4,7 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-
+#include "lrodefs.h"
 #include "lexlibs.h"
 #include "MicoPlatform.h"
 #include "user_version.h"
@@ -47,29 +47,49 @@ static int mcu_memory( lua_State* L )
    lua_pushinteger(L,MicoGetMemoryInfo()->num_of_chunks); /**< number of free chunks*/
    return 4;
 }
-
-#define MIN_OPT_LEVEL       2
-#include "lrodefs.h"
+static int mcu_chipid( lua_State* L )
+{
+    uint32_t mcuID[3];
+    mcuID[0] = *(__IO uint32_t*)(0x1FFF7A20);
+    mcuID[1] = *(__IO uint32_t*)(0x1FFF7A24);
+    mcuID[2] = *(__IO uint32_t*)(0x1FFF7A28);
+    char str[25];
+    sprintf(str,"%08X%08X%08X",mcuID[0],mcuID[1],mcuID[2]);
+    lua_pushstring(L,str);
+    return 1;
+}
+extern unsigned char boot_reason;
+static int mcu_bootreason( lua_State* L )
+{
+    char str[12]={0x00};
+    switch(boot_reason)
+    {
+      case BOOT_REASON_NONE:            strcpy(str,"NONE");break;
+      case BOOT_REASON_SOFT_RST:        strcpy(str,"SOFT_RST");break;
+      case BOOT_REASON_PWRON_RST:       strcpy(str,"PWRON_RST");break;
+      case BOOT_REASON_EXPIN_RST:       strcpy(str,"EXPIN_RST");break;
+      case BOOT_REASON_WDG_RST:         strcpy(str,"WDG_RST");break;
+      case BOOT_REASON_WWDG_RST:        strcpy(str,"WWDG_RST");break;
+      case BOOT_REASON_LOWPWR_RST:      strcpy(str,"LOWPWR_RST");break;
+      case BOOT_REASON_BOR_RST:         strcpy(str,"BOR_RST");break;
+      default:strcpy(str,"NONE");break;
+    }
+    lua_pushstring(L,str);
+    return 1;
+}
 const LUA_REG_TYPE mcu_map[] =
 {
   { LSTRKEY( "ver" ), LFUNCVAL( mcu_version )},
   { LSTRKEY( "info" ), LFUNCVAL( mcu_wifiinfo )},
   { LSTRKEY( "reboot" ), LFUNCVAL( mcu_reboot )},
   { LSTRKEY( "mem" ), LFUNCVAL( mcu_memory )},
+  { LSTRKEY( "chipid" ), LFUNCVAL( mcu_chipid )},
+  { LSTRKEY("bootreason"), LFUNCVAL(mcu_bootreason)},
   {LNILKEY, LNILVAL}
 };
 
-/**
- * Open library
- */
 LUALIB_API int luaopen_mcu(lua_State *L)
 {
-#if LUA_OPTIMIZE_MEMORY > 0
-  return 0;
-#else // #if LUA_OPTIMIZE_MEMORY > 0
   luaL_register( L, EXLIB_MCU, mcu_map );
-  // Add constants
-
   return 1;
-#endif // #if LUA_OPTIMIZE_MEMORY > 0
 }

@@ -1,6 +1,3 @@
-# WiFiMCU
-
-
 WiFiMCU-v0.9.2
 
 add uart/pwm/adc modules change

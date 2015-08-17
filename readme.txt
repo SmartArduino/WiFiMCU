@@ -1,5 +1,7 @@
 WiFiMCU-v0.9.2
 
+The ide tool for wifimcu can be found here:https://github.com/SmartArduino/WiFiMCU-STUDIO
+
 add uart/pwm/adc modules change
 change net module
 change the logo

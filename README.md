@@ -27,12 +27,30 @@
 #GPIO table
 
 #Program demos
-####Connect to your ap
+####Setup a AP
 
 ```lua
     cfg={ssid='Doit_3165',pwd=''}
     wifi.startap(cfg)
 ```
+####WebServer
+
+```lua
+   skt = net.new(net.TCP,net.SERVER) 
+   net.on(skt,"accept",function(clt,ip,port) 
+   print("accept ip:"..ip.." port:"..port.." clt:"..clt) 
+   net.send(clt,[[HTTP/1.1 200 OK
+   Server: WiFiMCU
+   Content-Type:text/html
+   Content-Length: 28
+   Connection: close
+   
+   
+   <h1>Welcome to WiFiMCU!</h1>]])
+   end)
+   net.start(skt,80) 
+```
+
 
 ###The IDE tool for wifimcu can be found here
 https://github.com/SmartArduino/WiFiMCU-STUDIO

@@ -549,6 +549,7 @@ static int lwifi_station_getipadv( lua_State* L )
 static int lwifi_station_getlink (lua_State* L )
 {
   LinkStatusTypeDef link;
+  memset(&link,0x00,sizeof(link));
   micoWlanGetLinkStatus(&link);
   
   if(link.is_connected==0)
@@ -639,8 +640,7 @@ static int lwifi_powersave( lua_State* L )
    
   return 0;
 }
-#define MIN_OPT_LEVEL       2
-#include "lrodefs.h"
+
 static const LUA_REG_TYPE wifi_station_map[] =
 {
   { LSTRKEY( "getip" ), LFUNCVAL ( lwifi_station_getip ) },
@@ -663,35 +663,20 @@ const LUA_REG_TYPE wifi_map[] =
   { LSTRKEY( "startsta" ), LFUNCVAL( lwifi_startsta )},
   { LSTRKEY( "scan" ), LFUNCVAL( lwifi_scan ) },
   { LSTRKEY( "stop" ), LFUNCVAL( lwifi_stop ) },
-//  { LSTRKEY( "wps" ), LFUNCVAL( lwifi_wps ) },
-//  { LSTRKEY( "easylink" ), LFUNCVAL( lwifi_easylink ) },
   { LSTRKEY( "powersave" ), LFUNCVAL( lwifi_powersave ) },
-#if LUA_OPTIMIZE_MEMORY > 0
-  { LSTRKEY( "sta" ), LROVAL( wifi_station_map ) },
-  { LSTRKEY( "ap" ), LROVAL( wifi_ap_map ) },
-
-
-  { LSTRKEY( "__metatable" ), LROVAL( wifi_map ) },
-#endif  
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_wifi(lua_State *L)
 {
-#if LUA_OPTIMIZE_MEMORY > 0
-    return 0;
-#else
-    luaL_register( L, EXLIB_WIFI, wifi_map );
-    // Setup the new tables (station and ap) inside wifi
-    lua_newtable( L );
-    luaL_register( L, NULL, wifi_station_map );
-    lua_setfield( L, -2, "sta" );
+  luaL_register( L, EXLIB_WIFI, wifi_map );
+  // Setup the new tables (station and ap) inside wifi
+  lua_newtable( L );
+  luaL_register( L, NULL, wifi_station_map );
+  lua_setfield( L, -2, "sta" );
 
-    lua_newtable( L );
-    luaL_register( L, NULL, wifi_ap_map );
-    lua_setfield( L, -2, "ap" );
-    return 1;
-#endif
+  lua_newtable( L );
+  luaL_register( L, NULL, wifi_ap_map );
+  lua_setfield( L, -2, "ap" );
+  return 1;
 }
-
-

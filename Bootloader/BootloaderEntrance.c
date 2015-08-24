@@ -73,8 +73,8 @@ char menu[] =
 " Notes:\r\n"
 " -e Erase only  -r Read from flash -i internal flash  -s SPI flash\r\n"
 " -start flash start address -end flash start address\r\n"
-" Example: Input \"4 -i -start 0x800C000 -end 0x807ffff\": Update internal\r\n"
-"          flash from 0x800C000 to 0x807ffff\r\n";
+" Example: Input \"4 -s -start 0x00002000 -end 0x0003FFFF\": Update spi\r\n"
+"          flash from 0x00002000 to 0x0003FFFF\r\n";
 #endif
 #ifdef MICO_ENABLE_STDIO_TO_BOOT
 extern int stdio_break_in(void);

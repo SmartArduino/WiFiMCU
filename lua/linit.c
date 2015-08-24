@@ -27,12 +27,12 @@ LUA_EXLIBS_ROM
 static const luaL_Reg lualibs[] = {
   {"", luaopen_base},
   {LUA_LOADLIBNAME, luaopen_package},
-  {LUA_IOLIBNAME, luaopen_io},
+//  {LUA_IOLIBNAME, luaopen_io},
   {LUA_STRLIBNAME, luaopen_string},    
 //#if LUA_OPTIMIZE_MEMORY == 0
   {LUA_MATHLIBNAME, luaopen_math},
   {LUA_TABLIBNAME, luaopen_table},  
-  {LUA_DBLIBNAME, luaopen_debug},  
+//  {LUA_DBLIBNAME, luaopen_debug},  
 //#endif
 #if defined(LUA_EXLIBS_ROM)
 #undef _ROM

@@ -121,18 +121,11 @@ static int docall (lua_State *L, int narg, int clear) {
 
 
 static void print_version (void) { 
- /* l_message(NULL,"\r\n");
-  l_message(NULL,".  . .___ .  . __ .  .    ;     /       ,--. "); 
-  l_message(NULL,"|  |o[__ o|\\/|/  `|  |   [\"]   [\"]  ,<-|__oo|");   
-  l_message(NULL,"|/\\|||   ||  |\\__.|__|  /[_]\\  [~]\\ /  |//  |");
-  l_message(NULL,"      ---by doit @2015   ] [   OOO     /o|__|");
-  l_message(NULL,"\r\n");
-  */
   l_message(NULL,"\r\n");
   l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
   l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
   l_message(NULL,"/[_]\\ |/\\|||   ||  |\\__.|__| /  |//  |");
-  l_message(NULL," ] [        ---by doit @2015    /o|__|\r\n");
+  l_message(NULL," ] [                            /o|__| www.doit.com @2015\r\n");
 }
 
 static int getargs (lua_State *L, char **argv, int n) {

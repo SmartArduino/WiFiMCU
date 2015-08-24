@@ -34,9 +34,9 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 ####More information please go to
 www.wifimcu.com<br/>
 
-####[Doctors of Intelligence & Technology](www.doit.am)(br/)
-support@doit.am(br/)
-[WiFiMCU Dev Kit](http://www.smartarduino.com)(br/)
+####[Doctors of Intelligence & Technology](www.doit.am)
+support@doit.am (br/)
+[WiFiMCU Dev Kit](http://www.smartarduino.com) (br/)
 
 ####Version log
 v0.9.4@2015-8-24<br/>

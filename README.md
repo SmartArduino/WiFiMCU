@@ -31,10 +31,10 @@
     <th scope="col">GPIO index</th><th scope="col">Alternative Function</th><th scope="col">Discription</th>
   </tr>
   <tr>
-    <td>D0</td><td>GPIO/BOOT</td><td>WiFiMCU would enter into Bootloader Mode, if D0 goes to LOW</td><td>
+    <td>D0</td><td>GPIO/BOOT</td><td>WiFiMCU would enter into Bootloader Mode, if D0 goes to LOW</td>
   </tr>
   <tr>
-    <td>D1</td><td>GPIO/PWM/ADC</td><td>WiFiMCU</td><td>
+    <td>D1</td><td>GPIO/PWM/ADC</td><td>WiFiMCU</td>
   </tr>
 </table>
 

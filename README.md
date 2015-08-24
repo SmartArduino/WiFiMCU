@@ -34,7 +34,55 @@
     <td>D0</td><td>GPIO/BOOT</td><td>WiFiMCU would enter into Bootloader Mode, if D0 goes to LOW</td>
   </tr>
   <tr>
-    <td>D1</td><td>GPIO/PWM/ADC</td><td>WiFiMCU</td>
+    <td>D1</td><td>GPIO/PWM/ADC</td><td></td>
+  </tr>
+  <tr>
+    <td>D2</td><td>GPIO</td><td></td>
+  </tr>
+  <tr>
+    <td>D3</td><td>GPIO/PWM</td><td></td>
+  </tr>
+  <tr>
+    <td>D4</td><td>GPIO</td><td></td>
+  </tr>
+  <tr>
+    <td>D5</td><td>GPIO</td><td>SWD Flash Programming Pin: swclk</td>
+  </tr>
+  <tr>
+    <td>D6</td><td>GPIO</td><td>SWD Flash Programming Pin: swdio</td>
+  </tr>
+  <tr>
+    <td>D7</td><td>GPIO</td><td></td>
+  </tr>
+  <tr>
+    <td>D8</td><td>GPIO/PWM</td><td>Uart1 rx pin: RX1</td>
+  </tr>
+  <tr>
+    <td>D9</td><td>GPIO/PWM</td><td>Uart1 tx pin: TX1</td>
+  </tr>
+  <tr>
+    <td>D10</td><td>GPIO/PWM</td><td>I2C interface: SCL</td>
+  </tr>
+  <tr>
+    <td>D11</td><td>GPIO/PWM</td><td>I2C interface: SDA</td>
+  </tr>
+  <tr>
+    <td>D12</td><td>GPIO/PWM</td><td></td>
+  </tr>
+  <tr>
+    <td>D13</td><td>GPIO/PWM/ADC</td><td></td>
+  </tr>
+  <tr>
+    <td>D14</td><td>GPIO/PWM</td><td></td>
+  </tr>
+  <tr>
+    <td>D15</td><td>GPIO/PWM/ADC</td><td></td>
+  </tr>
+  <tr>
+    <td>D16</td><td>GPIO/PWM/ADC</td><td></td>
+  </tr>
+  <tr>
+    <td>D17</td><td>GPIO/ADC</td><td>A LED is connected on WiFiMCU board</td>
   </tr>
 </table>
 

@@ -1,5 +1,6 @@
 
 # **WiFiMCU** #
+[![Download](https://img.shields.io/badge/download-~400k-orange.svg)](https://github.com/SmartArduino/WiFiMCU/releases)
    WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load this on your device and then run Lua scripts on it with nothing more than a terminal connection. Enjoy it!
 
 #####Cortex-M4 microcotroller<br/>

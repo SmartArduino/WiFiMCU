@@ -24,6 +24,15 @@
 - Station,Soft AP and Station+Soft AP<br/>
 - CE, FCC suitable<br/>
 
+#GPIO table
+
+#Program demos
+####Connect to your ap
+
+```lua
+    cfg={ssid='Doit_3165',pwd=''}
+    wifi.startap(cfg)
+```
 
 ###The IDE tool for wifimcu can be found here
 https://github.com/SmartArduino/WiFiMCU-STUDIO
@@ -35,7 +44,7 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 www.wifimcu.com<br/>
 
 ####[Doctors of Intelligence & Technology](www.doit.am)
-[WiFiMCU Dev Kit](http://www.smartarduino.com) (br/)
+[WiFiMCU Dev Kit](http://www.smartarduino.com)
 
 ####Version log
 v0.9.4@2015-8-24<br/>

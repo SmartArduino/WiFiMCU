@@ -173,9 +173,9 @@
    mcu.reboot()
 ```
 ###Discussion
-www.emw3165.com
-bbs.smartarduino.com
-bbs.doit.am
+www.emw3165.com<br/>
+bbs.smartarduino.com<br/>
+bbs.doit.am<br/>
 
 ###The IDE tool for wifimcu can be found here
 https://github.com/SmartArduino/WiFiMCU-STUDIO

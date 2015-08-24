@@ -7,12 +7,15 @@
 - 100MHz,Cortex-M4 core<br/>
 - 2M bytes of SPI flash and 512K bytes of on-chip flash<br/>
 - 128K bytes of RAM<br/>
+- Operation Temperature：-30℃ ~ +85℃<br/>
+
 ####Multi-Interface<br/>
 - 17 GPIO Pin<br/>
 - 3 UARTs<br/>
 - ADC(5)/SPI(1)/I2C(1)/USB(1)<br/>
 - SWD debug interface<br/>
 - 11 PWMs<br/>
+
 ####Broadcom IEEE 802.11 b/g/n RF Chip<br/>
 - Supports 802.11 b/g/n<br/>
 - WEP,WPA/WPA2,PSK/Enterprise<br/>
@@ -20,7 +23,7 @@
 - Receiver sensitivity：-87 dBm<br/>
 - Station,Soft AP and Station+Soft AP<br/>
 - CE,  FCC  suitable<br/>
-####Operation Temperature：-30℃ ~ +85℃<br/>
+
 
 The IDE tool for wifimcu can be found here:
 https://github.com/SmartArduino/WiFiMCU-STUDIO

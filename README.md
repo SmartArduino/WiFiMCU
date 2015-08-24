@@ -110,7 +110,68 @@
    end)
    net.start(skt,80) 
 ```
+####Connect Wireless Router
 
+```lua
+   print(wifi.sta.getip())  --check ip
+   0.0.0.0
+   cfg={ssid="Doit",pwd="123456789"} wifi.startsta(cfg) --sta mode connect
+   print(wifi.sta.getip())  --check ip
+   0.0.0.0
+   print(wifi.sta.getip())  --check ip
+   192.168.1.116 
+```
+####Connect Remote Server
+
+```lua
+   clt = net.new(net.TCP,net.CLIENT)
+   net.on(clt,"dnsfound",function(clt,ip) print("dnsfound clt:"..clt.." ip:"..ip) end)
+   net.on(clt,"connect",function(clt) print("connect:clt:"..clt) end)
+   net.on(clt,"disconnect",function(clt) print("disconnect:clt:"..clt) end)
+   net.on(clt,"receive",function(clt,data) print("receive:clt:"..clt.."data:"..data) end)
+   net.start(clt,6579,"115.29.109.104")
+```
+####GPIO Operation
+
+```lua
+   gpio.mode(17,gpio.OUTPUT)
+   gpio.toggle(17)
+   gpio.write(17,gpio.HIGH)
+   gpio.write(17,gpio.LOW)
+   gpio.mode(17,gpio.INPUT)
+   =gpio.read(17)
+   1
+   =gpio.read(17)
+   0
+```
+####Timer
+
+```lua
+   function tmr_cb() print('tmr1 is called') end 
+   tmr.start(1,1000,tmr_cb)
+   tmr1 is called
+   tmr1 is called
+```
+####File Operation
+
+```lua
+   file.open ("test.lua","w+")
+   file.write("this is a test")
+   file.close()
+   file.open ("test.lua","r")
+   data=file.read()
+   print(data)
+   this is a test
+   file.close()
+```
+####Auto start
+
+```lua
+   file.open ("init.lua","w+")
+   file.write("print('Hello WiFiMCU!')")
+   file.close()
+   mcu.reboot()
+```
 
 ###The IDE tool for wifimcu can be found here
 https://github.com/SmartArduino/WiFiMCU-STUDIO

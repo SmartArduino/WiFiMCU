@@ -3,11 +3,11 @@
 #define __USER_VERSION_H__
 
 #define NODE_VERSION	"WiFiMCU 0.9.4"
-#define BUILD_DATE	    "build 20150821"
+#define BUILD_DATE	    "build 20150824"
 
+//v0.9.4@2015-8-24
+//repair wifi module bugs
 
-//v0.9.4@2015-8-21
-//wifi module bugs
 //v0.9.3@2015-8-18
 //change the bootloader ymodem.c
 //v0.9.2@2015-8-10

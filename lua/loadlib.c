@@ -644,7 +644,7 @@ LUALIB_API int luaopen_package (lua_State *L) {
 #if LUA_OPTIMIZE_MEMORY == 0
   luaL_newmetatable(L, "_LOADLIB");
   //lua_pushlightfunction(L, gctm);
-  lua_pushlightfunction(L, (void*)gctm);
+  lua_pushlightfunction(L, (void*)gctm);//doit
   lua_setfield(L, -2, "__gc");
 #else
   luaL_rometatable(L, "_LOADLIB", (void*)lmt);

@@ -16,13 +16,13 @@ Doctors of Intelligence & Technology (Doit.am)
 support@doit.am
 
 ####version log
-v0.9.4@2015-8-24
-repair wifi module bugs
-v0.9.3@2015-8-18
-change the bootloader ymodem.c
-v0.9.2@2015-8-15
-add uart/pwm/adc modules change
-change net module
-change the logo
-v0.9.1@2015-7-26
-initial publish
+v0.9.4@2015-8-24<br/>
+repair wifi module bugs<br/>
+v0.9.3@2015-8-18<br/>
+change the bootloader ymodem.c<br/>
+v0.9.2@2015-8-15<br/>
+add uart/pwm/adc modules change<br/>
+change net module<br/>
+change the logo<br/>
+v0.9.1@2015-7-26<br/>
+initial publish<br/>

@@ -5,7 +5,7 @@ The IDE tool for wifimcu can be found here:
 https://github.com/SmartArduino/WiFiMCU-STUDIO
 
 ####Based on EMW3165, Lua 5.1.4, eLua, NodeMCU
-Thanks to [eLua project], (https://github.com/elua/elua),[NodeMCU project](https://github.com/nodemcu/nodemcu-firmware)<br/>,[spiffs file system](https://github.com/pellepl/spiffs)<br/>
+Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https://github.com/nodemcu/nodemcu-firmware),[spiffs file system](https://github.com/pellepl/spiffs)<br/>
 
 ####More information please go to: www.wifimcu.com<br/>
 

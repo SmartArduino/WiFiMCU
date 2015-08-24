@@ -172,6 +172,13 @@
    file.close()
    mcu.reboot()
 ```
+
+###Reference
+[EMW3165 Introduction(Chinese)](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)
+[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)
+[WiFiMCU Refecence](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)
+[WiFiMCU Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)
+
 ###Resource
 Home site:www.wifimcu.com<br/>
 discussion:www.emw3165.com<br/>

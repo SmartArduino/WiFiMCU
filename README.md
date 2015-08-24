@@ -25,6 +25,18 @@
 - CE, FCC suitable<br/>
 
 #GPIO table
+<a id="gpio pin table"></a>
+<table>
+  <tr>
+    <th scope="col">GPIO index</th><th scope="col">Alternative Function</th><th scope="col">Discription</th>
+  </tr>
+  <tr>
+    <td>D0</td><td>GPIO/BOOT</td><td>WiFiMCU would enter into Bootloader Mode, if D0 goes to LOW</td><td>
+  </tr>
+  <tr>
+    <td>D1</td><td>GPIO/PWM/ADC</td><td>WiFiMCU</td><td>
+  </tr>
+</table>
 
 #Program demos
 ####Setup a AP

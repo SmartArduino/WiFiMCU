@@ -11,6 +11,14 @@
  ] [                            /o|__|  [www.wifimcu.com@2015]
 </pre>
 
+#Overview
+- Based on Lua 5.1.4 (package, string, table, math modules)<br/>
+- Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc.<br/>
+- Modules to be builded: spi, i2c, 1-wire, bit, mqtt...<br/>
+- Integer version provided<br/>
+- `Free memory >48k bytes`<br/>
+
+##Highlights
 #####Cortex-M4 microcotroller<br/>
 - `STM32F411CE`<br/>
 - 100MHz,Cortex-M4 core<br/>
@@ -32,13 +40,6 @@
 - Receiver sensitivity：-87 dBm<br/>
 - Station,Soft AP and Station+Soft AP<br/>
 - CE, FCC suitable<br/>
-
-#Overview
-- Based on Lua 5.1.4 (package, string, table, math modules)<br/>
-- Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc.<br/>
-- Modules to be builded: spi, i2c, 1-wire, bit, mqtt...<br/>
-- Integer version provided<br/>
-- `Free memory >48k bytes`<br/>
 
 #GPIO table
 <a id="gpio pin table"></a>
@@ -249,15 +250,15 @@ discussion:www.emw3165.com<br/>
 http://bbs.smartarduino.com<br/>
 http://bbs.doit.am<br/>
 
-###The IDE tool for wifimcu can be found here
-https://github.com/SmartArduino/WiFiMCU-STUDIO
+###The IDE tool for wifimcu can be found here<br/>
+https://github.com/SmartArduino/WiFiMCU-STUDIO<br/>
 
 ####Acknowledgements
 Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https://github.com/nodemcu/nodemcu-firmware),[spiffs file system](https://github.com/pellepl/spiffs)<br/>
 
-####Doctors of Intelligence & Technology
-[DoIT website]www.doit.am
-[WiFiMCU Dev Kit](http://www.smartarduino.com)
+####Doctors of Intelligence & Technology<br/>
+[DoIT website](www.doit.am)<br/>
+[WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log
 v0.9.4@2015-8-24<br/>

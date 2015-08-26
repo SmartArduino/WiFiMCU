@@ -180,7 +180,7 @@
    mcu.reboot()
 ```
 
-### [WiFiMCU Tutorial<br/>
+### [WiFiMCU Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
 * Basic<br/>
 -- Install USB Driver<br/>
 -- Quickly Start with WiFiMCU STUDIO<br/>
@@ -201,7 +201,7 @@
 ----Get the latest firmware<br/>
 ----Use WiFiMCU STUDIO to update firmware<br/>
 ----Use SecureCRT to update firmware<br/>
-----Use SWD to update firmware<br/>](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)
+----Use SWD to update firmware<br/>
 
 ###How to
 * [How to use MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>

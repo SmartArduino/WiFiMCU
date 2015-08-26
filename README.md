@@ -182,8 +182,8 @@
 ###How to
 * [How to use MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>
 * [GPIO Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio)<br/>
-** [GPIO input demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_input_demo.lua)<br/>
-** [GPIO output demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_output_demo.lua)<br/>
+-- [GPIO input demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_input_demo.lua)<br/>
+-- [GPIO output demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_output_demo.lua)<br/>
 * [How to use TIMER Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/3%20timer)<br/>
 * [WIFI Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/4%20wifi)<br/>
 ** [Set up a simple AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_demo.lua)<br/>

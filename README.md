@@ -11,7 +11,7 @@
 </pre>
 
 #####Cortex-M4 microcotroller<br/>
-- STM32F411CE<br/>
+- `STM32F411CE<br/>`
 - 100MHz,Cortex-M4 core<br/>
 - 2M bytes of SPI flash and 512K bytes of on-chip flash<br/>
 - 128K bytes of RAM<br/>
@@ -24,7 +24,7 @@
 - SWD debug interface<br/>
 - 11 PWMs<br/>
 
-#####Broadcom IEEE 802.11 b/g/n RF Chip<br/>
+#####`Broadcom IEEE 802.11 b/g/n RF Chip`<br/>
 - Supports 802.11 b/g/n<br/>
 - WEP,WPA/WPA2,PSK/Enterprise<br/>
 - 16.5dBm@11b,14.5dBm@11g,13.5dBm@11n<br/>
@@ -37,6 +37,7 @@
 - Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc.<br/>
 - Modules to be builded: spi, i2c, 1-wire, bit, mqtt...<br/>
 - Integer version provided.<br/>
+- `Free memory >48k bytes`
 
 #GPIO table
 <a id="gpio pin table"></a>

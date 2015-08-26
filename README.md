@@ -11,7 +11,7 @@
 - Operation Temperature：-30℃ ~ +85℃<br/>
 
 #####Multi-Interface<br/>
-- 17 GPIO Pin<br/>
+- 18 GPIO Pins<br/>
 - 3 UARTs<br/>
 - ADC(5)/SPI(1)/I2C(1)/USB(1)<br/>
 - SWD debug interface<br/>

@@ -204,12 +204,12 @@
 ----[Use SWD to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_7.html)<br/>
 
 ###How to
-* [How to use MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>
-* [GPIO Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio)<br/>
+* [Using MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>
+* [Using GPIO Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio)<br/>
 -- [GPIO input demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_input_demo.lua)<br/>
 -- [GPIO output demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_output_demo.lua)<br/>
-* [How to use TIMER Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/3%20timer)<br/>
-* [WIFI Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/4%20wifi)<br/>
+* [Using TIMER Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/3%20timer)<br/>
+* [Using WIFI Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/4%20wifi)<br/>
 -- [Set up a simple AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_demo.lua)<br/>
 -- [Set up a advanced AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_adv_demo.lua)<br/>
 * [Using NET Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
@@ -218,6 +218,12 @@
 -- [Set up a TCP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/2%20net_tcpclient_demo.lua)<br/>
 -- [Set up a UDP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/3%20net_udpserver_demo.lua)<br/>
 -- [Set up a UDP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/4%20net_udpclient_demo.lua)<br/>
+* [Using FILE Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/6%20file/file_demo.lua)<br/>
+* [Using PWM Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/7%20pwm/pwm_breathing_LED.lua)<br/>
+* [Using ADC Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/8%20adc/adc_demo.lua)<br/>
+* [Using UART Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/8%20adc)<br/>
+* 
+
 
 
 ###Reference

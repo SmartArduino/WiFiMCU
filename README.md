@@ -246,9 +246,6 @@ https://github.com/SmartArduino/WiFiMCU-STUDIO
 ####Acknowledgements
 Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https://github.com/nodemcu/nodemcu-firmware),[spiffs file system](https://github.com/pellepl/spiffs)<br/>
 
-####More information please go to
-www.wifimcu.com<br/>
-
 ####[Doctors of Intelligence & Technology](www.doit.am)
 [WiFiMCU Dev Kit](http://www.smartarduino.com)
 

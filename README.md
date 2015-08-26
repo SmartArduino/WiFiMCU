@@ -179,6 +179,30 @@
    file.close()
    mcu.reboot()
 ```
+
+### WiFiMCU Tutorial
+* Basic
+--Install USB Driver
+--Quickly Start with WiFiMCU STUDIO
+----Prepare
+----Power UP
+----Check the COM Port
+----Run WiFiMCU STUDIO
+----Toggle LED on WiFiMCU board
+----Start AP mode
+----Setup a simply webserver
+--Use SecureCRT (Optional)
+*Adavanced
+--Flash LED -use TIMER module
+--Breathing LED -use PWM module
+--Socket programming –use Net module
+--WiFi to Serial transparent transmission
+--Update Firmware
+----Get the latest firmware
+----Use WiFiMCU STUDIO to update firmware
+----Use SecureCRT to update firmware
+----Use SWD to update firmware
+
 ###How to
 * [How to use MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>
 * [GPIO Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio)<br/>

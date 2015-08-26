@@ -221,9 +221,9 @@
 * [Using FILE Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/6%20file/file_demo.lua)<br/>
 * [Using PWM Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/7%20pwm/pwm_breathing_LED.lua)<br/>
 * [Using ADC Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/8%20adc/adc_demo.lua)<br/>
-* [Using UART Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/8%20adc)<br/>
-* 
-
+* [Using UART Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/9%20uart)<br/>
+-- [Uart receive data](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/1%20uart_demo.lua)<br/>
+-- [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
 
 
 ###Reference

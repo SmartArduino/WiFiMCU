@@ -186,8 +186,15 @@
 -- [GPIO output demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_output_demo.lua)<br/>
 * [How to use TIMER Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/3%20timer)<br/>
 * [WIFI Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/4%20wifi)<br/>
-** [Set up a simple AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_demo.lua)<br/>
-** [Set up a advanced AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_adv_demo.lua)<br/>
+-- [Set up a simple AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_demo.lua)<br/>
+-- [Set up a advanced AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_adv_demo.lua)<br/>
+* [Using NET Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
+-- [Set up a TCP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/1%20net_tcpserver_demo.lua)<br/>
+-- [Set up a webserver](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/1-1%20webserver.lua)<br/>
+-- [Set up a TCP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/2%20net_tcpclient_demo.lua)<br/>
+-- [Set up a UDP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/3%20net_udpserver_demo.lua)<br/>
+-- [Set up a UDP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/4%20net_udpclient_demo.lua)<br/>
+
 
 ###Reference
 [WiFiMCU Function Refecence](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>

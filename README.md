@@ -182,22 +182,22 @@
 
 ### WiFiMCU Tutorial<br/>
 * Basic<br/>
---Install USB Driver<br/>
---Quickly Start with WiFiMCU STUDIO<br/>
-----Prepare<br/>
-----Power UP<br/>
-----Check the COM Port<br/>
-----Run WiFiMCU STUDIO<br/>
-----Toggle LED on WiFiMCU board<br/>
-----Start AP mode<br/>
-----Setup a simply webserver<br/>
+-- Install USB Driver<br/>
+-- Quickly Start with WiFiMCU STUDIO<br/>
+---- Prepare<br/>
+---- Power UP<br/>
+---- Check the COM Port<br/>
+---- Run WiFiMCU STUDIO<br/>
+---- Toggle LED on WiFiMCU board<br/>
+---- Start AP mode<br/>
+---- Setup a simply webserver<br/>
 --Use SecureCRT (Optional)<br/>
-*Adavanced<br/>
---Flash LED -use TIMER module<br/>
---Breathing LED -use PWM module<br/>
---Socket programming –use Net module<br/>
---WiFi to Serial transparent transmission<br/>
---Update Firmware<br/>
+* Adavanced<br/>
+-- Flash LED -use TIMER module<br/>
+-- Breathing LED -use PWM module<br/>
+-- Socket programming –use Net module<br/>
+-- WiFi to Serial transparent transmission<br/>
+-- Update Firmware<br/>
 ----Get the latest firmware<br/>
 ----Use WiFiMCU STUDIO to update firmware<br/>
 ----Use SecureCRT to update firmware<br/>

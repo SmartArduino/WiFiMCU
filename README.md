@@ -179,12 +179,17 @@
    file.close()
    mcu.reboot()
 ```
+###How to
+[How to use MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>)
+[How to use GPIO Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/2%20gpio)<br/>)
 
 ###Reference
-[EMW3165 Introduction(Chinese)](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
-[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
-[WiFiMCU Refecence](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
+[WiFiMCU Function Refecence](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
 [WiFiMCU Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
+[EMW3165 Datasheet(English)](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
+[EMW3165 Datasheet(Chinese)](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
+[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/)<br/>
+
 
 ###Resource
 Home site:www.wifimcu.com<br/>

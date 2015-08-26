@@ -7,7 +7,7 @@
   ;   .  . .___ .  . __ .  .      ,--.
  ["]  |  |o[__ o|\/|/  `|  | ,<-|__oo|
 /[_]\ |/\|||   ||  |\__.|__| /  |//  |
- ] [                            /o|__|  [www.wifimcu.com](www.wifimcu.com) @2015
+ ] [                            /o|__|  [www.wifimcu.com@2015]
 </pre>
 
 #####Cortex-M4 microcotroller<br/>

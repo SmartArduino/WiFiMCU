@@ -1,7 +1,7 @@
 
 # **WiFiMCU** #
 [![Download](https://img.shields.io/badge/download-~200k-orange.svg)](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
-   WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load this on your device and then run Lua scripts on it with nothing more than a terminal connection. Enjoy it!
+   WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load this on your device and then run Lua scripts on it with nothing more than a terminal connection. <br/>Enjoy it!<br/>
 
 #####Cortex-M4 microcotroller<br/>
 - STM32F411CE<br/>
@@ -182,16 +182,16 @@
 
 ### [WiFiMCU Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
 * Basic<br/>
--- Install USB Driver<br/>
--- Quickly Start with WiFiMCU STUDIO<br/>
----- Prepare<br/>
----- Power UP<br/>
----- Check the COM Port<br/>
----- Run WiFiMCU STUDIO<br/>
----- Toggle LED on WiFiMCU board<br/>
----- Start AP mode<br/>
----- Setup a simply webserver<br/>
---Use SecureCRT (Optional)<br/>
+-- [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
+-- [Quickly Start with WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Prepare](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Power UP](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Check the COM Port](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Run WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Toggle LED on WiFiMCU board](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Start AP mode](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+---- [Setup a simply webserver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+--[Use SecureCRT (Optional)](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1_2.html)<br/>
 * Adavanced<br/>
 -- Flash LED -use TIMER module<br/>
 -- Breathing LED -use PWM module<br/>

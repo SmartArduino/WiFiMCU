@@ -1,7 +1,8 @@
 
 # **WiFiMCU** #
 [![Download](https://img.shields.io/badge/download-~200k-orange.svg)](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
-   WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load this on your device and then run Lua scripts on it with nothing more than a terminal connection. <br/>Enjoy it!<br/>
+   WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load this on your device and then run Lua scripts on it with nothing more than a terminal connection. <br/>
+   Enjoy it!<br/>
 
 <pre>
   ;   .  . .___ .  . __ .  .      ,--.
@@ -11,7 +12,7 @@
 </pre>
 
 #####Cortex-M4 microcotroller<br/>
-- `STM32F411CE<br/>`
+- `STM32F411CE`<br/>
 - 100MHz,Cortex-M4 core<br/>
 - 2M bytes of SPI flash and 512K bytes of on-chip flash<br/>
 - 128K bytes of RAM<br/>
@@ -36,8 +37,8 @@
 - Based on Lua 5.1.4 (package, string, table, math modules)<br/>
 - Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc.<br/>
 - Modules to be builded: spi, i2c, 1-wire, bit, mqtt...<br/>
-- Integer version provided.<br/>
-- `Free memory >48k bytes`
+- Integer version provided<br/>
+- `Free memory >48k bytes`<br/>
 
 #GPIO table
 <a id="gpio pin table"></a>

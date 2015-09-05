@@ -31,6 +31,10 @@
 #include "lstate.h"
 #include "legc.h"
 
+#ifndef LUA_CROSS_COMPILER
+#include "devman.h"
+#endif
+
 #define FREELIST_REF	0	/* free list of references */
 
 
@@ -40,15 +44,14 @@
 
 // Parameters for luaI_openlib
 #define LUA_USECCLOSURES          0
-//doit
 #define LUA_USELIGHTFUNCTIONS     1
 
-extern int cli_printf(const char *msg, ...);//doit
 /*
 ** {======================================================
 ** Error-report functions
 ** =======================================================
 */
+
 
 LUALIB_API int luaL_argerror (lua_State *L, int narg, const char *extramsg) {
   lua_Debug ar;
@@ -306,7 +309,7 @@ LUALIB_API void luaI_openlib (lua_State *L, const char *libname,
     for (i=0; i<nup; i++)  /* copy upvalues to the top */
       lua_pushvalue(L, -nup);
     if (ftype == LUA_USELIGHTFUNCTIONS)
-      //lua_pushlightfunction(L, l->func);
+      //lua_pushlightfunction(L, l->func);//doit
       lua_pushlightfunction(L, (void*)l->func);
     else
       lua_pushcclosure(L, l->func, nup);
@@ -579,20 +582,33 @@ typedef struct LoadF {
   int extraline;
   FILE *f;
   char buff[LUAL_BUFFERSIZE];
+  const char *srcp;
+  size_t totsize;
 } LoadF;
 
 
 static const char *getF (lua_State *L, void *ud, size_t *size) {
   LoadF *lf = (LoadF *)ud;
   (void)L;
+  if (L == NULL && size == NULL) // special request: detect 'direct mode'
+    return lf->srcp;
   if (lf->extraline) {
     lf->extraline = 0;
     *size = 1;
     return "\n";
   }
-  if (feof(lf->f)) return NULL;
-  *size = fread(lf->buff, 1, sizeof(lf->buff), lf->f);
-  return (*size > 0) ? lf->buff : NULL;
+  if (lf->srcp == NULL) { // no direct access
+    if (feof(lf->f)) return NULL;
+    *size = fread(lf->buff, 1, sizeof(lf->buff), lf->f);
+    return (*size > 0) ? lf->buff : NULL;
+  } else { // direct access, return the whole file as a single buffer
+    if (lf->totsize) {
+      *size = lf->totsize;
+      lf->totsize = 0;
+      return lf->srcp;
+    } else
+      return NULL;
+  }
 }
 
 
@@ -609,8 +625,9 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
   LoadF lf;
   int status, readstatus;
   int c;
+  const char *srcp = NULL;
   int fnameindex = lua_gettop(L) + 1;  /* index of filename on the stack */
-  lf.extraline = 0;
+  lf.extraline = lf.totsize = 0;
   if (filename == NULL) {
     lua_pushliteral(L, "=stdin");
     lf.f = stdin;
@@ -619,6 +636,14 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
     lua_pushfstring(L, "@%s", filename);
     lf.f = fopen(filename, "r");
     if (lf.f == NULL) return errfile(L, "open", fnameindex);
+#ifndef LUA_CROSS_COMPILER
+    srcp = dm_getaddr(fileno(lf.f));
+    if (srcp) {
+      fseek(lf.f, 0, SEEK_END);
+      lf.totsize = ftell(lf.f);
+      fseek(lf.f, 0, SEEK_SET);
+    }
+#endif
   }
   c = getc(lf.f);
   if (c == '#') {  /* Unix exec. file? */
@@ -634,6 +659,11 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
     lf.extraline = 0;
   }
   ungetc(c, lf.f);
+  if (srcp) {
+    lf.srcp = srcp + ftell(lf.f);
+    lf.totsize -= ftell(lf.f);
+  } else
+    lf.srcp = NULL;
   status = lua_load(L, getF, &lf, lua_tostring(L, -1));
   readstatus = ferror(lf.f);
   if (filename) fclose(lf.f);  /* close file (even in case of errors) */
@@ -645,6 +675,7 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
   return status;
 }
 #endif
+
 //doit
 #include <spiffs.h>
 #include <spiffs_nucleus.h>
@@ -734,8 +765,6 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
   return status;
 }
 
-
-
 typedef struct LoadS {
   const char *s;
   size_t size;
@@ -776,6 +805,8 @@ static int l_check_memlimit(lua_State *L, size_t needbytes) {
   global_State *g = G(L);
   int cycle_count = 0;
   lu_mem limit = g->memlimit - needbytes;
+  /* don't allow allocation if it requires more memory then the total limit. */
+  if (needbytes > g->memlimit) return 1;
   /* make sure the GC is not disabled. */
   if (!is_block_gc(L)) {
     while (g->totalbytes >= limit) {
@@ -814,7 +845,7 @@ static void *l_alloc (void *ud, void *ptr, size_t osize, size_t nsize) {
   return nptr;
 }
 
-
+//doit
 static int panic (lua_State *L) {
   (void)L;  /* to avoid warnings */
 #if defined(LUA_USE_STDIO)

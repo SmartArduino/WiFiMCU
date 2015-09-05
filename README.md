@@ -1,4 +1,4 @@
-
+﻿
 # **WiFiMCU** #
 [![Download](https://img.shields.io/badge/download-~200k-orange.svg)](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
    WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load this on your device and then run Lua scripts on it with nothing more than a terminal connection. <br/>
@@ -261,6 +261,17 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log
+v0.9.5@2015-9-5
+enable LTR function to save ram(48k free)
+update logo
+change exlibs, delete usb folder
+repair package module bug
+add tmr.delayus()
+add sensor/bit module
+add i2c module
+add spi module
+add mqtt(not work yet)
+
 v0.9.4@2015-8-24<br/>
 repair wifi module bugs<br/>
 v0.9.3@2015-8-18<br/>

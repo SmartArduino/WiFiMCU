@@ -11,7 +11,9 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+//#include "c_fcntl.h"
+#include "spiffs.h"
+extern spiffs fs;
 
 #define loadlib_c
 #define LUA_LIB
@@ -328,14 +330,20 @@ static int ll_loadlib (lua_State *L) {
 ** =======================================================
 */
 
-
+#if 0
 static int readable (const char *filename) {
   FILE *f = fopen(filename, "r");  /* try to open file */
   if (f == NULL) return 0;  /* open failed */
   fclose(f);
   return 1;
 }
-
+#endif
+static int readable (const char *filename) {
+  int f = SPIFFS_open(&fs, (char*)filename, SPIFFS_RDONLY,0);  /* try to open file */
+  if (f < 0) return 0;  /* open failed */
+  SPIFFS_close(&fs,f);
+  return 1;
+}
 
 static const char *pushnexttemplate (lua_State *L, const char *path) {
   const char *l;
@@ -376,7 +384,6 @@ static void loaderror (lua_State *L, const char *filename) {
                 lua_tostring(L, 1), filename, lua_tostring(L, -1));
 }
 
-
 static int loader_Lua (lua_State *L) {
   const char *filename;
   const char *name = luaL_checkstring(L, 1);
@@ -386,7 +393,6 @@ static int loader_Lua (lua_State *L) {
     loaderror(L, filename);
   return 1;  /* library loaded successfully */
 }
-
 
 static const char *mkfuncname (lua_State *L, const char *modname) {
   const char *funcname;
@@ -632,7 +638,10 @@ static const lua_CFunction loaders[] =
   {loader_preload, loader_Lua, loader_C, loader_Croot, NULL};
 
 #if LUA_OPTIMIZE_MEMORY > 0
-const luaR_entry lmt[] = {
+//const luaR_entry lmt[] = {
+#define MIN_OPT_LEVEL 1
+#include "lrodefs.h"
+const LUA_REG_TYPE lmt[] = {
   {LRO_STRKEY("__gc"), LRO_FUNCVAL(gctm)},
   {LRO_NILKEY, LRO_NILVAL}
 };

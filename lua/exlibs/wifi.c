@@ -4,8 +4,8 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
 
 #include "platform.h"
 #include "MICODefine.h"
@@ -641,12 +641,16 @@ static int lwifi_powersave( lua_State* L )
   return 0;
 }
 
+#define MIN_OPT_LEVEL       2
+#include "lrodefs.h"
 static const LUA_REG_TYPE wifi_station_map[] =
 {
   { LSTRKEY( "getip" ), LFUNCVAL ( lwifi_station_getip ) },
   { LSTRKEY( "getipadv" ), LFUNCVAL ( lwifi_station_getipadv ) },
   { LSTRKEY( "getlink" ), LFUNCVAL ( lwifi_station_getlink ) },
   { LSTRKEY( "stop" ), LFUNCVAL ( lwifi_station_stop ) },
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif        
   { LNILKEY, LNILVAL }
 };
 
@@ -655,6 +659,8 @@ static const LUA_REG_TYPE wifi_ap_map[] =
   { LSTRKEY( "getip" ), LFUNCVAL ( lwifi_ap_getip ) },
   { LSTRKEY( "getipadv" ), LFUNCVAL ( lwifi_ap_getipadv ) },
   { LSTRKEY( "stop" ), LFUNCVAL ( lwifi_ap_stop ) },
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif        
   { LNILKEY, LNILVAL }
 };
 const LUA_REG_TYPE wifi_map[] =
@@ -664,11 +670,18 @@ const LUA_REG_TYPE wifi_map[] =
   { LSTRKEY( "scan" ), LFUNCVAL( lwifi_scan ) },
   { LSTRKEY( "stop" ), LFUNCVAL( lwifi_stop ) },
   { LSTRKEY( "powersave" ), LFUNCVAL( lwifi_powersave ) },
+#if LUA_OPTIMIZE_MEMORY > 0
+  { LSTRKEY( "sta" ), LROVAL( wifi_station_map ) },
+  { LSTRKEY( "ap" ), LROVAL( wifi_ap_map ) },
+#endif        
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_wifi(lua_State *L)
 {
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else
   luaL_register( L, EXLIB_WIFI, wifi_map );
   // Setup the new tables (station and ap) inside wifi
   lua_newtable( L );
@@ -679,4 +692,5 @@ LUALIB_API int luaopen_wifi(lua_State *L)
   luaL_register( L, NULL, wifi_ap_map );
   lua_setfield( L, -2, "ap" );
   return 1;
+#endif  
 }

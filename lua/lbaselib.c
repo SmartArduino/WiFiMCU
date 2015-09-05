@@ -20,9 +20,10 @@
 #include "lualib.h"
 #include "lrotable.h"
 
-
 //doit
-extern int readline4lua(const char *prompt, char *buffer, int length);
+#ifndef LUA_CROSS_COMPILER
+#include "platform_conf.h"
+#endif
 
 /*
 ** If your system does not support `stdout', you can just remove this function.
@@ -44,7 +45,7 @@ static int luaB_print (lua_State *L) {
       return luaL_error(L, LUA_QL("tostring") " must return a string to "
                            LUA_QL("print"));
 #if defined(LUA_USE_STDIO)
-    if (i>1) fputs("\t", stdout);
+    if (i>1) fputs("\t", stdout); //doit
     fputs(s, stdout);
 #else
     if (i>1)  luai_writestring("\t", 1);
@@ -59,6 +60,7 @@ static int luaB_print (lua_State *L) {
 #endif
   return 0;
 }
+
 
 static int luaB_tonumber (lua_State *L) {
   int base = luaL_optint(L, 2, 10);
@@ -705,7 +707,7 @@ static void base_open (lua_State *L) {
 
 LUALIB_API int luaopen_base (lua_State *L) {
   base_open(L);
-#if LUA_OPTIMIZE_MEMORY == 0
+#if LUA_OPTIMIZE_MEMORY == 0 && defined( MODULE_LUA_CO_LINE )
   luaL_register(L, LUA_COLIBNAME, co_funcs);
   return 2;
 #else

@@ -126,10 +126,9 @@ void luaR_getcstr(char *dest, const TString *src, size_t maxsize) {
 
 /* Return 1 if the given pointer is a rotable */
 #ifdef LUA_META_ROTABLES
-
-#include "compiler.h"
-
+extern char stext;
+extern char etext;
 int luaR_isrotable(void *p) {
-  return RODATA_START_ADDRESS <= (char*)p && (char*)p <= RODATA_END_ADDRESS;
+  return &stext <= ( char* )p && ( char* )p <= &etext;
 }
 #endif

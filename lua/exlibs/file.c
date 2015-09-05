@@ -4,13 +4,15 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
+
 #include "MicoPlatform.h"
-#include "user_version.h"
+#include "user_config.h"
 
 #include <spiffs.h>
 #include <spiffs_nucleus.h>
+
 #define LOG_PAGE_SIZE       256
 static u8_t spiffs_work_buf[LOG_PAGE_SIZE*2];
 static u8_t spiffs_fds[32*4];
@@ -19,10 +21,7 @@ spiffs fs;
 #define FILE_NOT_OPENED 0
 static volatile int file_fd = FILE_NOT_OPENED;
 
-
 #define MICO_FLASH_FOR_LUA       MICO_SPI_FLASH
-//#define LUA_START_ADDRESS     (uint32_t)0x00100000 
-//#define LUA_FLASH_SIZE        (uint32_t)1024*1024 
 #define LUA_START_ADDRESS       (uint32_t)0x00C0000 
 #define LUA_FLASH_SIZE          (uint32_t)1024*(1024+256) 
 
@@ -66,8 +65,6 @@ void lua_spiffs_mount() {
       spiffs_cache_buf,
       sizeof(spiffs_cache_buf),
       0);
-    
-    //MCU_DBG("mount res: %i\r\n", res);
 }
 
 int mode2flag(char *mode){
@@ -136,11 +133,11 @@ static int file_format( lua_State* L )
   int ret = SPIFFS_format(&fs);
   if(ret==SPIFFS_OK)
   {
-    MCU_DBG("format done\r\n");
+    l_message(NULL,"format done\r\n");
     lua_spiffs_mount();    
   }
   else
-    MCU_DBG("format error,err:%d\r\n",ret);
+    l_message(NULL,"format error\r\n");
   return 0;
 }
 
@@ -409,6 +406,7 @@ static int writer(lua_State* L, const void* p, size_t size, void* u)
   //MCU_DBG("write fd:%d,size:%d\n", file_fd, size);
   return 0;
 }
+//rewrite lauxlib.c:luaL_loadfile
 #define toproto(L,i) (clvalue(L->top+(i))->l.p)
 static int file_compile( lua_State* L )
 {
@@ -460,7 +458,8 @@ static int file_compile( lua_State* L )
   return 0;
 }
 
-
+#define MIN_OPT_LEVEL   2
+#include "lrodefs.h"
 const LUA_REG_TYPE file_map[] =
 {
   { LSTRKEY( "list" ), LFUNCVAL( file_list ) },
@@ -479,13 +478,18 @@ const LUA_REG_TYPE file_map[] =
   { LSTRKEY( "info" ), LFUNCVAL( file_info ) },
   { LSTRKEY( "state" ), LFUNCVAL( file_state ) },
   { LSTRKEY( "compile" ), LFUNCVAL( file_compile ) },
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif  
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_file(lua_State *L)
 {
-  lua_spiffs_mount();
-
+  //lua_spiffs_mount();  
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else  
   luaL_register( L, EXLIB_FILE, file_map );
   return 1;
+#endif
 }

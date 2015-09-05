@@ -36,7 +36,7 @@
   #define P9813_PIN_DIN            MICO_GPIO_NONE    // DIN
 #endif
 
-#define P9813_PIN_CIN_Clr()        MicoGpioOutputLow(P9813_PIN_CIN)  
+#define P9813_PIN_CIN_Clr()        MicoGpioOutputLow(P9813_PIN_CIN)
 #define P9813_PIN_CIN_Set()        MicoGpioOutputHigh(P9813_PIN_CIN)
 
 #define P9813_PIN_DIN_Clr()        MicoGpioOutputLow(P9813_PIN_DIN) 

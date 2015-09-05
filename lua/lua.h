@@ -12,21 +12,16 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-#include "MICOCli.h"
+
 #include "luaconf.h"
 
-#define MCU_DEBUG
-#ifdef MCU_DEBUG
-#define MCU_DBG printf
-#else
-#define MCU_DBG
-#endif	/* NODE_DEBUG */
 
 #define LUA_VERSION	"Lua 5.1"
 #define LUA_RELEASE	"Lua 5.1.4"
 #define LUA_VERSION_NUM	501
 #define LUA_COPYRIGHT	"Copyright (C) 1994-2011 Lua.org, PUC-Rio"
 #define LUA_AUTHORS 	"R. Ierusalimschy, L. H. de Figueiredo & W. Celes"
+
 
 /* mark for precompiled code (`<esc>Lua') */
 #define	LUA_SIGNATURE	"\033Lua"
@@ -373,9 +368,13 @@ struct lua_Debug {
   int i_ci;  /* active function */
 };
 
+//doit
+extern int readline4lua(const char *prompt, char *buffer, int length);
+
 /* }====================================================================== */
-void l_message (const char *pname, const char *msg);
-int lua_main (int argc, char **argv);
+void l_message (const char *pname, const char *msg);//doit
+int lua_main( int argc, char **argv );
+
 /******************************************************************************
 * Copyright (C) 1994-2008 Lua.org, PUC-Rio.  All rights reserved.
 *

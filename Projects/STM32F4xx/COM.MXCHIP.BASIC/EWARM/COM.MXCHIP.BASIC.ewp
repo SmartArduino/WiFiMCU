@@ -613,7 +613,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>WiFiMCU_Firmware_20150824.bin</state>
+          <state>WiFiMCU_Firmware_20150905.bin</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1190,6 +1190,9 @@
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\adc.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\bit.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\file.c</name>
       </file>
       <file>
@@ -1197,9 +1200,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\i2c.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\lexlibs.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\mcu.c</name>
@@ -1211,6 +1211,9 @@
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\pwm.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\sensor.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\spi.c</name>
       </file>
       <file>
@@ -1220,15 +1223,12 @@
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\uart.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\user_version.h</name>
+        <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\user_config.h</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\wifi.c</name>
       </file>
     </group>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\lua\compiler.h</name>
-    </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\lua\lapi.c</name>
     </file>
@@ -1403,6 +1403,9 @@
     <file>
       <name>$PROJ_DIR$\..\..\..\..\lua\lzio.h</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\lua\print.c</name>
+    </file>
   </group>
   <group>
     <name>MICO</name>
@@ -1423,6 +1426,78 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\MICO\MICOSystemMonitor.h</name>
+    </file>
+  </group>
+  <group>
+    <name>MQTT</name>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\cJSON.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\cJSON.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\mqtt.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\mqtt.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTConnect.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTConnectClient.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTConnectServer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTDeserializePublish.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTFormat.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTFormat.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTPacket.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTPacket.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTPublish.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSerializePublish.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSubscribe.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSubscribeClient.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSubscribeServer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTUnsubscribe.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTUnsubscribeClient.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTUnsubscribeServer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\StackTrace.h</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\transport.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\transport.h</name>
     </file>
   </group>
   <group>
@@ -1720,6 +1795,9 @@
           <name>$PROJ_DIR$\..\..\..\..\Platform\MCU\STM32F4xx\peripherals\platform_mcu_powersave.c</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\..\..\Platform\MCU\STM32F4xx\peripherals\platform_nano_second.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\..\..\Platform\MCU\STM32F4xx\peripherals\platform_pwm.c</name>
         </file>
         <file>
@@ -1825,99 +1903,6 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\..\..\..\Support\URLUtils.c</name>
-    </file>
-  </group>
-  <group>
-    <name>USB</name>
-    <group>
-      <name>usb_cdc_device</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_bsp.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_bsp.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_conf.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_core.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_core.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd_int.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_dcd_int.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_defines.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usb_regs.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_core.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_core.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_vcp.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_cdc_vcp.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_conf.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_core.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_core.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_def.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_desc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_desc.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_ioreq.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_ioreq.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_req.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_req.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_usr.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\USB\usb_cdc_device\usbd_usr.h</name>
-      </file>
-    </group>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\USB\tm_stm32f4_usb_vcp.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\USB\tm_stm32f4_usb_vcp.h</name>
     </file>
   </group>
   <file>

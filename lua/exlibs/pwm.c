@@ -4,8 +4,8 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
 
 #include "platform.h"
 #include "MICOPlatform.h"
@@ -72,17 +72,25 @@ static int lpwm_stop( lua_State* L )
   return 0;
 }
 
+#define MIN_OPT_LEVEL       2
+#include "lrodefs.h"
 const LUA_REG_TYPE pwm_map[] =
 {
   { LSTRKEY( "start" ), LFUNCVAL( lpwm_start ) },
   { LSTRKEY( "stop" ), LFUNCVAL( lpwm_stop ) },
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif    
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_pwm(lua_State *L)
 {
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else  
   luaL_register( L, EXLIB_PWM, pwm_map );
   return 1;
+#endif
 }
 
 

@@ -158,8 +158,8 @@ static int math_sqrt (lua_State *L) {
   return 1;
 }
 
-LUA_NUMBER luai_ipow(LUA_NUMBER, LUA_NUMBER);
 #ifdef LUA_NUMBER_INTEGRAL
+extern LUA_NUMBER luai_ipow(LUA_NUMBER a, LUA_NUMBER b);
 # define pow(a,b) luai_ipow(a,b)
 #endif
 

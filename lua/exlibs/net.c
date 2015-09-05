@@ -4,8 +4,8 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
 
 #include "platform.h"
 #include "MICODefine.h"
@@ -899,6 +899,8 @@ static int lnet_getip( lua_State* L )
   return 2;
 }
 
+#define MIN_OPT_LEVEL   2
+#include "lrodefs.h"
 const LUA_REG_TYPE net_map[] =
 {
   {LSTRKEY("new"), LFUNCVAL(lnet_new)},
@@ -907,6 +909,12 @@ const LUA_REG_TYPE net_map[] =
   {LSTRKEY("send"), LFUNCVAL(lnet_send)},
   {LSTRKEY("close"), LFUNCVAL(lnet_close)},
   {LSTRKEY("getip"), LFUNCVAL(lnet_getip)},
+#if LUA_OPTIMIZE_MEMORY > 0
+   { LSTRKEY( "TCP" ), LNUMVAL( TCP ) },
+   { LSTRKEY( "UDP" ), LNUMVAL( UDP ) },
+   { LSTRKEY( "SERVER" ), LNUMVAL( SOCKET_SERVER ) },
+   { LSTRKEY( "CLIENT" ), LNUMVAL( SOCKET_CLIENT ) },
+#endif        
   {LNILKEY, LNILVAL}
 };
 
@@ -923,13 +931,15 @@ LUALIB_API int luaopen_net(lua_State *L)
     pcltsockt[i] = NULL;
     
   set_tcp_keepalive(3, 60);
-
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else  
   luaL_register( L, EXLIB_NET, net_map );
  
   MOD_REG_NUMBER( L, "TCP", TCP );
   MOD_REG_NUMBER( L, "UDP", UDP );
   MOD_REG_NUMBER( L, "SERVER", SOCKET_SERVER);
   MOD_REG_NUMBER( L, "CLIENT", SOCKET_CLIENT);
-
   return 1;
+#endif
 }

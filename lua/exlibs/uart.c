@@ -4,10 +4,9 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
 #include "MicoPlatform.h"
-#include "user_version.h"
 
 static lua_State *gL = NULL;
 static int usr_uart_cb_ref = LUA_NOREF;
@@ -197,17 +196,24 @@ static int uart_send( lua_State* L )
   }
   return 0;
 }
-
+#define MIN_OPT_LEVEL   2
+#include "lrodefs.h"
 const LUA_REG_TYPE uart_map[] =
 {
   { LSTRKEY( "setup" ), LFUNCVAL( uart_setup )},
   { LSTRKEY( "on" ), LFUNCVAL( uart_on )},
   { LSTRKEY( "send" ), LFUNCVAL( uart_send )},
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif      
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_uart(lua_State *L)
 {
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else  
   luaL_register( L, EXLIB_UART, uart_map );
   return 1;
+#endif
 }

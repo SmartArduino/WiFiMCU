@@ -4,12 +4,13 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
 
 #include "platform.h"
 #include "MICOPlatform.h"
 #include "platform_peripheral.h"
+#include "MicoDrivers/MICODriverNanoSecond.h"
 #include "MICORTOS.h"
 
 #define NUM_TMR 16
@@ -68,6 +69,15 @@ static int ltmr_delayms( lua_State* L )
   mico_thread_msleep(ms);
   return 0;
 }
+//tmr.delayus()
+static int ltmr_delayus( lua_State* L )
+{
+  uint32_t us = luaL_checkinteger( L, 1 );
+  if ( us <= 0 ) return luaL_error( L, "wrong arg range" );
+
+  MicoNanosendDelay(us*1000);
+  return 0;
+}
 
 //tmr.wdclr()
 static int ltmr_wdclr( lua_State* L )
@@ -116,14 +126,19 @@ static int ltmr_start( lua_State* L )
   return 0;
 }
 
+#define MIN_OPT_LEVEL       2
+#include "lrodefs.h"
 const LUA_REG_TYPE tmr_map[] =
 {
   { LSTRKEY( "tick" ), LFUNCVAL( ltmr_tick ) },
   { LSTRKEY( "delayms" ), LFUNCVAL( ltmr_delayms ) },
+  { LSTRKEY( "delayus" ), LFUNCVAL( ltmr_delayus ) },
   { LSTRKEY( "start" ), LFUNCVAL( ltmr_start ) },
   { LSTRKEY( "stop" ), LFUNCVAL( ltmr_stop ) },
   { LSTRKEY( "stopall" ), LFUNCVAL( ltmr_stopall ) },
   { LSTRKEY( "wdclr" ), LFUNCVAL( ltmr_wdclr) },
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif   
   {LNILKEY, LNILVAL}
 };
 
@@ -132,9 +147,12 @@ LUALIB_API int luaopen_tmr(lua_State *L)
   for(int i=0;i<NUM_TMR;i++){
     tmr_cb_ref[i] = LUA_NOREF;
   }
-
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else
   luaL_register( L, EXLIB_TMR, tmr_map );
   return 1;
+#endif
 }
 
 

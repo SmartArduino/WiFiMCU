@@ -53,9 +53,6 @@ typedef struct GCheader {
   CommonHeader;
 } GCheader;
 
-
-
-
 /*
 ** Union of all Lua values
 */

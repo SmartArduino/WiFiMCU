@@ -4,13 +4,13 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
+#include "lualib.h"
+#include "lrotable.h"
 
-#include "lexlibs.h"
 #include "MicoPlatform.h"
-#include "user_version.h"
 
 extern const char wifimcu_gpio_map[];
+
 const char wifimcu_adc_map[] =
 {
   [MICO_GPIO_9]   = MICO_ADC_1,//D1
@@ -52,15 +52,22 @@ static int adc_read( lua_State* L )
   return 1;
 }
 
+#define MIN_OPT_LEVEL  2
+#include "lrodefs.h"
 const LUA_REG_TYPE adc_map[] =
 {
   { LSTRKEY( "read" ), LFUNCVAL( adc_read )},
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif    
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_adc(lua_State *L)
 {
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else  
   luaL_register( L, EXLIB_ADC, adc_map );
-
   return 1;
+#endif
 }

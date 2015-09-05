@@ -18,13 +18,16 @@
 #include "lualib.h"
 #include "legc.h"
 
+//doit
 #include <spiffs.h>
 #include <spiffs_nucleus.h>
 extern spiffs fs;
-
+extern void lua_spiffs_mount();
 static lua_State *globalL = NULL;
 
 static const char *progname = LUA_PROGNAME;
+
+
 
 static void lstop (lua_State *L, lua_Debug *ar) {
   (void)ar;  /* unused arg. */
@@ -41,11 +44,7 @@ static void laction (int i) {
 
 
 static void print_usage (void) {
-#if defined(LUA_USE_STDIO)
   fprintf(stderr,
-#else
-  luai_writestringerror(
-#endif
   "usage: %s [options] [script [args]].\n"
   "Available options are:\n"
   "  -e stat  execute string " LUA_QL("stat") "\n"
@@ -57,21 +56,17 @@ static void print_usage (void) {
   "  -        execute stdin and stop handling options\n"
   ,
   progname);
-#if defined(LUA_USE_STDIO)
   fflush(stderr);
-#endif
 }
 
-
+//doit
 void l_message (const char *pname, const char *msg) {
-#if defined(LUA_USE_STDIO)
-  if (pname) fprintf(stderr, "%s: ", pname);
+  /*if (pname) fprintf(stderr, "%s: ", pname);
   fprintf(stderr, "%s\n", msg);
   fflush(stderr);
-#else
+  */
   if (pname) luai_writestringerror("%s: ", pname);
-    luai_writestringerror("%s\r\n", msg);
-#endif
+  luai_writestringerror("%s\r\n", msg);
 }
 
 
@@ -105,6 +100,7 @@ static int traceback (lua_State *L) {
   return 1;
 }
 
+
 static int docall (lua_State *L, int narg, int clear) {
   int status;
   int base = lua_gettop(L) - narg;  /* function index */
@@ -120,13 +116,14 @@ static int docall (lua_State *L, int narg, int clear) {
 }
 
 
-static void print_version (void) { 
+static void print_version (void) {
   l_message(NULL,"\r\n");
   l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
   l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
   l_message(NULL,"/[_]\\ |/\\|||   ||  |\\__.|__| /  |//  |");
-  l_message(NULL," ] [                            /o|__| www.doit.com @2015\r\n");
+  l_message(NULL," ] [                            /o|__| [ WiFiMCU Team @2015 ]\r\n");
 }
+
 
 static int getargs (lua_State *L, char **argv, int n) {
   int narg;
@@ -144,6 +141,7 @@ static int getargs (lua_State *L, char **argv, int n) {
   }
   return narg;
 }
+
 
 static int dofile (lua_State *L, const char *name) {
   int status = luaL_loadfile(L, name) || docall(L, 0, 1);
@@ -189,11 +187,10 @@ static int incomplete (lua_State *L, int status) {
 
 
 static int pushline (lua_State *L, int firstline) {
-  static char buffer[LUA_MAXINPUT];
+  char buffer[LUA_MAXINPUT];
   char *b = buffer;
   size_t l;
   const char *prmt = get_prompt(L, firstline);
-  
   if (lua_readline(L, b, prmt) == 0)
     return 0;  /* no input */
   l = strlen(b);
@@ -226,12 +223,13 @@ static int loadline (lua_State *L) {
   lua_remove(L, 1);  /* remove line */
   return status;
 }
-
+//doit
 static void mydofile(lua_State *L)
 {
   char *fn="init.lua";
   int file_fd=-1;
-
+  lua_spiffs_mount();
+  
   file_fd = SPIFFS_open(&fs,fn,SPIFFS_RDONLY,0);
   if(file_fd<0)
   {
@@ -241,15 +239,15 @@ static void mydofile(lua_State *L)
   {
      SPIFFS_close(&fs,file_fd);
      dofile(L,"init.lua");
-  }
-    
+  }    
 }
+
 static void dotty (lua_State *L) {
   int status;
   const char *oldprogname = progname;
   
-  mydofile(L);
-
+  mydofile(L);//doit
+    
   progname = NULL;
   while ((status = loadline(L)) != -1) {
     if (status == 0) status = docall(L, 0, 0);
@@ -266,13 +264,9 @@ static void dotty (lua_State *L) {
   }
   lua_settop(L, 0);  /* clear stack */
   
-#if defined(LUA_USE_STDIO)
-  fputs("\n", stdout);
-  fflush(stdout);
-#else
-  luai_writeline();
-#endif
-
+  luai_writeline();//doit
+  /*fputs("\n", stdout);
+  fflush(stdout);*/
   progname = oldprogname;
 }
 
@@ -373,7 +367,6 @@ static int runargs (lua_State *L, char **argv, int n) {
 
 static int handle_luainit (lua_State *L) {
   const char *init = getenv(LUA_INIT);
-  //const char *init = "@init.lua";
   if (init == NULL) return 0;  /* status OK */
   else if (init[0] == '@')
     return dofile(L, init+1);
@@ -425,8 +418,11 @@ static int pmain (lua_State *L) {
   return 0;
 }
 
-
+#ifdef LUA_RPC
+int main (int argc, char **argv) {
+#else
 int lua_main (int argc, char **argv) {
+#endif
   int status;
   struct Smain s;
   lua_State *L = lua_open();  /* create state */
@@ -434,7 +430,7 @@ int lua_main (int argc, char **argv) {
     l_message(argv[0], "cannot create state: not enough memory");
     return EXIT_FAILURE;
   }
-  legc_set_mode( L, EGC_ALWAYS, 4096 );// always run EGC before an allocation
+  legc_set_mode( L, EGC_ALWAYS, 0);// always run EGC before an allocation
   s.argc = argc;
   s.argv = argv;
   status = lua_cpcall(L, &pmain, &s);

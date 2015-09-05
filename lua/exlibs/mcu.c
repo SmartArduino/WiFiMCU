@@ -4,17 +4,18 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
+#include "lualib.h"
+#include "lrotable.h"
+   
 #include "MicoPlatform.h"
-#include "user_version.h"
+#include "user_config.h"
 #include "MicoWlan.h"
 #include "MICO.h"
 #include "StringUtils.h"
 
 static int mcu_version( lua_State* L )
 {
-  lua_pushstring(L,NODE_VERSION);
+  lua_pushstring(L,MCU_VERSION);
   lua_pushstring(L,BUILD_DATE);
   return 2;
 }
@@ -77,6 +78,9 @@ static int mcu_bootreason( lua_State* L )
     lua_pushstring(L,str);
     return 1;
 }
+
+#define MIN_OPT_LEVEL       2
+#include "lrodefs.h"
 const LUA_REG_TYPE mcu_map[] =
 {
   { LSTRKEY( "ver" ), LFUNCVAL( mcu_version )},
@@ -84,12 +88,18 @@ const LUA_REG_TYPE mcu_map[] =
   { LSTRKEY( "reboot" ), LFUNCVAL( mcu_reboot )},
   { LSTRKEY( "mem" ), LFUNCVAL( mcu_memory )},
   { LSTRKEY( "chipid" ), LFUNCVAL( mcu_chipid )},
-  { LSTRKEY("bootreason"), LFUNCVAL(mcu_bootreason)},
+  { LSTRKEY( "bootreason" ), LFUNCVAL(mcu_bootreason)},
+#if LUA_OPTIMIZE_MEMORY > 0
+#endif      
   {LNILKEY, LNILVAL}
 };
 
 LUALIB_API int luaopen_mcu(lua_State *L)
 {
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else    
   luaL_register( L, EXLIB_MCU, mcu_map );
   return 1;
+#endif
 }

@@ -19,13 +19,12 @@
 ** ===================================================================
 */
 //doit
-//#define LUA_OPTRAM
+#define LUA_OPTRAM
 #ifdef LUA_OPTRAM
 #define LUA_OPTIMIZE_MEMORY	2
 #else
 #define LUA_OPTIMIZE_MEMORY     0
 #endif	/* LUA_OPTRAM */
-
 
 /*
 @@ LUA_ANSI controls the use of non-ansi features.
@@ -99,7 +98,13 @@
 //## Modified for eLua
 //## Defaults search modules path to our ROM File System
 #ifndef LUA_RPC
-#define LUA_PATH_DEFAULT  "/rfs/?.lua;/rfs/?.lc;/mmc/?.lua;/mmc/?.lc;/rom/?.lua;/rom/?.lc"
+
+#ifndef LUA_PATH_DEFAULT
+//doit
+//#define LUA_PATH_DEFAULT  "?.lua;?.lc;/rfs/?.lua;/rfs/?.lc;/mmc/?.lua;/mmc/?.lc;/wo/?.lua;/wo/?.lc;/rom/?.lua;/rom/?.lc;/semi/?.lua;/semi/?.lc;"
+#define LUA_PATH_DEFAULT  "?.lua;?.lc;"
+#endif
+
 #define LUA_CPATH_DEFAULT ""
 #else // #ifndef LUA_RPC
 #define LUA_PATH_DEFAULT  \
@@ -116,7 +121,11 @@
 #define LUA_CDIR	LUA_ROOT "lib/lua/5.1/"
 
 #ifndef LUA_RPC
-#define LUA_PATH_DEFAULT  "/mmc/?.lua;/mmc/?.lc;/rom/?.lua;/rom/?.lc"
+#ifndef LUA_PATH_DEFAULT
+//doit
+//#define LUA_PATH_DEFAULT  "?.lua;?.lc;/mmc/?.lua;/mmc/?.lc;/wo/?.lua;/wo/?.lc;/rom/?.lua;/rom/?.lc;/semi/?.lua;/semi/?.lc;"
+#define LUA_PATH_DEFAULT  "?.lua;?.lc;"
+#endif
 #define LUA_CPATH_DEFAULT ""
 #else // #ifndef LUA_RPC
 #define LUA_PATH_DEFAULT  \
@@ -249,6 +258,8 @@
 ** ===================================================================
 */
 
+//#if defined(lua_c) || defined(luaall_c)
+
 /*
 @@ lua_stdin_is_tty detects whether the standard input is a 'tty' (that
 @* is, whether we're running lua interactively).
@@ -273,9 +284,10 @@
 ** CHANGE them if you want different prompts. (You can also change the
 ** prompts dynamically, assigning to globals _PROMPT/_PROMPT2.)
 */
-//doit
 #define LUA_PROMPT		"> "
 #define LUA_PROMPT2		">> "
+
+
 /*
 @@ LUA_PROGNAME is the default name for the stand-alone Lua program.
 ** CHANGE it if your stand-alone interpreter has a different name and
@@ -300,33 +312,12 @@
 ** CHANGE them if you want to improve this functionality (e.g., by using
 ** GNU readline and history facilities).
 */
-#if !defined(MICO_USING_LUA)
-#if defined(LUA_USE_READLINE)
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#define lua_readline(L,b,p)	((void)L, ((b)=readline(p)) != NULL)
-#define lua_saveline(L,idx) \
-	if (lua_strlen(L,idx) > 0)  /* non-empty line? */ \
-	  add_history(lua_tostring(L, idx));  /* add it to history */
-#define lua_freeline(L,b)	((void)L, free(b))
-#else // #if defined(LUA_USE_READLINE)
-#define lua_readline(L,b,p)	\
-	((void)L, fputs(p, stdout), fflush(stdout),  /* show prompt */ \
-	fgets(b, LUA_MAXINPUT, stdin) != NULL)  /* get line */
-#define lua_saveline(L,idx)	{ (void)L; (void)idx; }
-#define lua_freeline(L,b)	{ (void)L; (void)b; }
-#endif // #if defined(LUA_USE_READLINE)
-
-#else // #if defined(MICO_USING_LUA)
-
+//doit
 #define lua_readline(L,b,p)     (readline4lua(p, b, LUA_MAXINPUT))
 #define lua_saveline(L,idx)     { (void)L; (void)idx; }
 #define lua_freeline(L,b)       { (void)L; (void)b; }
 
 
-
-#endif // #if defined(MICO_USING_LUA)
 
 /*
 @@ luai_writestring/luai_writeline define how 'print' prints its results.
@@ -358,7 +349,6 @@
 #define luai_writestringerror(s,p)   printf((s), (p))
 
 #endif // defined(MICO_USING_LUA)
-
 
 /* }================================================================== */
 
@@ -591,12 +581,14 @@
    %G. */
 //doit
 #define LUA_NUMBER_INTEGRAL
-          
+
 #if defined LUA_NUMBER_INTEGRAL
 #define LUA_NUMBER	LUA_INTEGER
 #else
 #define LUA_NUMBER_DOUBLE
-#define LUA_NUMBER	double
+//doit
+//#define LUA_NUMBER	double
+#define LUA_NUMBER	float
 #endif
 
 /*
@@ -896,6 +888,13 @@ union luai_Cast { double l_d; long l_l; };
 ** without modifying the main part of the file.
 */
 
+#define LUA_CROSS_COMPILER
+
+#if !defined(LUA_CROSS_COMPILER)
+typedef short int16_t;
+typedef long int32_t;
+#endif
+
 /* If you define the next macro you'll get the ability to set rotables as
    metatables for tables/userdata/types (but the VM might run slower)
 */
@@ -903,7 +902,7 @@ union luai_Cast { double l_d; long l_l; };
 #define LUA_META_ROTABLES 
 #endif
 
-#if LUA_OPTIMIZE_MEMORY == 2 && LUA_USE_POPEN
+#if LUA_OPTIMIZE_MEMORY == 2 && defined(LUA_USE_POPEN)
 #error "Pipes not supported in aggresive optimization mode (LUA_OPTIMIZE_MEMORY=2)"
 #endif
 

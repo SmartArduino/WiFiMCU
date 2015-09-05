@@ -62,7 +62,7 @@ static void P9813_PIN_write_data(uint8_t blue, uint8_t green, uint8_t red)
   
   // calc check data
   check_byte |= (((~blue) >> 2) & 0x30);  // B7, B6
-  check_byte |= (((~green) >> 4) & 0x0C);  // G7,G6
+  check_byte |= (((~green) >> 4) & 0x0C); // G7,G6
   check_byte |= (((~red) >> 6) & 0x03);   // R7,R6
   
   // create send data 32bit

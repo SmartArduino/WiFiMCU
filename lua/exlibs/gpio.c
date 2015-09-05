@@ -4,9 +4,10 @@
 
 #include "lua.h"
 #include "lauxlib.h"
-#include "lrodefs.h"
-#include "lexlibs.h"
-
+#include "lualib.h"
+#include "lrotable.h"
+#include "user_config.h"
+   
 #include "platform.h"
 #include "MICOPlatform.h"
 #include "platform_peripheral.h"
@@ -40,7 +41,7 @@ const char wifimcu_gpio_map[] =
   [17] = MICO_GPIO_38,//adc
 };
 
-int platform_gpio_exists( unsigned pin )
+static int platform_gpio_exists( unsigned pin )
 {
   return pin < NUM_GPIO;
 }
@@ -173,12 +174,27 @@ static int lgpio_toggle( lua_State* L )
   return 0;  
 }
 
+#define MIN_OPT_LEVEL  2
+#include "lrodefs.h"
 const LUA_REG_TYPE gpio_map[] =
 {
   { LSTRKEY( "mode" ), LFUNCVAL( lgpio_mode ) },
   { LSTRKEY( "read" ), LFUNCVAL( lgpio_read ) },
   { LSTRKEY( "write" ), LFUNCVAL( lgpio_write ) },
   { LSTRKEY( "toggle" ), LFUNCVAL( lgpio_toggle ) },
+#if LUA_OPTIMIZE_MEMORY > 0
+  { LSTRKEY( "INPUT" ), LNUMVAL( INPUT ) },
+  { LSTRKEY( "INPUT_PULL_UP" ), LNUMVAL( INPUT_PULL_UP ) },
+  { LSTRKEY( "INPUT_PULL_DOWN" ), LNUMVAL( INPUT_PULL_DOWN ) },
+  { LSTRKEY( "INPUT_HIGH_IMPEDANCE" ), LNUMVAL( INPUT_HIGH_IMPEDANCE ) },
+  { LSTRKEY( "OUTPUT" ), LNUMVAL( OUTPUT ) },
+  { LSTRKEY( "OUTPUT_PUSH_PULL" ), LNUMVAL( OUTPUT_PUSH_PULL ) },
+  { LSTRKEY( "OUTPUT_OPEN_DRAIN_NO_PULL" ), LNUMVAL( OUTPUT_OPEN_DRAIN_NO_PULL ) },
+  { LSTRKEY( "OUTPUT_OPEN_DRAIN_PULL_UP" ), LNUMVAL( OUTPUT_OPEN_DRAIN_PULL_UP ) },
+  { LSTRKEY( "INT" ), LNUMVAL( INTERRUPT ) },
+  { LSTRKEY( "HIGH" ), LNUMVAL( HIGH ) },
+  { LSTRKEY( "LOW" ), LNUMVAL( LOW ) },
+#endif        
   {LNILKEY, LNILVAL}
 };
 
@@ -187,7 +203,9 @@ LUALIB_API int luaopen_gpio(lua_State *L)
   for(int i=0;i<NUM_GPIO;i++){
     gpio_cb_ref[i] = LUA_NOREF;
   }
-  
+#if LUA_OPTIMIZE_MEMORY > 0
+    return 0;
+#else  
   luaL_register( L, EXLIB_GPIO, gpio_map );
   MOD_REG_NUMBER( L, "INPUT", INPUT);
   MOD_REG_NUMBER( L, "INPUT_PULL_UP", INPUT_PULL_DOWN);
@@ -201,6 +219,7 @@ LUALIB_API int luaopen_gpio(lua_State *L)
   MOD_REG_NUMBER( L, "HIGH", HIGH);
   MOD_REG_NUMBER( L, "LOW", LOW);
   return 1;
+#endif
 }
 
 

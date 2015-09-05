@@ -1,10 +1,5 @@
 /* Read-only tables helper */
 
-#ifndef lrodefs_h
-#define lrodefs_h
-
-#include "lrotable.h"
-
 #undef LUA_REG_TYPE
 #undef LSTRKEY
 #undef LNILKEY
@@ -36,6 +31,4 @@
   luaL_register(L, name, table);\
   return 1
 #endif
-
-#endif /* lrodefs_h */
 

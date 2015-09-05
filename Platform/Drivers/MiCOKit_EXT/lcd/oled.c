@@ -113,7 +113,7 @@ void OLED_WR_Byte(u8 dat,u8 cmd)
 #endif
 
 void OLED_Set_Pos(unsigned char x, unsigned char y) 
-{ 
+{
   OLED_WR_Byte(0xb0+y,OLED_CMD);
   OLED_WR_Byte(((x&0xf0)>>4)|0x10,OLED_CMD);
   OLED_WR_Byte((x&0x0f)|0x01,OLED_CMD); 

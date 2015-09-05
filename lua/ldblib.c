@@ -299,9 +299,25 @@ static int db_gethook (lua_State *L) {
   return 3;
 }
 
-
+//doit
 static int db_debug (lua_State *L) {
+#if 0
   for (;;) {
+    char buffer[250];
+    fputs("lua_debug> ", stderr);
+    if (fgets(buffer, sizeof(buffer), stdin) == 0 ||
+        strcmp(buffer, "cont\n") == 0)
+      return 0;
+    if (luaL_loadbuffer(L, buffer, strlen(buffer), "=(debug command)") ||
+        lua_pcall(L, 0, 0, 0)) {
+      fputs(lua_tostring(L, -1), stderr);
+      fputs("\n", stderr);
+    }
+    lua_settop(L, 0);  /* remove eventual returns */
+  }
+#endif
+  
+    for (;;) {
     char buffer[LUA_MAXINPUT];
 #if defined(LUA_USE_STDIO)
     fputs("lua_debug> ", stderr);
@@ -344,10 +360,10 @@ static int db_errorfb (lua_State *L) {
   if (lua_gettop(L) == arg)
     lua_pushliteral(L, "");
   else if (!lua_isstring(L, arg+1)) return 1;  /* message is not a string */
-  //else  lua_pushliteral(L, "\n");
-  else  lua_pushliteral(L, "\r\n");
+  //else lua_pushliteral(L, "\n");
+  else lua_pushliteral(L, "\r\n");//doit
 #if 0  
-//doit
+//doit  
   lua_pushliteral(L, "stack traceback:");
   while (lua_getstack(L1, level++, &ar)) {
     if (level > LEVELS1 && firstpart) {
@@ -355,16 +371,14 @@ static int db_errorfb (lua_State *L) {
       if (!lua_getstack(L1, level+LEVELS2, &ar))
         level--;  /* keep going */
       else {
-        //lua_pushliteral(L, "\n\t...");  /* too many levels */
-        lua_pushliteral(L, "\r\n...");  /* too many levels */
+        lua_pushliteral(L, "\n\t...");  /* too many levels */
         while (lua_getstack(L1, level+LEVELS2, &ar))  /* find last levels */
           level++;
       }
       firstpart = 0;
       continue;
     }
-    //lua_pushliteral(L, "\n\t");
-    lua_pushliteral(L, "\r\n");
+    lua_pushliteral(L, "\n\t");
     lua_getinfo(L1, "Snl", &ar);
     lua_pushfstring(L, "%s:", ar.short_src);
     if (ar.currentline > 0)
@@ -382,7 +396,7 @@ static int db_errorfb (lua_State *L) {
     }
     lua_concat(L, lua_gettop(L) - arg);
   }
-#endif
+#endif  
   lua_concat(L, lua_gettop(L) - arg);
   return 1;
 }

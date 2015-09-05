@@ -261,16 +261,16 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log
-v0.9.5@2015-9-5
-enable LTR function to save ram(48k free)
-update logo
-change exlibs, delete usb folder
-repair package module bug
-add tmr.delayus()
-add sensor/bit module
-add i2c module
-add spi module
-add mqtt(not work yet)
+v0.9.5@2015-9-5<br/>
+enable LTR function to save ram(48k free)<br/>
+update logo<br/>
+change exlibs, delete usb folder<br/>
+repair package module bug<br/>
+add tmr.delayus()<br/>
+add sensor/bit module<br/>
+add i2c module<br/>
+add spi module<br/>
+add mqtt(not work yet)<br/>
 
 v0.9.4@2015-8-24<br/>
 repair wifi module bugs<br/>

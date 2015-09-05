@@ -14,8 +14,8 @@
 
 #Overview
 - Based on Lua 5.1.4 (package, string, table, math modules)<br/>
-- Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc.<br/>
-- Modules to be builded: spi, i2c, 1-wire, bit, mqtt...<br/>
+- Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc, spi, i2c, bit<br/>
+- Modules to be builded: 1-wire, bit, mqtt...<br/>
 - Integer version provided<br/>
 - `Free memory >48k bytes`<br/>
 

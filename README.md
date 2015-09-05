@@ -262,15 +262,16 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 
 ####Version log
 v0.9.5@2015-9-5<br/>
-enable LTR function to save ram(48k free)<br/>
-update logo<br/>
-change exlibs, delete usb folder<br/>
-repair package module bug<br/>
-add tmr.delayus()<br/>
-add sensor/bit module<br/>
-add i2c module<br/>
-add spi module<br/>
-add mqtt(not work yet)<br/>
+Release Integer and Float version<br/>
+Enable LTR function to save ram(48k free)<br/>
+Update logo<br/>
+Change exlibs, delete usb folder<br/>
+Repair package module bug<br/>
+Add tmr.delayus()<br/>
+Add sensor/bit module<br/>
+Add i2c module<br/>
+Add spi module<br/>
+Add mqtt(not work yet)<br/>
 
 v0.9.4@2015-8-24<br/>
 repair wifi module bugs<br/>

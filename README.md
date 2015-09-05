@@ -29,7 +29,7 @@ Enjoy Programming!<br/>
 
 #####Multi-Interface<br/>
 - 18 GPIO Pins<br/>
-- 3 UARTs<br/>
+- 2 UARTs<br/>
 - ADC(5)/SPI(1)/I2C(1)/USB(1)<br/>
 - SWD debug interface<br/>
 - 11 PWMs<br/>

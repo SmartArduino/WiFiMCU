@@ -106,8 +106,8 @@ Enjoy Programming!<br/>
 
 ### [Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
 * [Basic](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
-* * [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
--- [Quickly Start with WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+** [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
+** [Quickly Start with WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Prepare](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Power UP](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Check the COM Port](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
@@ -115,12 +115,12 @@ Enjoy Programming!<br/>
 ---- [Toggle LED on WiFiMCU board](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Start AP mode](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Setup a simply webserver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
---[Use SecureCRT (Optional)](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1_2.html)<br/>
+**[Use SecureCRT (Optional)](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1_2.html)<br/>
 * [Adavanced](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2.html)<br/>
 ** [Flash LED -use TIMER module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_1.html)<br/>
--- [Breathing LED -use PWM module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_2.html)<br/>
--- [Socket programming –use Net module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
--- [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
+** [Breathing LED -use PWM module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_2.html)<br/>
+** [Socket programming –use Net module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
+** [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
 ** [Update Firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_5.html)<br/>
 ----[Get the latest firmware](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
 ----[Use WiFiMCU STUDIO to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_5.html)<br/>

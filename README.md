@@ -106,7 +106,7 @@ Enjoy Programming!<br/>
 
 ### [Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
 * [Basic](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
--- [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
+* * [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
 -- [Quickly Start with WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Prepare](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
 ---- [Power UP](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>

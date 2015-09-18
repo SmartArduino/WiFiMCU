@@ -153,9 +153,9 @@ Enjoy Programming!<br/>
 ###Reference
 [WiFiMCU Function Refecence](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU%20Reference_2015-9-5.pdf)<br/>
 [WiFiMCU Tutorial](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_Tutorial.pdf)<br/>
-[EMW3165 Datasheet(English)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet.pdf)<br/>
-[EMW3165 Datasheet(Chinese)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet(Chinese).pdf)<br/>
-[WiFiMCU SCH](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_SCH.pdf/)<br/>
+[EMW3165 Datasheet(English)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet.pdf)<br/>
+[EMW3165 Datasheet(Chinese)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet(Chinese).pdf).pdf)<br/>
+[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU_SCH.pdf/)<br/>
 
 
 ###Resource

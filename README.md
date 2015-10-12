@@ -262,6 +262,10 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log
+v0.9.6@2015-10-12
+Solve system corrupt bug when reading file in callback function
+Print version infomation when startup
+
 v0.9.5@2015-9-5<br/>
 Release Integer and Float version<br/>
 Enable LTR function to save ram(48k free)<br/>
@@ -273,7 +277,6 @@ Add sensor/bit module<br/>
 Add i2c module<br/>
 Add spi module<br/>
 Add mqtt(not work yet)<br/>
-
 v0.9.4@2015-8-24<br/>
 repair wifi module bugs<br/>
 v0.9.3@2015-8-18<br/>

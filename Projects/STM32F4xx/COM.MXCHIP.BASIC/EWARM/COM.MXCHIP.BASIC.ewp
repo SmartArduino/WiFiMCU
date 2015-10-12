@@ -613,7 +613,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>WiFiMCU_Firmware_20150905.bin</state>
+          <state>WiFiMCU_Firmware_Integer(v0.9.6)_20151012.bin</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>

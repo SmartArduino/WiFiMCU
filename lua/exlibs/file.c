@@ -10,6 +10,10 @@
 #include "MicoPlatform.h"
 #include "user_config.h"
 
+#include "MicoWlan.h"
+#include "MICO.h"
+
+
 #include <spiffs.h>
 #include <spiffs_nucleus.h>
 
@@ -226,7 +230,7 @@ static int file_g_read( lua_State* L, int n, int16_t end_char )
     end_char = EOF;
   int ec = (int)end_char;
   
-  luaL_Buffer b;
+  static luaL_Buffer b;
   if(FILE_NOT_OPENED==file_fd)
     return luaL_error(L, "open a file first");
 

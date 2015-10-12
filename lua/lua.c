@@ -117,11 +117,19 @@ static int docall (lua_State *L, int narg, int clear) {
 
 
 static void print_version (void) {
+  /*l_message(NULL,"\r\n");
+  l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
+  l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
+  l_message(NULL,"/[_]\\ |/\\|||   ||  |\\__.|__| /  |//  |");
+  l_message(NULL," ] [                            /o|__| [ WiFiMCU Team @2015 ]\r\n");*/
+  
   l_message(NULL,"\r\n");
   l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
   l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
   l_message(NULL,"/[_]\\ |/\\|||   ||  |\\__.|__| /  |//  |");
-  l_message(NULL," ] [                            /o|__| [ WiFiMCU Team @2015 ]\r\n");
+  char temp[128];
+  sprintf(temp," ] [                            /o|__| [ %s WiFiMCU Team @2015 ]\r\n",PRT_VERSION);
+  l_message(NULL,temp);
 }
 
 

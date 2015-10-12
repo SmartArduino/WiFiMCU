@@ -265,6 +265,7 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 v0.9.6@2015-10-12
 Solve system corrupt bug when reading file in callback function
 Print version infomation when startup
+Update libary to Mico 2.3.0
 
 v0.9.5@2015-9-5<br/>
 Release Integer and Float version<br/>

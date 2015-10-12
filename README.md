@@ -261,11 +261,11 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [DoIT website](www.doit.am)<br/>
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
-####Version log
-v0.9.6@2015-10-12
-Solve system corrupt bug when reading file in callback function
-Print version infomation when startup
-Update libary to Mico 2.3.0
+####Version log<br/>
+v0.9.6@2015-10-12<br/>
+Solve system corrupt bug when reading file in callback function<br/>
+Print version infomation when startup<br/>
+Update libary to Mico 2.3.0<br/>
 
 v0.9.5@2015-9-5<br/>
 Release Integer and Float version<br/>

@@ -116,7 +116,7 @@ Enjoy Programming!<br/>
     * [Start AP mode](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
     * [Setup a simply webserver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
   * [Use SecureCRT (Optional)](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1_2.html)<br/>
-  * [Adavanced](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2.html)<br/>
+* [Adavanced](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2.html)<br/>
   * [Flash LED -use TIMER module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_1.html)<br/>
   * [Breathing LED -use PWM module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_2.html)<br/>
   * [Socket programming –use Net module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
@@ -142,7 +142,7 @@ Enjoy Programming!<br/>
   * [Set up a TCP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/2%20net_tcpclient_demo.lua)<br/>
   * [Set up a UDP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/3%20net_udpserver_demo.lua)<br/>
   * [Set up a UDP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/4%20net_udpclient_demo.lua)<br/>
-  * [Using FILE Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/6%20file/file_demo.lua)<br/>
+* [Using FILE Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/6%20file/file_demo.lua)<br/>
 * [Using PWM Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/7%20pwm/pwm_breathing_LED.lua)<br/>
 * [Using ADC Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/8%20adc/adc_demo.lua)<br/>
 * [Using UART Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/9%20uart)<br/>

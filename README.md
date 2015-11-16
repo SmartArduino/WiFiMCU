@@ -165,8 +165,8 @@ http://bbs.smartarduino.com<br/>
 http://bbs.doit.am<br/>
 
 ###The IDE tool for wifimcu can be found here<br/>
-[WiFiMCU STUDIO supported by WiFiMCU Team](https://github.com/SmartArduino/WiFiMCU-STUDIO)<br/>
-[WMC WiFiMCU CLI](https://github.com/zpeters/wmc) [Article](http://thehelpfulhacker.net/2015/11/15/wifimcu-command/)(Thanks for Zpeters contribution)
+[WiFiMCU STUDIO](https://github.com/SmartArduino/WiFiMCU-STUDIO)(supported by WiFiMCU Team)<br/>
+[WMC WiFiMCU CLI](https://github.com/zpeters/wmc) [Article](http://thehelpfulhacker.net/2015/11/15/wifimcu-command/)(Thanks for Zpeters' contribution)
 
 #Program demos
 ####Setup a AP

@@ -52,17 +52,17 @@ static void lua_usr_usart_thread(void *data)
     if(index+len>=USR_UART_LENGTH) len = USR_UART_LENGTH - index;
     MicoUartRecv(LUA_USR_UART, pinbuf+index, len, 10);
     index = index+len;pinbuf[index]=0x00;
+
 doUartData:
     if(index>=USR_UART_LENGTH || mico_get_time() - lastTick>=100)
     {
-      index = 0;
       if(usr_uart_cb_ref == LUA_NOREF) continue;
       lua_rawgeti(gL, LUA_REGISTRYINDEX, usr_uart_cb_ref);
-      lua_pushstring(gL,(char const*)pinbuf);
+      lua_pushlstring(gL,(char const*)pinbuf,index);
       lua_call(gL, 1, 0);
+      index = 0;
     }
   }  
-  //mico_rtos_delete_thread(NULL);
 }
 
 //uart.setup(1,9600,'n','8','1')

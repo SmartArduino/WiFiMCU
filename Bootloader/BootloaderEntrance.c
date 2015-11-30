@@ -112,7 +112,7 @@ int main(void)
 BOOT:
 #endif
   
-  printf ( menu, MODEL, HARDWARE_REVISION );
+  printf ( menu, MODEL, Bootloader_REVISION );
 
   while(1){                             
     Main_Menu ();

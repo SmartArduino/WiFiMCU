@@ -392,7 +392,7 @@ LUALIB_API const char *luaL_gsub (lua_State *L, const char *s, const char *p,
                                                                const char *r) {
   const char *wild;
   size_t l = strlen(p);
-  luaL_Buffer b;
+  static luaL_Buffer b;//doit
   luaL_buffinit(L, &b);
   while ((wild = strstr(s, p)) != NULL) {
     luaL_addlstring(&b, s, wild - s);  /* push prefix */
@@ -403,7 +403,6 @@ LUALIB_API const char *luaL_gsub (lua_State *L, const char *s, const char *p,
   luaL_pushresult(&b);
   return lua_tostring(L, -1);
 }
-
 
 LUALIB_API const char *luaL_findtable (lua_State *L, int idx,
                                        const char *fname, int szhint) {
@@ -728,8 +727,9 @@ static int mySPIFFS_getc( int fd ){
   }
   return (int)EOF;
 }
+
 LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
-  LoadFSF lf;
+  static LoadFSF lf;//doit
   int status;
   int c;
   int fnameindex = lua_gettop(L) + 1;  /* index of filename on the stack */
@@ -759,7 +759,6 @@ LUALIB_API int luaL_loadfile (lua_State *L, const char *filename) {
   //fs_ungetc(c, lf.f);
   SPIFFS_lseek(&fs, lf.f, -1, SEEK_CUR);
   status = lua_load(L, getFSF, &lf, lua_tostring(L, -1));
-
   if (filename) SPIFFS_close(&fs,lf.f);  /* close file (even in case of errors) */
   lua_remove(L, fnameindex);
   return status;

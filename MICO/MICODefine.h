@@ -36,7 +36,7 @@
 #include "Common.h"
 #include "Debug.h"
 #include "MICO.h"
-#include "JSON-C/json.h"
+//#include "JSON-C/json.h"
 #include "MICOAppDefine.h"
 
 #define CONFIG_MODE_EASYLINK                    (2)

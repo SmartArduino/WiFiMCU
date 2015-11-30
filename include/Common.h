@@ -624,14 +624,15 @@ typedef int32_t         OSStatus;
 
 // ==== SOCKET MACROS ====
 #define IsValidSocket( X )                  ( ( X ) >= 0 )
-
+/*
 #ifndef __PTRDIFF_TYPE__
 #define __PTRDIFF_TYPE__ int
 #endif
 
 typedef __PTRDIFF_TYPE__        ptrdiff_t;
 
-
+*/
+      
 /* Suppress unused parameter warning */
 #ifndef UNUSED_PARAMETER
 #define UNUSED_PARAMETER(x) ( (void)(x) )

@@ -27,21 +27,17 @@ static lua_State *globalL = NULL;
 
 static const char *progname = LUA_PROGNAME;
 
-
-
 static void lstop (lua_State *L, lua_Debug *ar) {
   (void)ar;  /* unused arg. */
   lua_sethook(L, NULL, 0, 0);
   luaL_error(L, "interrupted!");
 }
 
-
 static void laction (int i) {
   signal(i, SIG_DFL); /* if another SIGINT happens before lstop,
                               terminate process (default action) */
   lua_sethook(globalL, lstop, LUA_MASKCALL | LUA_MASKRET | LUA_MASKCOUNT, 1);
 }
-
 
 static void print_usage (void) {
   fprintf(stderr,
@@ -117,12 +113,6 @@ static int docall (lua_State *L, int narg, int clear) {
 
 
 static void print_version (void) {
-  /*l_message(NULL,"\r\n");
-  l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
-  l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
-  l_message(NULL,"/[_]\\ |/\\|||   ||  |\\__.|__| /  |//  |");
-  l_message(NULL," ] [                            /o|__| [ WiFiMCU Team @2015 ]\r\n");*/
-  
   l_message(NULL,"\r\n");
   l_message(NULL,"  ;   .  . .___ .  . __ .  .      ,--.");
   l_message(NULL," [\"]  |  |o[__ o|\\/|/  `|  | ,<-|__oo|");
@@ -241,7 +231,15 @@ static void mydofile(lua_State *L)
   file_fd = SPIFFS_open(&fs,fn,SPIFFS_RDONLY,0);
   if(file_fd<0)
   {
-    l_message(NULL,"cannot open init.lua");
+    char *fn2 = "init.lc";
+    file_fd = SPIFFS_open(&fs,fn2,SPIFFS_RDONLY,0);
+    if(file_fd<0)
+      l_message(NULL,"cannot open init.lua or init.lc");
+    else
+    {
+      SPIFFS_close(&fs,file_fd);
+      dofile(L,"init.lc");
+    }
   }
   else
   {
@@ -255,7 +253,7 @@ static void dotty (lua_State *L) {
   const char *oldprogname = progname;
   
   mydofile(L);//doit
-    
+
   progname = NULL;
   while ((status = loadline(L)) != -1) {
     if (status == 0) status = docall(L, 0, 0);

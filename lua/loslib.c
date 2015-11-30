@@ -148,7 +148,7 @@ static int os_date (lua_State *L) {
   }
   else {
     char cc[3];
-    luaL_Buffer b;
+    static luaL_Buffer b;//doit
     cc[0] = '%'; cc[2] = '\0';
     luaL_buffinit(L, &b);
     for (; *s; s++) {

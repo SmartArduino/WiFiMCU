@@ -52,7 +52,8 @@ const uint32_t  mico_timer_queue_len = 5;
 const uint32_t mico_nmode_enable = true;
 
 #ifdef DEBUG
-int mico_debug_enabled = 1;
+//int mico_debug_enabled = 1;
+int mico_debug_enabled = 0;//doit
 #endif
 
 #ifdef SDIO_1_BIT

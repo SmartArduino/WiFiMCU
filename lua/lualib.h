@@ -104,6 +104,11 @@ LUALIB_API int (luaopen_bit) (lua_State *L);
 LUALIB_API int (luaopen_sensor) (lua_State *L);
 #endif
 
+#ifdef USE_MQTT_MODULE
+#define LUA_MQTTLIBNAME	"mqtt"
+LUALIB_API int (luaopen_mqtt) (lua_State *L);
+#endif
+
 /* open all previous libraries */
 LUALIB_API void (luaL_openlibs) (lua_State *L); 
 

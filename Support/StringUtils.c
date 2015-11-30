@@ -20,6 +20,7 @@
   */ 
 #include "StringUtils.h"
 #include "Debug.h"
+#include <stddef.h>
 #include <stdarg.h>
 
 #define IS_AF(c)  ((c >= 'A') && (c <= 'F'))

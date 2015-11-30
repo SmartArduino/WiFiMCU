@@ -89,7 +89,7 @@
   <group>
     <name>Application</name>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\Demos\COM.MXCHIP.BASIC\main.c</name>
+      <name>$PROJ_DIR$\..\..\..\..\lua\main.c</name>
     </file>
   </group>
   <group>
@@ -104,120 +104,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\Board\MiCOKit-3165\platform_config.h</name>
-      </file>
-    </group>
-  </group>
-  <group>
-    <name>External</name>
-    <group>
-      <name>Curve25519</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\Curve25519\curve25519-donna.c</name>
-      </file>
-    </group>
-    <group>
-      <name>FatFs</name>
-      <group>
-        <name>Core</name>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\diskio.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\ff.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\ff_gen_drv.c</name>
-        </file>
-      </group>
-      <group>
-        <name>Drivers</name>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\drivers\sd_diskio.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\drivers\sdram_diskio.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\drivers\sram_diskio.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\drivers\usbh_diskio.c</name>
-        </file>
-      </group>
-      <group>
-        <name>Options</name>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\option\syscall.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\External\FatFs\src\option\unicode.c</name>
-        </file>
-      </group>
-    </group>
-    <group>
-      <name>GladmanAES</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\GladmanAES\aes_modes.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\GladmanAES\aescrypt.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\GladmanAES\aeskey.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\GladmanAES\aestab.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\GladmanAES\gf128mul.c</name>
-      </file>
-    </group>
-    <group>
-      <name>JSON-C</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\arraylist.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\debug.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\json.h</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\json_object.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\json_tokener.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\json_util.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\linkhash.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\JSON-C\printbuf.c</name>
-      </file>
-    </group>
-    <group>
-      <name>SHAUtils</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\SHAUtils\hkdf.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\SHAUtils\hmac.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\SHAUtils\sha1.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\SHAUtils\sha224-256.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\SHAUtils\sha384-512.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\External\SHAUtils\usha.c</name>
       </file>
     </group>
   </group>
@@ -317,6 +203,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\mcu.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\mqtt.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\lua\exlibs\net.c</name>
@@ -545,73 +434,10 @@
   <group>
     <name>MQTT</name>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\cJSON.c</name>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\mico_mqtt_client_cm4_release.a</name>
     </file>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\cJSON.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\mqtt.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\mqtt.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTConnect.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTConnectClient.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTConnectServer.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTDeserializePublish.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTFormat.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTFormat.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTPacket.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTPacket.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTPublish.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSerializePublish.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSubscribe.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSubscribeClient.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTSubscribeServer.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTUnsubscribe.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTUnsubscribeClient.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTUnsubscribeServer.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\StackTrace.h</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\transport.c</name>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\..\..\..\..\MQTT\transport.h</name>
+      <name>$PROJ_DIR$\..\..\..\..\MQTT\MQTTClient.h</name>
     </file>
   </group>
   <group>
@@ -1017,10 +843,10 @@
     </file>
   </group>
   <file>
-    <name>$PROJ_DIR$\..\..\..\..\README.md</name>
+    <name>$PROJ_DIR$\..\..\..\..\change.log</name>
   </file>
   <file>
-    <name>$PROJ_DIR$\..\..\..\..\readme.txt</name>
+    <name>$PROJ_DIR$\..\..\..\..\README.md</name>
   </file>
 </project>
 

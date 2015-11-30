@@ -283,7 +283,7 @@ static int i2c_read( lua_State* L )
   if( size == 0 ) return 0;
   
   int i=0;
-  luaL_Buffer b;
+  static luaL_Buffer b;
   int data;
   luaL_buffinit( L, &b );
   for( i = 0; i < size; i ++ )

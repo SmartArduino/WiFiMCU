@@ -102,8 +102,7 @@ static int handle_input(char *inbuf)
   int i = 0;
   const struct cli_command *command = NULL;
   const char *p;
-  
-  
+    
   memset((void *)&argv, 0, sizeof(argv));
   memset(&stat, 0, sizeof(stat));
   

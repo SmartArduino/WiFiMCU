@@ -13,6 +13,7 @@
 #include "MicoDrivers/MICODriverNanoSecond.h"
 #include "MICORTOS.h"
 
+extern mico_queue_t os_queue;
 #define NUM_TMR 16
 
 extern void _watchdog_reload_timer_handler( void* arg );
@@ -25,6 +26,7 @@ static int platform_tmr_exists( unsigned pin )
 static int tmr_cb_ref[NUM_TMR];
 static lua_State* gL = NULL;
 static mico_timer_t _timer[NUM_TMR];
+static bool tmr_is_started[NUM_TMR];
 
 //tmr.tick()
 static int ltmr_tick( lua_State* L )
@@ -39,7 +41,9 @@ static int ltmr_stop( lua_State* L )
 {
   unsigned id = luaL_checkinteger( L, 1 );
   MOD_CHECK_ID( tmr, id );
-  mico_stop_timer(&_timer[id]);
+  if(tmr_is_started[id]==true)
+    mico_stop_timer(&_timer[id]);
+  tmr_is_started[id]=false;
   if(tmr_cb_ref[id] != LUA_NOREF)
    {
      luaL_unref(L, LUA_REGISTRYINDEX, tmr_cb_ref[id]);
@@ -51,7 +55,9 @@ static int ltmr_stopall( lua_State* L )
 {
   for(int i=0;i<NUM_TMR;i++)
   {
-    mico_stop_timer(&_timer[i]);
+    if(tmr_is_started[i]==true)
+      mico_stop_timer(&_timer[i]);
+    tmr_is_started[i]=false;
     if(tmr_cb_ref[i] != LUA_NOREF)
     {
       luaL_unref(L, LUA_REGISTRYINDEX, tmr_cb_ref[i]);
@@ -88,11 +94,15 @@ static int ltmr_wdclr( lua_State* L )
 static void _tmr_handler( void* arg )
 {
   unsigned id = (unsigned)arg;
-  if(tmr_cb_ref[id] == LUA_NOREF)
-    return;
-  lua_rawgeti(gL, LUA_REGISTRYINDEX, tmr_cb_ref[id]);
-  lua_call(gL, 0, 0);
-  lua_gc(gL, LUA_GCCOLLECT, 0);
+  if(id<NUM_TMR)
+  {
+    queue_msg_t msg;
+    msg.L = gL;
+    msg.source = TMR;
+    //msg.para1 = tmr_cb_ref[id];
+    msg.para2 = tmr_cb_ref[id];;
+    mico_rtos_push_to_queue( &os_queue, &msg,0);
+  }
 }
 
 //tmr.start(id,interval,function)
@@ -115,10 +125,12 @@ static int ltmr_start( lua_State* L )
     }
     gL = L;
     tmr_cb_ref[id] = luaL_ref(L, LUA_REGISTRYINDEX);
+    
     mico_stop_timer(&_timer[id]);
     mico_deinit_timer( &_timer[id] );
     mico_init_timer(&_timer[id], interval, _tmr_handler, (void*)id);
-    mico_start_timer(&_timer[id]);    
+    mico_start_timer(&_timer[id]);
+    tmr_is_started[id] = true;   
   }
   else
     return luaL_error( L, "callback function needed" );
@@ -146,6 +158,7 @@ LUALIB_API int luaopen_tmr(lua_State *L)
 {
   for(int i=0;i<NUM_TMR;i++){
     tmr_cb_ref[i] = LUA_NOREF;
+    tmr_is_started[i] = false;
   }
 #if LUA_OPTIMIZE_MEMORY > 0
     return 0;

@@ -317,7 +317,7 @@ static int test_eof (lua_State *L, FILE *f) {
 
 
 static int read_line (lua_State *L, FILE *f) {
-  luaL_Buffer b;
+  static luaL_Buffer b;//doit
   luaL_buffinit(L, &b);
   for (;;) {
     size_t l;
@@ -341,7 +341,7 @@ static int read_line (lua_State *L, FILE *f) {
 static int read_chars (lua_State *L, FILE *f, size_t n) {
   size_t rlen;  /* how much to read */
   size_t nr;  /* number of chars actually read */
-  luaL_Buffer b;
+  static luaL_Buffer b;//doit
   luaL_buffinit(L, &b);
   rlen = LUAL_BUFFERSIZE;  /* try to read that much each time */
   do {

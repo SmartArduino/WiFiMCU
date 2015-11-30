@@ -44,11 +44,16 @@ extern "C"
 /******************************************************
 *                    Constants
 ******************************************************/
+//doit
+//#define BOOTLOADER_FOR_MICO_KIT
 
-#define HARDWARE_REVISION   "V 1.0"
-#define DEFAULT_NAME        "WiFiMCU"
-#define MODEL               "EMW3165"
-#define Bootloader_REVISION "V 0.1"
+#ifdef BOOTLOADER_FOR_MICO_KIT
+  #define Bootloader_REVISION "V1.1"
+  #define MODEL               "\"MicoKit of EMW3165\""
+#else
+  #define MODEL               "\"WiFiMCU Board\""
+  #define Bootloader_REVISION "V1.1"
+#endif
 
 /* MICO RTOS tick rate in Hz */
 #define MICO_DEFAULT_TICK_RATE_HZ                   (1000) 

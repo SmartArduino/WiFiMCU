@@ -86,7 +86,7 @@ const platform_gpio_t platform_gpio_pins[] =
   [MICO_RF_LED]                       = { GPIOA,  4 }, 
   [BOOT_SEL]                          = { GPIOB,  1 }, 
   [MFG_SEL]                           = { GPIOB,  0 }, 
-  [EasyLink_BUTTON]                   = { GPIOA,  1 }, 
+  [EasyLink_BUTTON]                   = { GPIOA,  1 },
   [STDIO_UART_RX]                     = { GPIOA,  3 },  
   [STDIO_UART_TX]                     = { GPIOA,  2 },  
   [FLASH_PIN_SPI_CS  ]                = { GPIOA, 15 },
@@ -629,8 +629,12 @@ bool MicoShouldEnterMFGMode(void)
 
 bool MicoShouldEnterBootloader(void)
 {
-  //if(MicoGpioInputGet((mico_gpio_t)BOOT_SEL)==false && MicoGpioInputGet((mico_gpio_t)MFG_SEL)==true)
-  if(MicoGpioInputGet((mico_gpio_t)MICO_GPIO_2)==false)
+  mico_gpio_t pin = MICO_GPIO_2;
+#ifdef BOOTLOADER_FOR_MICO_KIT
+  pin = EasyLink_BUTTON;
+#endif
+  MicoGpioInitialize(pin, INPUT_PULL_UP);
+  if(MicoGpioInputGet((mico_gpio_t)pin)==false)
     return true;
   else
     return false;

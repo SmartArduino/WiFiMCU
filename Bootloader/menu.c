@@ -439,7 +439,7 @@ void Main_Menu(void)
   }
 
 	else if(strcmp(cmdname, "HELP") == 0 || strcmp(cmdname, "?") == 0)	{
-    printf ( menu, MODEL, HARDWARE_REVISION );                       /* display command menu        */
+    printf ( menu, MODEL, Bootloader_REVISION );                       /* display command menu        */
 		break;
 	}
 

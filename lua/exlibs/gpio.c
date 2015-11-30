@@ -19,6 +19,7 @@
 #define HIGH          OUTPUT_OPEN_DRAIN_PULL_UP+4
 #define LOW           OUTPUT_OPEN_DRAIN_PULL_UP+5
 
+extern mico_queue_t os_queue;
 const char wifimcu_gpio_map[] =
 {
   [0] = MICO_GPIO_2,
@@ -51,12 +52,18 @@ static lua_State* gL = NULL;
 
 static void _gpio_irq_handler( void* arg )
 {
-  unsigned pin = (unsigned)arg;
-  if(gpio_cb_ref[pin] == LUA_NOREF)
-    return;
-  lua_rawgeti(gL, LUA_REGISTRYINDEX, gpio_cb_ref[pin]);
-  lua_call(gL, 0, 0);
+  unsigned id = (unsigned)arg;
+  if(id<NUM_GPIO)
+  {
+    queue_msg_t msg;
+    msg.L = gL;
+    msg.source = GPIO;
+    //msg.para1;
+    msg.para2 = gpio_cb_ref[id];;
+    mico_rtos_push_to_queue( &os_queue, &msg,0);
+  }
 }
+
 // gpio.mode(pin,mode)
 //gpio.mode(pin,gpio.INT,'rising',function)
 static int lgpio_mode( lua_State* L )
@@ -221,5 +228,3 @@ LUALIB_API int luaopen_gpio(lua_State *L)
   return 1;
 #endif
 }
-
-

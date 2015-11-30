@@ -118,7 +118,7 @@ static int file_slist( lua_State* L )
   spiffs_DIR d;
   struct spiffs_dirent e;
   struct spiffs_dirent *pe = &e;
-  char buff[LUAL_BUFFERSIZE];
+  static char buff[LUAL_BUFFERSIZE];
   SPIFFS_opendir(&fs, "/", &d);
   while ((pe = SPIFFS_readdir(&d, pe))) {
     sprintf(buff," %s size:%i\r\n", pe->name, pe->size);

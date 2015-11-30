@@ -230,7 +230,7 @@ static int spi_read( lua_State* L )
   if( size == 0 ) return 0;
   
   int i=0;
-  luaL_Buffer b;
+  static luaL_Buffer b;
   uint16_t data;
   luaL_buffinit( L, &b );
   for( i = 0; i < size; i ++ )

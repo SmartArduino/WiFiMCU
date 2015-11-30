@@ -153,9 +153,9 @@ Enjoy Programming!<br/>
 ###Reference
 [WiFiMCU Function Refecence](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU%20Reference_2015-9-5.pdf)<br/>
 [WiFiMCU Tutorial](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_Tutorial.pdf)<br/>
-[EMW3165 Datasheet(English)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet.pdf)<br/>
-[EMW3165 Datasheet(Chinese)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet(Chinese).pdf).pdf)<br/>
-[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU_SCH.pdf/)<br/>
+[EMW3165 Datasheet(English)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet.pdf)<br/>
+[EMW3165 Datasheet(Chinese)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet(Chinese).pdf)<br/>
+[WiFiMCU SCH](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_SCH.pdf/)<br/>
 
 
 ###Resource
@@ -262,29 +262,4 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>
-v0.9.6@2015-10-12<br/>
-Solve system corrupt bug when reading file in callback function<br/>
-Print version infomation when startup<br/>
-Update libary to Mico 2.3.0<br/>
-
-v0.9.5@2015-9-5<br/>
-Release Integer and Float version<br/>
-Enable LTR function to save ram(48k free)<br/>
-Update logo<br/>
-Change exlibs, delete usb folder<br/>
-Repair package module bug<br/>
-Add tmr.delayus()<br/>
-Add sensor/bit module<br/>
-Add i2c module<br/>
-Add spi module<br/>
-Add mqtt(not work yet)<br/>
-v0.9.4@2015-8-24<br/>
-repair wifi module bugs<br/>
-v0.9.3@2015-8-18<br/>
-change the bootloader ymodem.c<br/>
-v0.9.2@2015-8-15<br/>
-add uart/pwm/adc modules change<br/>
-change net module<br/>
-change the logo<br/>
-v0.9.1@2015-7-26<br/>
-initial publish<br/>
+See change.log<br/>

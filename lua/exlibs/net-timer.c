@@ -27,8 +27,7 @@ enum _req_actions{
   NO_ACTION=0,
   REQ_ACTION_GOTIP,
   REQ_ACTION_SENT,
-  REQ_ACTION_DISCONNECT,
-  REQ_ACTION_CONNECT
+  REQ_ACTION_DISCONNECT
 };
 //for server-client
 typedef struct {
@@ -65,10 +64,10 @@ cltsockt_t *pcltsockt[MAX_CLT_SOCKET];
 
 static lua_State *gL = NULL;
 static char *pDomain4Dns=NULL;
+static mico_timer_t _timer_net;
 #define MAX_RECV_LEN 1024
 static char recvBuf[MAX_RECV_LEN];
 static int clientIndexK=0;
-static bool net_thread_is_started=false;
 
 // socket=net.new(net.TCP/UDP,net.SERVER/net.CLIENT)
 static int lnet_new( lua_State* L )
@@ -125,7 +124,8 @@ static int lnet_new( lua_State* L )
     pcltsockt[k]->receive_cb = LUA_NOREF;
     pcltsockt[k]->sent_cb = LUA_NOREF;
     pcltsockt[k]->disconnect_cb = LUA_NOREF;
-    pcltsockt[k]->clientFlag = NO_ACTION;   
+    pcltsockt[k]->clientFlag = NO_ACTION;
+   
   }
   
    if(socketHandle==INVALID_HANDLE)
@@ -256,7 +256,6 @@ static void closeSocket(lua_State*L, int socketHandle)
 }
 static void lgethostbyname_thread(void *inContext)
 {
-  (void)inContext;
   int k = clientIndexK;
   char pIPstr[16]={0};
   //MCU_DBG("lgethostbyname_thread called:%d",k);
@@ -271,7 +270,7 @@ static void lgethostbyname_thread(void *inContext)
     pcltsockt[k]->clientFlag = REQ_ACTION_GOTIP;
     pcltsockt[k]->addr.s_ip = inet_addr(pIPstr);
   }
-
+  
 exit:
   mico_rtos_delete_thread(NULL);
 }
@@ -292,13 +291,11 @@ void _micoNotify_TCPClientConnectedHandler(int fd)
     //MCU_DBG("socket is not valid\r\n" );
     return;
   }
-  
   if(pcltsockt[k] ==NULL) return;;
-  pcltsockt[k]->clientFlag = REQ_ACTION_CONNECT;
- /* if(pcltsockt[k]->connect_cb == LUA_NOREF) return;
+  if(pcltsockt[k]->connect_cb == LUA_NOREF) return;
   lua_rawgeti(gL, LUA_REGISTRYINDEX,pcltsockt[k]->connect_cb);//function
   lua_pushinteger(gL,pcltsockt[k]->socket);//para1
-  lua_call(gL, 1, 0); lua_gc(gL, LUA_GCCOLLECT, 0);*/
+  lua_call(gL, 1, 0); lua_gc(gL, LUA_GCCOLLECT, 0);
 }
 /*
   step1:check if ACTION required  gotip/connect/disconnect
@@ -308,9 +305,7 @@ void _micoNotify_TCPClientConnectedHandler(int fd)
     2.3,udp server:recieve or disconnect
     2.4,tcp client/udp client: or recieve or disconnect
 */
-//ret:  true, at least one socket is not null
-//      false, all socket is null
-static bool _thread_net_handle(void)
+static void _timer_net_handle( void* arg )
 {
 //step 0
   static fd_set readset;
@@ -383,14 +378,6 @@ static bool _thread_net_handle(void)
             //_micoNotify will be called if connected
             connect(pcltsockt[k]->socket, paddr, slen);
           }//udp client do not need connect
-        }
-        else if(pcltsockt[k]->clientFlag==REQ_ACTION_CONNECT){
-          pcltsockt[k]->clientFlag=NO_ACTION;
-          if(pcltsockt[k]->connect_cb != LUA_NOREF){
-            lua_rawgeti(gL, LUA_REGISTRYINDEX,pcltsockt[k]->connect_cb);//function
-            lua_pushinteger(gL,pcltsockt[k]->socket);//para1
-            lua_call(gL, 1, 0); lua_gc(gL, LUA_GCCOLLECT, 0);
-          }
         }
       }
   }
@@ -598,33 +585,17 @@ static bool _thread_net_handle(void)
       }
     }
   }//for(k=0;..  
-  //check if all sockets are null
-  for(k=0;k<MAX_SVR_SOCKET;k++)
-    if(psvrsockt[k] !=NULL) return true;
-  for(k=0;k<MAX_CLT_SOCKET;k++)
-    if(pcltsockt[k] !=NULL) return true;
-  
-  return false; 
 }
-
-static void _thread_net(void *inContext)
+static void startNetTimer(void)
 {
-  (void)inContext;
-  while(1)
+  static bool timer_net_is_started=false;
+  //start timer
+  if( !timer_net_is_started)
   {
-    if(!_thread_net_handle()) break;
-    mico_thread_msleep(1);
-  }
-  mico_rtos_delete_thread( NULL );
-  net_thread_is_started =  false;
-}
-static void startNetThread(void)
-{
-  //start thread
-  if( !net_thread_is_started)
-  {
-    net_thread_is_started = true;
-    mico_rtos_create_thread(NULL, MICO_APPLICATION_PRIORITY, "Net_Thread", _thread_net, 0x1000, NULL);
+    timer_net_is_started = true;
+    mico_deinit_timer( &_timer_net);
+    mico_init_timer(&_timer_net, 50,_timer_net_handle ,NULL);
+    mico_start_timer(&_timer_net);
   }
 }
 
@@ -656,7 +627,7 @@ static int lnet_start( lua_State* L )
      if(psvrsockt[k]->type==TCP){
         listen(socketHandle, 0);
       }
-     startNetThread();
+     startNetTimer();
   }
   else
   {//client
@@ -686,7 +657,7 @@ static int lnet_start( lua_State* L )
     clientIndexK = k;
     //setup a thread to get ip address arg:socketHandle
     mico_rtos_create_thread(NULL, MICO_APPLICATION_PRIORITY, "gethostip", lgethostbyname_thread, 0x300,NULL);
-    startNetThread();
+    startNetTimer();
     MICOAddNotification( mico_notify_TCP_CLIENT_CONNECTED, (void *)_micoNotify_TCPClientConnectedHandler );
   }
   

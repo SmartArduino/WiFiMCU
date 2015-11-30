@@ -606,11 +606,11 @@
         </option>
         <option>
           <name>OCOutputOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>Bootloader.bin</state>
+          <state>WiFiMCU_Bootloader(V1.1).bin</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>

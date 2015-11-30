@@ -53,10 +53,9 @@ static int str_sub (lua_State *L) {
   return 1;
 }
 
-
+static luaL_Buffer b;//doit
 static int str_reverse (lua_State *L) {
-  size_t l;
-  luaL_Buffer b;
+  size_t l;  
   const char *s = luaL_checklstring(L, 1, &l);
   luaL_buffinit(L, &b);
   while (l--) luaL_addchar(&b, s[l]);
@@ -68,7 +67,7 @@ static int str_reverse (lua_State *L) {
 static int str_lower (lua_State *L) {
   size_t l;
   size_t i;
-  luaL_Buffer b;
+  //luaL_Buffer b;doit
   const char *s = luaL_checklstring(L, 1, &l);
   luaL_buffinit(L, &b);
   for (i=0; i<l; i++)
@@ -81,7 +80,7 @@ static int str_lower (lua_State *L) {
 static int str_upper (lua_State *L) {
   size_t l;
   size_t i;
-  luaL_Buffer b;
+  //luaL_Buffer b;//doit
   const char *s = luaL_checklstring(L, 1, &l);
   luaL_buffinit(L, &b);
   for (i=0; i<l; i++)
@@ -92,7 +91,7 @@ static int str_upper (lua_State *L) {
 
 static int str_rep (lua_State *L) {
   size_t l;
-  luaL_Buffer b;
+  //luaL_Buffer b;//doit
   const char *s = luaL_checklstring(L, 1, &l);
   int n = luaL_checkint(L, 2);
   luaL_buffinit(L, &b);
@@ -125,7 +124,7 @@ static int str_byte (lua_State *L) {
 static int str_char (lua_State *L) {
   int n = lua_gettop(L);  /* number of arguments */
   int i;
-  luaL_Buffer b;
+  //luaL_Buffer b;//doit
   luaL_buffinit(L, &b);
   for (i=1; i<=n; i++) {
     int c = luaL_checkint(L, i);
@@ -145,7 +144,7 @@ static int writer (lua_State *L, const void* b, size_t size, void* B) {
 
 
 static int str_dump (lua_State *L) {
-  luaL_Buffer b;
+  //luaL_Buffer b;//doit
   luaL_checktype(L, 1, LUA_TFUNCTION);
   lua_settop(L, 1);
   luaL_buffinit(L,&b);
@@ -651,7 +650,7 @@ static int str_gsub (lua_State *L) {
   int anchor = (*p == '^') ? (p++, 1) : 0;
   int n = 0;
   MatchState ms;
-  luaL_Buffer b;
+  //luaL_Buffer b;//doit
   luaL_argcheck(L, tr == LUA_TNUMBER || tr == LUA_TSTRING ||
                    tr == LUA_TFUNCTION || tr == LUA_TTABLE ||
                    tr == LUA_TLIGHTFUNCTION, 3,
@@ -762,7 +761,7 @@ static int str_format (lua_State *L) {
   size_t sfl;
   const char *strfrmt = luaL_checklstring(L, arg, &sfl);
   const char *strfrmt_end = strfrmt+sfl;
-  luaL_Buffer b;
+  //luaL_Buffer b;//doit
   luaL_buffinit(L, &b);
   while (strfrmt < strfrmt_end) {
     if (*strfrmt != L_ESC)

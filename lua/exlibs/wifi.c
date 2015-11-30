@@ -16,6 +16,23 @@ static lua_State *gL=NULL;
 static int wifi_scan_succeed = LUA_NOREF;
 static int wifi_status_changed_AP = LUA_NOREF;
 static int wifi_status_changed_STA = LUA_NOREF;
+static int wifi_smartconfig_finished = LUA_NOREF;
+
+extern mico_queue_t os_queue;
+enum{EASYLINK=0,AIRKISS};
+char gWiFiSSID[33],gWiFiPSW[65];
+
+static int smartConfigTimeout=3*60;//senconds
+static int smartConfigMode=EASYLINK;//easylink:0, airkiss:1
+
+extern mico_queue_t os_queue;
+//airkiss
+static mico_semaphore_t      smartconfig_sem=NULL;
+static uint8_t airkiss_data=0xaa;
+static void smartconfig_thread(void *inContext);
+//easylink
+static uint32_t FTC_IP=0;
+#define FTC_PORT 8001
 
 static int is_valid_ip(const char *ip) 
 {
@@ -41,35 +58,33 @@ static int is_valid_ip(const char *ip)
 void _micoNotify_WifiStatusHandler(WiFiEvent event, mico_Context_t * const inContext)
 {
   (void)inContext;
-  if(wifi_status_changed_AP == LUA_NOREF&&
-     wifi_status_changed_STA == LUA_NOREF)
-    return;
   
-  if(wifi_status_changed_AP != LUA_NOREF)
-    lua_rawgeti(gL, LUA_REGISTRYINDEX, wifi_status_changed_AP);
-  else if(wifi_status_changed_STA != LUA_NOREF)
-    lua_rawgeti(gL, LUA_REGISTRYINDEX, wifi_status_changed_STA);
-   switch (event) {
+  queue_msg_t msg;
+  msg.L = gL;
+  msg.source = WIFI;
+switch (event) {
   case NOTIFY_STATION_UP:
-    lua_pushstring(gL, "STATION_UP");
-    //MicoRfLed(true);
+    msg.para1 = 0;
+    msg.para2 = wifi_status_changed_STA;
     break;
   case NOTIFY_STATION_DOWN:
-    lua_pushstring(gL, "STATION_DOWN");
-    //MicoRfLed(false);
+    msg.para1 = 1;
+    msg.para2 = wifi_status_changed_STA;
     break;
   case NOTIFY_AP_UP:
-    lua_pushstring(gL, "AP_UP");
-    //MicoRfLed(true);
+    msg.para1 = 2;
+    msg.para2 = wifi_status_changed_AP;
     break;
   case NOTIFY_AP_DOWN:
-    lua_pushstring(gL, "AP_DOWN");
-    //MicoRfLed(false);
+    msg.para1 = 3;
+    msg.para2 = wifi_status_changed_AP;
     break;
-  default:lua_pushstring(gL,"ERROR");
+  default:
+    msg.para1 = 4;
+    msg.para2 = wifi_status_changed_AP;
     break;
   }
-  lua_call(gL, 1, 0);
+    mico_rtos_push_to_queue( &os_queue, &msg,0);
 }
 /*cfg={}
 cfg.ssid=""
@@ -429,11 +444,11 @@ static int lwifi_startsta( lua_State* L )
   return 0;  
 }
 
-int _micoNotify_WiFi_Scan_OK (ScanResult_adv *pApList, mico_Context_t * const inContext)
+void _micoNotify_WiFi_Scan_OK (ScanResult_adv *pApList, mico_Context_t * const inContext)
 {
   (void)inContext;
   if(wifi_scan_succeed == LUA_NOREF)
-    return 0;
+    return;
   lua_rawgeti(gL, LUA_REGISTRYINDEX, wifi_scan_succeed);
    
   if(pApList->ApNum==0) 
@@ -458,7 +473,7 @@ int _micoNotify_WiFi_Scan_OK (ScanResult_adv *pApList, mico_Context_t * const in
       for (int j = 0; j < 6; j++)
       {
           if ( j == 6 - 1 )
-          { 
+          {
             sprintf(temp,"%02X",inBuf[j]);
             strcat(buf_ptr,temp);
           }
@@ -488,11 +503,9 @@ int _micoNotify_WiFi_Scan_OK (ScanResult_adv *pApList, mico_Context_t * const in
       lua_setfield( gL, -2, ssid );//key
     }
   }
-  
   //free(pApList);
-  
   lua_call(gL, 1, 0);
-  return 0;
+  return;
 }
 //function listap(t) if t then for k,v in pairs(t) do print(k.."\t"..v);end else print('no ap') end end wifi.scan(listap)
 static int lwifi_scan( lua_State* L )
@@ -519,6 +532,251 @@ static int lwifi_scan( lua_State* L )
     return 0;
 }
 
+void _smartconfigNotify_WifiStatusHandler(WiFiEvent event, mico_Context_t * const inContext)
+{
+  switch (event) {
+  case NOTIFY_STATION_UP:
+    mico_rtos_set_semaphore(&smartconfig_sem);
+    break;
+  case NOTIFY_STATION_DOWN:break;
+  case NOTIFY_AP_UP:break;
+  case NOTIFY_AP_DOWN:break;
+  default:break;
+  }
+}
+void _micoNotify_WiFi_smartconfig_finished (network_InitTypeDef_st *nwkpara, mico_Context_t * const inContext)
+{
+  (void)inContext;
+
+  memset(gWiFiSSID,0x00,33);
+  memset(gWiFiPSW,0x00,65);
+  strncpy(gWiFiSSID,nwkpara->wifi_ssid,32);
+  strncpy(gWiFiPSW,nwkpara->wifi_key,64);
+  if(nwkpara==NULL) 
+    gWiFiSSID[0]=0x00;
+}
+static void _micoNotify_WiFi_smartconfig_ExtraData(int datalen, char* data, mico_Context_t * const inContext)
+{
+  /*printf("[ExtraData](len:%d):\r\n",datalen);
+  for(int i=0;i<datalen;i++)
+  printf("data[%d]: %d(%x)\r\n",i,data[i],data[i]);
+  printf("\r\n");*/
+  if(smartConfigMode==AIRKISS)//airkiss
+    airkiss_data=data[0];
+  else//easylink
+  {
+    memcpy((char*)(&FTC_IP),&(data[1]),4);
+    /*char address[16];
+    inet_ntoa( address, FTC_IP);
+    printf("EasyLink server ip address: %s\r\n",address);*/
+  }
+  mico_rtos_set_semaphore(&smartconfig_sem);
+}
+
+void _smartConfigConnectWiFi()
+{
+  network_InitTypeDef_adv_st wNetConfig;
+  memset(&wNetConfig, 0x0, sizeof(network_InitTypeDef_adv_st));
+  strcpy((char*)wNetConfig.ap_info.ssid,gWiFiSSID);
+  wNetConfig.ap_info.security = SECURITY_TYPE_AUTO;
+  strcpy(wNetConfig.key,gWiFiPSW);
+  wNetConfig.key_len = strlen(gWiFiPSW);
+  wNetConfig.dhcpMode = DHCP_Client;
+  wNetConfig.wifi_retry_interval = 100;
+  micoWlanStartAdv(&wNetConfig);
+  //printf("connect to %s with %s.....\r\n", wNetConfig.ap_info.ssid,wNetConfig.key);
+}
+void _cleanSmartConfigResource( void )
+{
+  MICORemoveNotification( mico_notify_WIFI_STATUS_CHANGED, (void *)_smartconfigNotify_WifiStatusHandler );
+  MICORemoveNotification( mico_notify_EASYLINK_WPS_COMPLETED, (void *)_micoNotify_WiFi_smartconfig_finished );
+  MICORemoveNotification( mico_notify_EASYLINK_GET_EXTRA_DATA, (void *)_micoNotify_WiFi_smartconfig_ExtraData );
+  mico_rtos_deinit_semaphore(&smartconfig_sem);
+  micoWlanSuspendStation();
+  smartconfig_sem = NULL;
+  micoWlanStopAirkiss();
+  micoWlanStopEasyLink();
+}
+void smartconfig_thread(void *inContext)
+{
+  UNUSED_PARAMETER(inContext);
+  OSStatus err = kNoErr;
+  int fd;
+  struct sockaddr_t addr;
+  int i = 0;
+  
+  require_action(smartconfig_sem, threadExit, err = kNotPreparedErr);
+  //printf("Start airkiss or easylink\r\n");
+  if(smartConfigMode==AIRKISS)//airkiss
+    micoWlanStartAirkiss(smartConfigTimeout);
+  else
+    micoWlanStartEasyLinkPlus(smartConfigTimeout);
+  
+  //printf("Wait for ssid and psw\r\n");
+  mico_rtos_get_semaphore(&smartconfig_sem, (smartConfigTimeout)*1000);
+  micoWlanStopAirkiss();
+  micoWlanStopEasyLink();
+  
+  if(gWiFiSSID[0] != 0x00)
+    _smartConfigConnectWiFi();
+  else
+  {
+    //printf("Airkiss timeout!\r\n");
+    goto threadExit_Timeout;
+  }
+  //printf("Try connect to sta\r\n");
+  err = mico_rtos_get_semaphore(&smartconfig_sem, smartConfigTimeout*1000);
+  if(err != kNoErr) 
+  {
+    //printf("Connect to sta timeout!\r\n");
+    goto threadExit_Timeout;
+  }
+  net_para_st para;
+  micoWlanGetIPStatus(&para, Station);
+  //printf("Connect to sta ok, ip:%s\r\n",para.ip);
+  //msleep(1000);
+  //printf("Set udp socket \r\n");
+    fd = socket( AF_INET, SOCK_DGRM, IPPROTO_UDP );
+    //uint32_t opt=0;
+    //setsockopt(fd,0,SO_BLOCKMODE,&opt,4);//non block
+    if (fd < 0)
+    {
+      //printf("Create socket failed\r\n");
+      goto threadExit_Timeout;
+    }
+    if(smartConfigMode==AIRKISS)
+    {
+      addr.s_ip = INADDR_BROADCAST;
+      addr.s_port = 10000;
+    }
+    else
+    {
+      addr.s_ip   = FTC_IP; //FTC_IP;
+      addr.s_port = FTC_PORT;
+    }
+    while(1){
+      sendto(fd, &airkiss_data, 1, 0, &addr, sizeof(addr));
+      msleep(10);
+      i++;
+      if (i > 10)
+        break;
+    }
+    close(fd);
+    goto threadExit;
+  /*
+  {//EASYLINK
+    int i=0;
+    for(i=0;i<20;i++)
+    {
+      fd=socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+      struct sockaddr_t addr;
+      addr.s_ip   = FTC_IP;
+      addr.s_port = FTC_PORT;
+      char address[16];
+      inet_ntoa( address, FTC_IP);
+      printf("EasyLink server ip address: %s, port:%d\r\n",address,FTC_PORT);
+      
+      err = connect(fd, &addr, sizeof(addr));
+        if(err != kNoErr) 
+        {
+          printf("Connect to FTC server Failed! Try again:%d/20\r\n",i);
+          close(fd);
+        }
+        else
+        {
+          break;
+        }
+        msleep(300);
+    }
+    if(i==20) 
+    {
+      printf("Connect to FTC server Failed!\r\n");
+      goto threadExit_Timeout;
+    }
+    printf("Connect to FTC server OK!\r\n");
+    char msg[]="ok";
+    int s = send(fd,msg,strlen(msg),0);
+    if(s==strlen(msg))
+    {
+      printf("Send to FTC ok\r\n");
+    }
+    else
+    {
+      printf("Send to FTC failed\r\n");
+      goto threadExit_Timeout;
+    }
+    msleep(100);
+    close(fd);
+    goto threadExit;
+  }*/
+threadExit_Timeout:
+  gWiFiSSID[0]=0x00;
+threadExit:
+  _cleanSmartConfigResource();
+  
+  queue_msg_t msg;
+  msg.L = gL;
+  msg.source = WIFI;
+  msg.para1 = 5;
+  msg.para2 = wifi_smartconfig_finished;
+  mico_rtos_push_to_queue( &os_queue, &msg,0);
+  
+  mico_rtos_delete_thread( NULL );
+  return;
+}
+//wifi.smartconfig(0,timeout,function(ssid,psw) end) //easylink: timeout in senconds
+//wifi.smartconfig(1,timeout,function(ssid,psw) end) //airkiss: timeout in senconds
+static int lwifi_smartconfig( lua_State* L )
+{
+  int mode = luaL_checkinteger( L, 1 );
+  if(mode !=EASYLINK && mode !=AIRKISS)
+    return luaL_error( L, "wrong arg type:mode is 0(easylink) or 1(airkiss)" );
+  
+  smartConfigMode=mode;//easylink:0, airkiss:1
+  int timeout = luaL_checkinteger( L, 2 );
+  if (timeout<=0)
+    return luaL_error( L, "wrong arg type:timeout > 0");
+  smartConfigTimeout = timeout;
+  if (lua_type(L, 3) == LUA_TFUNCTION || lua_type(L, 3) == LUA_TLIGHTFUNCTION)
+  {
+    lua_pushvalue(L, 3);
+    if(wifi_smartconfig_finished != LUA_NOREF)
+      luaL_unref(L, LUA_REGISTRYINDEX, wifi_smartconfig_finished);
+    
+     wifi_smartconfig_finished = luaL_ref(L, LUA_REGISTRYINDEX);
+     
+     //micoWlanSuspendStation();
+     //micoWlanSuspendSoftAP();
+     
+     MICOAddNotification( mico_notify_WIFI_STATUS_CHANGED, (void *)_smartconfigNotify_WifiStatusHandler );
+     MICOAddNotification( mico_notify_EASYLINK_WPS_COMPLETED, (void *)_micoNotify_WiFi_smartconfig_finished );
+     MICOAddNotification( mico_notify_EASYLINK_GET_EXTRA_DATA, (void *)_micoNotify_WiFi_smartconfig_ExtraData);
+     gL = L;
+     
+     gWiFiSSID[0]=0x00;
+     mico_rtos_init_semaphore(&smartconfig_sem, 1);
+     mico_rtos_create_thread(NULL, MICO_APPLICATION_PRIORITY, "Smartconfig", smartconfig_thread, 0x1000, NULL);
+  } 
+  else 
+  {
+    return luaL_error( L, "callback funtion needed");
+  }
+  return 0;
+}
+static int lwifi_stopsmartconfig( lua_State* L )
+{
+  micoWlanStopAirkiss();
+  micoWlanStopEasyLink();
+  if(smartconfig_sem!=NULL)
+  {
+    mico_rtos_set_semaphore(&smartconfig_sem);
+    mico_thread_msleep(10);
+    mico_rtos_set_semaphore(&smartconfig_sem);
+    mico_thread_msleep(10);
+    mico_rtos_deinit_semaphore(&smartconfig_sem);  
+  }
+  return 0;
+}
 static int lwifi_station_getip( lua_State* L )
 {
   net_para_st para;
@@ -622,6 +880,25 @@ static int lwifi_stop( lua_State* L )
   micoWlanSuspend();
   return 0;
 }
+extern char *gethostname( char *name, int len );
+extern char *sethostname( char *name );
+static int lwifi_sethostname( lua_State* L )
+{
+  size_t len=0;
+  const char *s = luaL_checklstring(L, 1, &len);
+  if(len<1)
+        return luaL_error( L, "string len > 1" );
+  sethostname((char*)s);
+  return 0;
+}
+static int lwifi_gethostname( lua_State* L )
+{
+  char name[128];
+  memset(name,0x00,128);
+  gethostname(name,128);
+  lua_pushstring(L,name);
+  return 1;
+}
 static int lwifi_powersave( lua_State* L )
 {
    int arg = lua_toboolean( L, 1 );
@@ -667,6 +944,10 @@ const LUA_REG_TYPE wifi_map[] =
 {
   { LSTRKEY( "startap" ), LFUNCVAL( lwifi_startap )},
   { LSTRKEY( "startsta" ), LFUNCVAL( lwifi_startsta )},
+  { LSTRKEY( "smartconfig" ), LFUNCVAL( lwifi_smartconfig )},
+  { LSTRKEY( "stopsmartconfig" ), LFUNCVAL( lwifi_stopsmartconfig )},
+  { LSTRKEY( "sethostname" ), LFUNCVAL( lwifi_sethostname )},
+  { LSTRKEY( "gethostname" ), LFUNCVAL( lwifi_gethostname )},
   { LSTRKEY( "scan" ), LFUNCVAL( lwifi_scan ) },
   { LSTRKEY( "stop" ), LFUNCVAL( lwifi_stop ) },
   { LSTRKEY( "powersave" ), LFUNCVAL( lwifi_powersave ) },
@@ -679,6 +960,7 @@ const LUA_REG_TYPE wifi_map[] =
 
 LUALIB_API int luaopen_wifi(lua_State *L)
 {
+
 #if LUA_OPTIMIZE_MEMORY > 0
     return 0;
 #else

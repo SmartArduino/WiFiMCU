@@ -106,56 +106,62 @@ Enjoy Programming!<br/>
 
 ### [Tutorial](https://github.com/SmartArduino/WiFiMCU/tree/master/Document)<br/>
 * [Basic](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
-** [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
-** [Quickly Start with WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Prepare](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Power UP](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Check the COM Port](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Run WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Toggle LED on WiFiMCU board](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Start AP mode](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
----- [Setup a simply webserver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
-**[Use SecureCRT (Optional)](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1_2.html)<br/>
-* [Adavanced](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2.html)<br/>
-** [Flash LED -use TIMER module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_1.html)<br/>
-** [Breathing LED -use PWM module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_2.html)<br/>
-** [Socket programming –use Net module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
-** [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
-** [Update Firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_5.html)<br/>
-----[Get the latest firmware](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
-----[Use WiFiMCU STUDIO to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_5.html)<br/>
-----[Use SecureCRT to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_6.html)<br/>
-----[Use SWD to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_7.html)<br/>
+  * [Install USB Driver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1.html)<br/>
+  * [Quickly Start with WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Prepare](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Power UP](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Check the COM Port](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Run WiFiMCU STUDIO](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Toggle LED on WiFiMCU board](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Start AP mode](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+    * [Setup a simply webserver](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/charpter1_1.html)<br/>
+  * [Use SecureCRT (Optional)](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter1_2.html)<br/>
+* [Adavance](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2.html)<br/>
+  * [Flash LED -use TIMER module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_1.html)<br/>
+  * [Breathing LED -use PWM module](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_2.html)<br/>
+  * [Socket programming –use Net module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
+  * [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
+  * [Update Firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_5.html)<br/>
+    * [Get the latest firmware](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
+    * [Use WiFiMCU STUDIO to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_5.html)<br/>
+    * [Use SecureCRT to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_6.html)<br/>
+    * [Use SWD to update firmware](http://fineshang.gitbooks.io/wifimcu-based-on-emw3165-user-manual/content/chapter2_7.html)<br/>
 
 ###How to Use
 * [Using MCU Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/1%20mcu)<br/>
 * [Using GPIO Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio)<br/>
--- [GPIO input demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_input_demo.lua)<br/>
--- [GPIO output demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_output_demo.lua)<br/>
+  * [GPIO input demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_input_demo.lua)<br/>
+  * [GPIO output demo](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/2%20gpio/gpio_output_demo.lua)<br/>
 * [Using TIMER Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/3%20timer)<br/>
 * [Using WIFI Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/4%20wifi)<br/>
--- [Set up a simple AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_demo.lua)<br/>
--- [Set up a advanced AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_adv_demo.lua)<br/>
+  * [Set up a simple AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_demo.lua)<br/>
+  * [Set up a advanced AP](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/4%20wifi/wifi_ap_adv_demo.lua)<br/>
 * [Using NET Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/5%20net)<br/>
--- [Set up a TCP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/1%20net_tcpserver_demo.lua)<br/>
--- [Set up a webserver](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/1-1%20webserver.lua)<br/>
--- [Set up a TCP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/2%20net_tcpclient_demo.lua)<br/>
--- [Set up a UDP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/3%20net_udpserver_demo.lua)<br/>
--- [Set up a UDP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/4%20net_udpclient_demo.lua)<br/>
+  * [Set up a TCP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/1%20net_tcpserver_demo.lua)<br/>
+  * [Set up a webserver](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/1-1%20webserver.lua)<br/>
+  * [Set up a TCP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/2%20net_tcpclient_demo.lua)<br/>
+  * [Set up a UDP Server](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/3%20net_udpserver_demo.lua)<br/>
+  * [Set up a UDP Client](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/5%20net/4%20net_udpclient_demo.lua)<br/>
 * [Using FILE Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/6%20file/file_demo.lua)<br/>
 * [Using PWM Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/7%20pwm/pwm_breathing_LED.lua)<br/>
 * [Using ADC Module](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/8%20adc/adc_demo.lua)<br/>
 * [Using UART Module](https://github.com/SmartArduino/WiFiMCU/tree/master/Document/demos/9%20uart)<br/>
--- [Uart receive data](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/1%20uart_demo.lua)<br/>
--- [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
+  * [Uart receive data](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/1%20uart_demo.lua)<br/>
+  * [WiFi to Serial transparent transmission](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/demos/9%20uart/2%20uart_2_wifi_trans.lua)<br/>
 
 
 ###Reference
 [WiFiMCU Function Refecence](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU%20Reference_2015-9-5.pdf)<br/>
 [WiFiMCU Tutorial](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_Tutorial.pdf)<br/>
+<<<<<<< HEAD
 [EMW3165 Datasheet(English)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet.pdf)<br/>
 [EMW3165 Datasheet(Chinese)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet(Chinese).pdf)<br/>
 [WiFiMCU SCH](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_SCH.pdf/)<br/>
+=======
+[EMW3165 Datasheet(English)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet.pdf)<br/>
+[EMW3165 Datasheet(Chinese)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet(Chinese).pdf)<br/>
+[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU_SCH.pdf/)<br/>
+>>>>>>> origin/master
 
 
 ###Resource
@@ -165,7 +171,8 @@ http://bbs.smartarduino.com<br/>
 http://bbs.doit.am<br/>
 
 ###The IDE tool for wifimcu can be found here<br/>
-https://github.com/SmartArduino/WiFiMCU-STUDIO<br/>
+[WiFiMCU STUDIO](https://github.com/SmartArduino/WiFiMCU-STUDIO)(supported by WiFiMCU Team)<br/>
+[WMC WiFiMCU CLI](https://github.com/zpeters/wmc) [Article](http://thehelpfulhacker.net/2015/11/15/wifimcu-command/)(Thanks for Zpeters' contribution)
 
 #Program demos
 ####Setup a AP

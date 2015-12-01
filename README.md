@@ -262,7 +262,7 @@ http://bbs.doit.am<br/>
 Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https://github.com/nodemcu/nodemcu-firmware),[spiffs file system](https://github.com/pellepl/spiffs)<br/>
 
 ####Doctors of Intelligence & Technology<br/>
-[DoIT website](www.doit.am)<br/>
+[DoIT website](www.doit.am) <br/>
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>

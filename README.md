@@ -266,4 +266,4 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>
-See change.log<br/>
+See [change.log](https://github.com/SmartArduino/WiFiMCU/blob/master/change.log)<br/>

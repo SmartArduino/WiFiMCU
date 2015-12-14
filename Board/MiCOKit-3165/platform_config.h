@@ -45,7 +45,7 @@ extern "C"
 *                    Constants
 ******************************************************/
 //doit
-//#define BOOTLOADER_FOR_MICO_KIT
+#define BOOTLOADER_FOR_MICO_KIT
 
 #ifdef BOOTLOADER_FOR_MICO_KIT
   #define Bootloader_REVISION "V1.1"

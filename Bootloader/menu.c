@@ -248,7 +248,7 @@ void Main_Menu(void)
   bool inputFlashArea = false;
 
   while (1)  {                                    /* loop forever                */
-    printf ("\n\rWiFiMCU> ");
+    printf ("\nWiFiMCU> ");
     getline (&cmdbuf[0], sizeof (cmdbuf));        /* input command line          */
 
     for (i = 0; cmdbuf[i] == ' '; i++);           /* skip blanks on head         */

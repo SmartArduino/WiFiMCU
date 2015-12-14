@@ -1,5 +1,5 @@
 
-v0.9.7 @2015-11-30
+v0.9.7 @2015-12-14
 (under beta version)
 WiFi module:
           Add easylink and airkiss function in wifi module
@@ -13,7 +13,7 @@ Uart module:
 Net module:
           Improve TCP Client connect callback function
 MQTT module:
-          Use Mico mqtt lib(V0.1.2) - not work yet
+          Use Mico mqtt lib(V0.1.2)
 Others:   Rearrangement the source code files and folders
           Improve wifimcu upload function, LUA_MAXINPUT 128->512
           Support utf-8 charset

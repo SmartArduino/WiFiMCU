@@ -45,7 +45,7 @@ extern OSStatus update(void);
 #ifdef SIZE_OPTIMIZE
 char menu[] =
 "\r\n"
-"MICO Bootloader for %s, HARDWARE_REVISION: %s\r\n"
+"MICO Bootloader for %s, Bootloader Version: %s\r\n"
 "0:BOOTUPDATE <-r>\r\n"
 "1:FWUPDATE <-r>\r\n"
 "2:DRIVERUPDATE <-r>\r\n"
@@ -57,7 +57,7 @@ char menu[] =
 #else
 char menu[] =
 "\r\n"
-"WiFiMCU Bootloader for %s, HARDWARE_REVISION: %s\r\n"
+"WiFiMCU Bootloader for %s, Bootloader Version: %s\r\n"
 "+ command -------------------------+ function ------------+\r\n"
 "| 0:BOOTUPDATE    <-r>             | Update bootloader    |\r\n"
 "| 1:FWUPDATE      <-r>             | Update application   |\r\n"

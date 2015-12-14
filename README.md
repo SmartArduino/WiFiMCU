@@ -266,10 +266,10 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>
-v0.9.7 @2015-12-14<br/>
-(under beta version)<br/>
-Mico SDK Lib:<br/>
-	  Update to SDK 2.4.0<br/>
+#####v0.9.7 @2015-12-14<br/>
+- (under beta version)<br/>
+- Mico SDK Lib:<br/>
+- -   Update to SDK 2.4.0<br/>
 WiFi module:<br/>
           Add easylink and airkiss function in wifi module<br/>
           Add sethostname/sethostname function<br/>

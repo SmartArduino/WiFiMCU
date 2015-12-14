@@ -1,6 +1,8 @@
 
 v0.9.7 @2015-12-14
 (under beta version)
+Mico SDK Lib:
+	  Update to SDK 2.4.0
 WiFi module:
           Add easylink and airkiss function in wifi module
           Add sethostname/sethostname function

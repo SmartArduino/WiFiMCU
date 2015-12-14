@@ -266,4 +266,29 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>
+v0.9.7 @2015-12-14<br/>
+(under beta version)<br/>
+Mico SDK Lib:<br/>
+	  Update to SDK 2.4.0<br/>
+WiFi module:<br/>
+          Add easylink and airkiss function in wifi module<br/>
+          Add sethostname/sethostname function<br/>
+GPIO module: <br/>
+          Enhance GPIO interrupt code to avoid errors in its callback function<br/>
+Timer module:<br/>
+          Enhance Timer interrupt checking method<br/>
+Uart module: <br/>
+          Use pushlstring for uart recieve data to avoid data missing<br/>
+Net module:<br/>
+          Improve TCP Client connect callback function<br/>
+MQTT module:<br/>
+          Use Mico mqtt lib(V0.1.2)<br/>
+          Demo:https://github.com/SmartArduino/WiFiMCU/tree/master/Demos/12%20mqtt<br/>
+Others:   Rearrangement the source code files and folders<br/>
+          Improve wifimcu upload function, LUA_MAXINPUT 128->512<br/>
+          Support utf-8 charset<br/>
+          Optimize WiFiMCU STUDIO upload file function<br/>
+          Set init.lua or init.lc to start up<br/>
+          Fix dofile bug in tmr/gpio<br/>
+          Fix bootloader gpio initize bug,add compiling bootloader switch for MicoKit<br/>
 See [change.log](https://github.com/SmartArduino/WiFiMCU/blob/master/change.log)<br/>

@@ -292,4 +292,4 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
     * Set init.lua or init.lc to start up<br/>
     * Fix dofile bug in tmr/gpio<br/>
     * Fix bootloader gpio initize bug,add compiling bootloader switch for MicoKit<br/>
-More details see [change.log](https://github.com/SmartArduino/WiFiMCU/blob/master/change.log)<br/>
+* More details see [change.log](https://github.com/SmartArduino/WiFiMCU/blob/master/change.log)<br/>

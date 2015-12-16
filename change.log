@@ -1,6 +1,9 @@
+v0.9.8 @2015-12-16
+(Under developping)
+string lib Module:
+      Add string.md5calc/md5 for md5 calculation
 
 v0.9.7 @2015-12-14
-(under beta version)
 Mico SDK Lib:
 	  Update to MiCO SDK 2.4.0
 WiFi module:
@@ -16,7 +19,6 @@ Net module:
           Improve TCP Client connect callback function
 MQTT module:
           Use Mico mqtt lib(V0.1.2)
-          Demo:https://github.com/SmartArduino/WiFiMCU/tree/master/Demos/12%20mqtt
 Others:   Rearrangement the source code files and folders
           Improve wifimcu upload function, LUA_MAXINPUT 128->512
           Support utf-8 charset

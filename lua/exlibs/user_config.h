@@ -2,9 +2,9 @@
 #ifndef __USER_CONFIG_H__
 #define __USER_CONFIG_H__
 
-#define MCU_VERSION	"WiFiMCU 0.9.7"
-#define PRT_VERSION "Ver. 0.9.7"
-#define BUILD_DATE	"build 20151214"
+#define MCU_VERSION	"WiFiMCU 0.9.8"
+#define PRT_VERSION "Ver. 0.9.8_alpha"
+#define BUILD_DATE	"build 20151216"
 
 #define USE_GPIO_MODULE
 #define USE_ADC_MODULE

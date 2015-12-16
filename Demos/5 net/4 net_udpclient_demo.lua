@@ -25,7 +25,7 @@ net.on(skt,"sent",function(skt) print("sent:skt:"..skt) end)
 net.on(skt,"disconnect",function(skt) print("disconnect:skt:"..skt) end)
 net.on(skt,"receive",function(skt,d)
 	print("Receive:"..d)
-	net.send(skt,'From Client:'..d.."\\n")
+	net.send(skt,'From Client:'..d.."\n")
 end)
 --connect to server(ip:192.168.1.105) at port 8001
 --net.start(skt,8001,"192.168.1.105") 

@@ -827,6 +827,55 @@ static int str_format (lua_State *L) {
   return 1;
 }
 
+#include "MicoAlgorithm.h"
+//doit
+md5_context *pctx=NULL;
+static int str_md5(lua_State *L){
+  if(pctx!=NULL)
+  {
+    uint8_t md5_calc[16];
+    char md5_ret[32];
+    Md5Final( pctx, md5_calc);
+    free(pctx);
+    pctx = NULL;
+    for(int i=0;i<16;i++)
+    sprintf(md5_ret+i*2,"%02x",md5_calc[i]);
+    lua_pushlstring(L, (char const*)md5_ret,32);
+  }
+  else
+  {
+    lua_pushnil(L);
+  }
+  return 1;
+}
+//string.md5calc(str1,str2,...)
+static int str_md5Calc(lua_State *L)
+{
+  const char* buf;
+  size_t len;
+  int total = lua_gettop( L ), s;  
+  for( s = 1; s <= total; s++ )
+  {
+    if( lua_type( L, s ) == LUA_TSTRING )
+    {
+       luaL_checktype( L, s, LUA_TSTRING );
+      buf = lua_tolstring( L, s, &len );
+    }
+    else
+    {
+      return luaL_error( L, "wrong arg type" );
+    }
+  }
+
+  if(pctx==NULL)
+   {
+      pctx = malloc(sizeof(md5_context));
+      InitMd5(pctx); 
+   }
+  Md5Update( pctx, (uint8_t *)buf, len);
+  return 0;
+}
+
 #define MIN_OPT_LEVEL 1
 #include "lrodefs.h"
 const LUA_REG_TYPE strlib[] = {
@@ -835,6 +884,8 @@ const LUA_REG_TYPE strlib[] = {
   {LSTRKEY("dump"), LFUNCVAL(str_dump)},
   {LSTRKEY("find"), LFUNCVAL(str_find)},
   {LSTRKEY("format"), LFUNCVAL(str_format)},
+  {LSTRKEY("md5calc"), LFUNCVAL(str_md5Calc)},//doit
+  {LSTRKEY("md5"), LFUNCVAL(str_md5)},
 #if LUA_OPTIMIZE_MEMORY > 0 && defined(LUA_COMPAT_GFIND)
   {LSTRKEY("gfind"), LFUNCVAL(gmatch)},
 #else

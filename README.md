@@ -268,6 +268,7 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 ####Version log<br/>
 #####v0.9.8 @2015-12-16<br/>
 * Under developping<br/>
+    * Add string.md5calc/md5 for md5 calculation<br/>
 #####v0.9.7 @2015-12-14<br/>
 * (under beta version)<br/>
 * Mico SDK Lib:<br/>

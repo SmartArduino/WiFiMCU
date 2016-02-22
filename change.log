@@ -1,5 +1,8 @@
+v0.9.8.1 @2016-02-22
+MQTT module:
+      Fixed mqtt publish bug
+
 v0.9.8 @2015-12-16
-(Under developping)
 string lib Module:
       Add string.md5calc/md5 for md5 calculation
 

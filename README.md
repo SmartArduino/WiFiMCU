@@ -1,7 +1,6 @@
 ﻿
 # **WiFiMCU** #
-[Latest Firmware Download[2015-12-16] ](https://github.com/SmartArduino/WiFiMCU/releases)[![Download](https://img.shields.io/badge/download-~200k-orange.svg)](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
-[WiFiMCU STUDIO Develop IDE(V2.1)](https://github.com/SmartArduino/WiFiMCU-STUDIO)<br/>
+[Latest Firmware Download ](https://github.com/SmartArduino/WiFiMCU/releases)[![Download](https://img.shields.io/badge/download-~200k-orange.svg)](https://github.com/SmartArduino/WiFiMCU/releases)<br/>
 <br/>
 WiFiMCU is developed based on EMW3165 module produced by [MXCHIP.INC](http://www.mxchip.com/). A Lua interpreter is builded inside with hardware support. A light weight file system and socket protocols can help to realize IoT development easily and quickly. Basically, you can load Lua scripts on your device and then run it on board with nothing more than a terminal connection. <br/>
 Enjoy Programming!<br/>
@@ -15,8 +14,8 @@ Enjoy Programming!<br/>
 
 #Overview
 - Based on Lua 5.1.4 (package, string, table, math modules)<br/>
-- Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc, spi, i2c, bit, mqtt<br/>
-- Modules to be builded: 1-wire...<br/>
+- Build-in modules: mcu,gpio, timer, wifi, net, file, pwm, uart, adc, spi, i2c, bit<br/>
+- Modules to be builded: 1-wire, bit, mqtt...<br/>
 - Integer version provided<br/>
 - `Free memory >48k bytes`<br/>
 
@@ -157,6 +156,9 @@ Enjoy Programming!<br/>
 [EMW3165 Datasheet(English)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet.pdf)<br/>
 [EMW3165 Datasheet(Chinese)](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/EMW3165_datasheet(Chinese).pdf)<br/>
 [WiFiMCU SCH](https://raw.githubusercontent.com/SmartArduino/WiFiMCU/master/Document/WiFiMCU_SCH.pdf/)<br/>
+[EMW3165 Datasheet(English)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet.pdf)<br/>
+[EMW3165 Datasheet(Chinese)](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/EMW3165_datasheet(Chinese).pdf)<br/>
+[WiFiMCU SCH](https://github.com/SmartArduino/WiFiMCU/blob/master/Document/WiFiMCU_SCH.pdf/)<br/>
 
 
 ###Resource
@@ -264,14 +266,15 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>
+#####v0.9.8.1 @2016-02-22<br/>
+* MQTT module:<br/>
+    * Fix mqtt publish bug<br/>
 #####v0.9.8 @2015-12-16<br/>
-* Under developping<br/>
-    * Add string.md5calc/md5 for md5 calculation<br/>
-
+* Under developping
 #####v0.9.7 @2015-12-14<br/>
 * (under beta version)<br/>
 * Mico SDK Lib:<br/>
-    * Update to MiCO SDK 2.4.0<br/>
+    * Update to SDK 2.4.0<br/>
 * WiFi module:<br/>
     * Add easylink and airkiss function in wifi module<br/>
     * Add sethostname/sethostname function<br/>
@@ -294,4 +297,4 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
     * Set init.lua or init.lc to start up<br/>
     * Fix dofile bug in tmr/gpio<br/>
     * Fix bootloader gpio initize bug,add compiling bootloader switch for MicoKit<br/>
-* More details see [change.log](https://github.com/SmartArduino/WiFiMCU/blob/master/change.log)<br/>
+More details see [change.log](https://github.com/SmartArduino/WiFiMCU/blob/master/change.log)<br/>

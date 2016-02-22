@@ -431,7 +431,7 @@ static int lmqtt_publish( lua_State* L )
   if (!(qos == QOS0 || qos == QOS1 ||qos == QOS2))
       return luaL_error( L, "QoS wrong arg type" );
     
-  char const *data = luaL_checklstring( L, 2, &sl );
+  char const *data = luaL_checklstring( L, 4, &sl );
   if (data == NULL) return luaL_error( L, "wrong arg type" );
   
   pmqtt[mqttClt]->pTopic = (char*)topic;

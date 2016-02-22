@@ -269,6 +269,7 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 ##### v0.9.8.1 @2016-02-22<br/>
 * MQTT module:<br/>
     * Fix mqtt publish bug<br/>
+
 ##### v0.9.8 @2015-12-16<br/>
 * Add string.md5calc/md5 for md5 calculation<br/>
 

@@ -266,12 +266,13 @@ Thanks to [eLua project](https://github.com/elua/elua),[NodeMCU project](https:/
 [WiFiMCU Dev Kit](http://www.smartarduino.com)<br/>
 
 ####Version log<br/>
-#####v0.9.8.1 @2016-02-22<br/>
+##### v0.9.8.1 @2016-02-22<br/>
 * MQTT module:<br/>
     * Fix mqtt publish bug<br/>
-#####v0.9.8 @2015-12-16<br/>
-* Under developping
-#####v0.9.7 @2015-12-14<br/>
+##### v0.9.8 @2015-12-16<br/>
+* Add string.md5calc/md5 for md5 calculation<br/>
+
+##### v0.9.7 @2015-12-14<br/>
 * (under beta version)<br/>
 * Mico SDK Lib:<br/>
     * Update to SDK 2.4.0<br/>
